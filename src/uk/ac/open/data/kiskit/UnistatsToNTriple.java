@@ -14,7 +14,7 @@ public class UnistatsToNTriple {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
-		UnistatsToNTriple001.main(args);
+		UnistatsToNTriple002.main(args);
 	}
 
 }
