@@ -1,0 +1,1060 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix kis: <http://data.linkedu.eu/kis/ontology/> .
+@prefix dset: <http://data.linkedu.eu/kis/dataset/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix dcterm: <http://purl.org/dc/terms/> .
+@prefix courseware: <http://courseware.rkbexplorer.com/ontologies/courseware#> .
+@prefix aiiso: <http://purl.org/vocab/aiiso/schema#> .
+
+#
+# SCHEMA
+#
+
+#
+# classes
+#
+
+# We use RKB Project: Courseware instead
+#kis:Course 
+courseware:Course
+	a rdfs:Class;
+	rdfs:label "Course";
+	rdfs:comment "[KISCOURSE] A course in the Unistat Dataset"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/C12061/A/KISCourse.html";
+	rdfs:isDefinedBy <http://courseware.rkbexplorer.com/ontologies/courseware>
+	.
+
+aiiso:Institution
+	a rdfs:Class;
+	rdfs:label "Institution";
+	rdfs:isDefinedBy <http://purl.org/vocab/aiiso/schema#>
+	.
+
+kis:PartTimeCourse 
+	a rdfs:Class;
+	rdfs:subClassOf kis:Course;
+	rdfs:label "Part time KIS Course"@en;
+	rdfs:comment "When [MODE] = 2";
+	.
+kis:FullTimeCourse 
+	a rdfs:Class;
+	rdfs:subClassOf kis:Course;
+	rdfs:label "Full time KIS Course"@en;
+	rdfs:comment "When [MODE] = 1";
+	.
+	
+kis:Accreditation
+	a rdfs:Class;
+	rdfs:label "Professional accreditation held by a course"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/C12061/A/Accreditation.html"
+	.
+	
+kis:AccreditingBody
+	a rdfs:Class;
+	rdfs:label "Institution of a Professional accreditation held by a course"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/C12061/A/ACCBODYID.html"
+	.
+
+kis:Job
+	a rdfs:Class;
+	rdfs:label "A type of employment"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/C12061/A/Accreditation.html"
+	.
+
+#
+# properties
+#
+
+kis:courseId
+	a rdf:Property;
+	rdfs:label "An identifier which uniquely identifies a course within an institution"@en;
+	rdfs:comment "[KISCOURSEID] This field is provided by the institution to uniquely identify each KISCOURSE. It is also used to provide the link to the appropriate widget.";
+	rdfs:seeAlso "http://www.hesa.ac.uk/C12061/A/KISCOURSEID.html";
+	rdfs:domain kis:Course;
+	rdfs:range xsd:string
+	.
+
+kis:type
+	a rdf:Property;
+	rdfs:label "The type of KIS course"@en;
+	rdfs:comment "[KISTYPE] This field identifies whether the KIS is a full KIS (KISTYPE=1), a placeholder for a multiple subject course (KISTYPE=2) or a subject level KIS (KISTYPE=3). Further details of the coverage of the KISTYPES can be found at www.hesa.ac.uk/C12061/coverage. ";
+	rdfs:seeAlso "http://www.hesa.ac.uk/C12061/A/KISTYPE.html";
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int
+	.
+	
+kis:courseUrl
+	a rdf:Property;
+	rdfs:label "The URL for the course page"@en;
+	rdfs:comment "[CRSEURL] This field provides a link back from Unistats to the page on the institutional website that hosts the widget (information box). ";
+	rdfs:seeAlso "http://www.hesa.ac.uk/C12061/A/CRSEURL.html";
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri
+	.	
+	
+kis:supportUrl
+	a rdf:Property;
+	rdfs:label "Link to further details on financial support"@en;
+	rdfs:comment "[SUPPORTURL] This field contains a URL for a web-page that contains further details about the financial support available to students. Institutions may link this to a general financial support page or to a course specific financial support page. ";
+	rdfs:seeAlso "http://www.hesa.ac.uk/C12061/A/CRSEURL.html";
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri
+	.	
+	
+kis:employUrl
+	a rdf:Property;
+	rdfs:label "Link to further details on employment"@en;
+	rdfs:comment "[EMPLOYURL] This field contains a URL which contains further details about the employment opportunities for students following successful completion of the course. ";
+	rdfs:seeAlso "http://www.hesa.ac.uk/C12061/A/EMPLOYURL.html";
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri
+	.
+	
+kis:learningAndTeachingUrl
+	a rdf:Property;
+	rdfs:label "URL explaining Learning and Teaching methods"@en;
+	rdfs:comment "[LTURL] This field contains a URL that links to further explanation about the learning and teaching methods for the course. In most cases it will be a link directly to the programme specification. ";
+	rdfs:seeAlso "http://www.hesa.ac.uk/C12061/A/LTURL.html";
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri
+	.
+
+#
+# TODO missing properties 
+#
+
+kis:accomodationUrl
+	a rdf:Property;
+	rdfs:domain kis:Institution;
+	rdfs:label "URL explaining accommodation costs";
+	rdfs:range xsd:anyUri
+	.
+
+kis:accomodationUrlW
+	a rdf:Property;
+	rdfs:domain kis:Institution;
+	rdfs:label "URL explaining accommodation costs (in Welsh)";
+	rdfs:range xsd:anyUri
+	.
+
+kis:numberOfBeds
+	a rdf:Property;
+	rdfs:domain kis:Institution;
+	rdfs:label "Number of institution owned/sponsored beds";
+	rdfs:range xsd:int
+	.
+
+kis:bedsLowerPrice
+	a rdf:Property;
+	rdfs:domain kis:Institution;
+	rdfs:label "Lower quartile annual cost of institution owned/sponsored beds";
+	rdfs:range xsd:int
+	.
+
+kis:bedsUpperPrice
+	a rdf:Property;
+	rdfs:domain kis:Institution;
+	rdfs:label "Upper quartile annual cost of institution owned/sponsored beds";
+	rdfs:range xsd:int
+	.
+
+kis:privateBedsLowerPrice
+	a rdf:Property;
+	rdfs:domain kis:Institution;
+	rdfs:label "Lower quartile annual cost of private sector beds";
+	rdfs:range xsd:int
+	.
+
+kis:privateBedsUpperPrice
+	a rdf:Property;
+	rdfs:domain kis:Institution;
+	rdfs:label "Upper quartile annual cost of private sector beds";
+	rdfs:range xsd:int
+	.
+
+kis:country
+	a rdf:Property;
+	rdfs:domain kis:Institution;
+	rdfs:label "Country";
+	rdfs:range rdf:Resource; 
+	rdfs:comment "From the KIS codes: XF=England XG=Northern Ireland XH=Scotland XI=Wales"
+	.
+	
+kis:nspParticipant
+	a rdf:Property;
+	rdfs:domain kis:Institution;
+	rdfs:label "Whether the institution is participating in the English National Scholarship Programme"@en
+	.
+	
+kis:studentsUnionSatisfactory
+	a rdf:Property;
+	rdfs:domain kis:Institution;
+	rdfs:label """Proportion of students who "agree" or "strongly agree" with question 24 on the NSS: "I am satisfied with the Students' Union at my institution'". (Question 23 is not included in Unistats; this was for free text responses.)"""@en
+	.
+	
+kis:nssPopulation
+	a rdf:Property;
+	rdfs:domain kis:Institution;
+	rdfs:range xsd:int;
+	rdfs:label "Population of students who responded to the NSS"@en
+	.
+
+kis:accreditation
+	a rdf:Property;
+	rdfs:label "Has accreditation"@en;
+	rdfs:domain kis:Course;
+	rdfs:range kis:Accreditation
+	.
+	
+kis:accreditationType
+	a rdf:Property;
+	rdfs:subPropertyOf rdfs:label;
+	rdfs:label "Description of the accreditation"@en;
+	rdfs:domain kis:Accreditation
+	.
+	
+kis:aggregationLevel
+	a rdf:Property;
+	rdfs:label "Aggregation Level";
+	rdfs:comment "The level of aggregation for the entity. A full description of how data are aggregated is in Annex A. The first digit of this field indicates whether one (1) or two (2) years' data have been aggregated. The second digit indicates whether the data have been aggregated at KISCOURSE (4), JACS level 3 (3), JACS level 2 (2) or JACS level 1 (1)."@en
+	.
+
+kis:population
+	a rdf:Property;
+	rdfs:label "Population"@en
+	.	
+
+kis:course
+	a rdf:Property ;
+	rdfs:range courseware:Course;
+	rdfs:label "course"@en;
+	.
+	
+aiiso:teaches
+	a rdf:Property;
+	rdfs:range courseware:Course;
+	rdfs:label "teaches"@en;
+	.
+
+kis:job
+	a rdf:Property;
+	rdfs:range kis:Job;
+	rdfs:label "job"@en;
+	.
+
+kis:percentage
+	a rdf:Property;
+	rdfs:range xsd:int; # XXX this should be a percentage...
+	rdfs:label "percentage"@en;
+	.
+
+kis:order
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "order"@en;
+	.
+
+kis:continuing
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Continuing"@en;
+	rdfs:comment "The proportion of students who continued on their course at the institution in the year after entering HE."@en
+	.
+
+kis:dormant
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Dormant"@en;
+	rdfs:comment "The proportion of students recorded as dormant the year after they entered HE"@en
+	.
+
+kis:gained
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Gained intended or higher"@en;
+	rdfs:comment "The proportion of students who gained their intended award (or higher) the year after they entered HE."@en
+	.
+
+kis:left
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Left without award"@en;
+	rdfs:comment "The proportion of students who left without an award the year after they entered HE."@en
+	.
+
+kis:lower
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Gained lower"@en;
+	rdfs:comment "The proportion of students who gained a lower award than the one originally intended the year after they entered HE."@en
+	.
+
+kis:workOrStudy
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students in work and/or study"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students who are recorded as BOTH, WORK or STUDY six months after their course ended."@en
+	.
+
+kis:assumedUnemployed
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students assumed unemployed"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students assumed to be unemployed six months after their course ended."@en
+	.
+
+kis:workAndStudy
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students in work and study"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students in work and study six months after their course ended."@en
+	.
+
+kis:notAvailable
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students not available for work or study"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students who are not available for work or study six months after their course ended."@en
+	.
+
+kis:study
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students studying only"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students who are undertaking further study six months after their course ended."@en
+	.
+
+kis:work
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students working only"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students in work six months after their course ended."@en
+	.
+
+kis:firstClass
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "First class"@en;
+	rdfs:comment "The proportion of students gaining a first class degree (CLASS=01 on HESA student data.)."@en
+	.
+
+kis:upperSecondClass
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Upper second class (2:1)"@en;
+	rdfs:comment "The proportion of students gaining a upper second class (2:1) degree (CLASS=02 on HESA student data.)."@en
+	.
+
+kis:lowerSecondClass
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Lower (or undivided) second class"@en;
+	rdfs:comment "The proportion of students gaining a lower (or undivided) second class degree (CLASS=03, 04 on HESA student data.)."@en
+	.
+
+kis:otherHonours
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Other Honours"@en;
+	rdfs:comment "The proportion of students gaining a other honours degree (CLASS=05,06,09 on HESA student data.)."@en
+	.
+
+kis:ordinary
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Ordinary"@en;
+	rdfs:comment "The proportion of students gaining a ordinary degree (CLASS=10 on HESA student data)."@en
+	.
+
+kis:notClassified
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Not classified"@en;
+	rdfs:comment "The proportion of students gaining a not classified degree (CLASS=07, 08,11, 12, 13, 14 on HESA student data)."@en
+	.
+
+kis:accesCourse
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Access Course"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is an access course"@en
+	.
+
+kis:aLevel
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "A-levels and Highers"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is A level or (Scottish) Highers. A full description of this field is given in Annex G."@en
+	.
+
+kis:baccalaureate
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "International baccalaureate"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is an International Baccalaureate."@en
+	.
+
+kis:degree
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Degree or higher"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is a degree or higher qualification."@en
+	.
+
+kis:diploma
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Diploma"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is a diploma."@en
+	.
+
+kis:foundation
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Foundation course"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is a foundation course."@en
+	.
+
+kis:noQualifications
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "No qualifications"@en;
+	rdfs:comment "Proportion of students with no qualifications on entry."@en
+	.
+
+kis:other
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Other qualifications"@en;
+	rdfs:comment "Proportion of students with other qualifications on entry."@en
+	.
+
+kis:otherHE
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Other HE"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is another HE qualification."@en
+	.
+
+kis:professional
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Professional or managerial jobs"@en;
+	rdfs:comment "This field is derived from the SOC DLHE codes (http://www.hesa.ac.uk/content/view/102/143/1/9/). It gives the proportion of students in professional or managerial jobs. These are defined as those students whose occupation code starts with 1, 2 or 3."@en
+	.
+
+kis:nonProfessional
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Non-professional or managerial"@en;
+	rdfs:comment "This field is derived from the SOC DLHE codes (http://www.hesa.ac.uk/content/view/102/143/1/9/). It gives the proportion of students in non professional or managerial jobs. It consists of all students whose SOC code is not in(00020,00010 or xxxxx) or does not start with 1, 2 or 3."@en
+	.
+
+kis:unknown
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "Unable to classify/Unknown"@en;
+	rdfs:comment "This field is derived from the SOC DLHE codes (http://www.hesa.ac.uk/content/view/102/143/1/9/). It gives the proportion of students whose job classification cannot be derived, or whose SOC code is unknown. These are all students whose SOC code is one of 00020,00010 or xxxxx"@en
+	.
+
+kis:nssQuestion1
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 1";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 1 on the NSS: "Staff are good at explaining things".""";
+	rdfs:label "Staff are good at explaining things"@en
+	.
+kis:nssQuestion2
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 2";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 2 on the NSS: "Staff have made the subject interesting".""";
+	rdfs:label "Staff have made the subject interesting"@en
+	.
+
+kis:nssQuestion3
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 3";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 3 on the NSS: "Staff are enthusiastic about what they are teaching".""";
+	rdfs:label "Staff are enthusiastic about what they are teaching"@en
+	.
+kis:nssQuestion4
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 4";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 4 on the NSS: "The course is intellectually stimulating".""";
+	rdfs:label "The course is intellectually stimulating"@en
+	.
+kis:nssQuestion5
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 5";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 5 on the NSS: "The criteria used in marking have been clear in advance".""";
+	rdfs:label "The criteria used in marking have been clear in advance"@en
+	.
+kis:nssQuestion6
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 6";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 6 on the NSS: "Assessment arrangements and marking have been fair".""";
+	rdfs:label "Assessment arrangements and marking have been fair"@en
+	.
+kis:nssQuestion7
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 7";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 7 on the NSS: "Feedback on my work has been prompt".""";
+	rdfs:label "Feedback on my work has been prompt"@en
+	.
+kis:nssQuestion8
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 8";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 8 on the NSS: "I have received detailed comments on my work".""";
+	rdfs:label "I have received detailed comments on my work"@en
+	.
+kis:nssQuestion9
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 9";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 9 on the NSS: "Feedback on my work has helped me clarify things I did not understand".""";
+	rdfs:label "Feedback on my work has helped me clarify things I did not understand"@en
+	.
+kis:nssQuestion10
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 10";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 10 on the NSS: "I have received sufficient advice and support with my studies".""";
+	rdfs:label "I have received sufficient advice and support with my studies"@en
+	.
+kis:nssQuestion11
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 11";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 11 on the NSS: "I have been able to contact staff when I needed to".""";
+	rdfs:label "I have been able to contact staff when I needed to"@en
+	.
+kis:nssQuestion12
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 12";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 12 on the NSS: "Good advice was available when I needed to make study choices".""";
+	rdfs:label "Good advice was available when I needed to make study choices"@en
+	.
+kis:nssQuestion13
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 13";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 13 on the NSS: "The timetable works efficiently as far as my activities are concerned".""";
+	rdfs:label "The timetable works efficiently as far as my activities are concerned"@en
+	.
+kis:nssQuestion14
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 14";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 14 on the NSS: "Any changes in the course or teaching have beencommunicated effectively".""";
+	rdfs:label "Any changes in the course or teaching have beencommunicated effectively"@en
+	.
+kis:nssQuestion15
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 15";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 15 on the NSS: "The course is well organised and is running smoothly".""";
+	rdfs:label "The course is well organised and is running smoothly"@en
+	.
+kis:nssQuestion16
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 16";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 16 on the NSS: "The library resources and services are good enough for my needs".""";
+	rdfs:label "The library resources and services are good enough for my needs"@en
+	.
+kis:nssQuestion17
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 17";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 17 on the NSS: "I have been able to access general IT resources when I needed to".""";
+	rdfs:label "I have been able to access general IT resources when I needed to"@en
+	.
+kis:nssQuestion18
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 18";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 18 on the NSS: "I have been able to access specialised equipment, facilities or rooms when I needed to".""";
+	rdfs:label "I have been able to access specialised equipment, facilities or rooms when I needed to"@en
+	.
+kis:nssQuestion19
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 19";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 19 on the NSS: "The course has helped me present myself with confidence".""";
+	rdfs:label "The course has helped me present myself with confidence"@en
+	.
+kis:nssQuestion20
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 20";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 20 on the NSS: "My communication skills have improved".""";
+	rdfs:label "My communication skills have improved"@en
+	.
+kis:nssQuestion21
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 21";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 21 on the NSS: "As a result of the course, I feel confident in tackling unfamiliar problems".""";
+	rdfs:label "As a result of the course, I feel confident in tackling unfamiliar problems"@en
+	.
+kis:nssQuestion22
+	a rdf:Property;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 22";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 22 on the NSS: "Overall, I am satisfied with the quality of the course.".""";
+	rdfs:label "Overall, I am satisfied with the quality of the course."@en
+	.
+
+kis:sectorLowerForty #LDLQ
+	a rdf:Property;
+	rdfs:label "Sector lower quartile salary for subject (40 months)";
+	rdfs:comment "Contains the lower quartile salary of students at all institutions of the subject 40 months after graduation."
+	.
+
+kis:sectorMedianForty #LDMED
+	a rdf:Property;
+	rdfs:label "Sector Median salary for subject (40 months)";
+	rdfs:comment "Contains the median salary of students at all institutions of the subject 40 months after graduation."
+	.
+
+kis:sectorUpperForty #LDUQ
+	a rdf:Property;
+	rdfs:label "Sector upper quartile salary for subject(40 months)";
+	rdfs:comment "Contains the upper quartile salary of students at all institutions of the subject 40 months after graduation."
+	.
+
+kis:sectorLowerSix #LQ
+	a rdf:Property;
+	rdfs:label "Sector lower quartile salary for subject(6 months)";
+	rdfs:comment "Contains the lower quartile salary of students at all institutions of the subject 6 months after graduation."
+	.
+
+kis:sectorMedianSix #MED
+	a rdf:Property;
+	rdfs:label "Sector Median salary for subject (6 months)";
+	rdfs:comment "Contains the median salary of students at all institutions of the subject 6 months after graduation."
+	.
+
+kis:sectorUpperSix #UQ
+	a rdf:Property;
+	rdfs:label "Sector upper quartile salary for subject (6 months)";
+	rdfs:comment "Contains the upper quartile salary of students at all institutions of the subject 6 months after graduation."
+	.
+
+kis:courseLower #INSTLQ
+	a rdf:Property;
+	rdfs:label "Course lower quartile salary (6 months)";
+	rdfs:comment "Contains the lower quartile salary of students on the course 6 months after graduation. "
+	.
+
+kis:courseMedian #INSTMED
+	a rdf:Property;
+	rdfs:label "Course Median salary (6 months)";
+	rdfs:comment "Contains the median salary of students on the course 6 months after graduation."
+	.
+
+kis:courseUpper #INSTUQ
+	a rdf:Property;
+	rdfs:label "Course upper quartile salary (6 months)";
+	rdfs:comment "Contains the upper quartile salary of students on the course 6 months after graduation."
+	.
+
+kis:nhsNssQuestion1 #NSHQ1
+	a rdf:Property;
+	rdfs:label "NSS (NHS) question 1";
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 1 on the NSS (NHS): "I received sufficient preparatory information prior to my placement(s) "."""@en
+	.
+kis:nhsNssQuestion2 #NSHQ2
+	a rdf:Property;
+	rdfs:label "NSS (NHS) question 2";
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 2 on the NSS (NHS): "I was allocated placement(s) suitable for my course"."""@en
+	.
+kis:nhsNssQuestion3 #NSHQ3
+	a rdf:Property;
+	rdfs:label "NSS (NHS) question 3";
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 3 on the NSS (NHS): "I received appropriate supervision on my placement(s)"."""@en
+	.
+kis:nhsNssQuestion4 #NSHQ4
+	a rdf:Property;
+	rdfs:label "NSS (NHS) question 4";
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 4 on the NSS (NHS): "I was given opportunities to meet my required practice learning outcomes/competences"."""@en
+	.
+kis:nhsNssQuestion5 #NSHQ5
+	a rdf:Property;
+	rdfs:label "NSS (NHS) question 5";
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 5 on the NSS (NHS): "My contribution during placement(s) as part of the clinical team was valued "."""@en
+	.
+kis:nhsNssQuestion6 #NSHQ6
+	a rdf:Property;
+	rdfs:label "NSS (NHS) question 6";
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 6 on the NSS (NHS): "My practice supervisor(s) understood how my placement(s) related to the broader requirements of my course"."""@en
+	.
+
+kis:tariff1
+	a rdf:Property;
+	rdfs:label "Less than 120 tariff points"@en;
+	rdfs:comment "The proportion of entrants with less than 120 tariff points."@en
+	.
+	
+kis:tariff120
+	a rdf:Property;
+	rdfs:label "Between 120 and 159 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 120 and 159 tariff points."@en
+	.
+kis:tariff160
+	a rdf:Property;
+	rdfs:label "Between 160 and 299 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 160 and 299 tariff points."@en
+	.
+kis:tariff200
+	a rdf:Property;
+	rdfs:label "Between 200 and 239 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 200 and 239 tariff points."@en
+	.
+kis:tariff240
+	a rdf:Property;
+	rdfs:label "Between 240 and 279 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 240 and 279 tariff points."@en
+	.
+kis:tariff280
+	a rdf:Property;
+	rdfs:label "Between 280 and 319 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 280 and 319 tariff points."@en
+	.
+kis:tariff320
+	a rdf:Property;
+	rdfs:label "Between 320 and 359 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 320 and 359 tariff points."@en
+	.
+kis:tariff360
+	a rdf:Property;
+	rdfs:label "Between 360 and 399 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 360 and 399 tariff points."@en
+	.
+kis:tariff400
+	a rdf:Property;
+	rdfs:label "Between 400 and 439 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 400 and 439 tariff points."@en
+	.
+kis:tariff440
+	a rdf:Property;
+	rdfs:label "Between 440 and 479 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 440 and 479 tariff points."@en
+	.
+kis:tariff480
+	a rdf:Property;
+	rdfs:label "Between 480 and 519 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 480 and 519 tariff points."@en
+	.
+kis:tariff520
+	a rdf:Property;
+	rdfs:label "Between 520 and 559 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 520 and 559 tariff points."@en
+	.
+kis:tariff560
+	a rdf:Property;
+	rdfs:label "Between 560 and 599 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 560 and 599 tariff points."@en
+	.
+kis:tariff600
+	a rdf:Property;
+	rdfs:label "Over 600 tariff points"@en;
+	rdfs:comment "The proportion of entrants with 600 or more tariff points."@en
+	.
+#
+# instances
+#
+
+dset:commonJobs 
+	a qb:DataSet;
+    rdfs:label "Common job types obtained by students taking a course"@en;
+    qb:structure dset:commonJobsStructure
+    .
+    
+# the following needs revision
+dset:commonJobsStructure 
+	a qb:DataStructureDefinition;
+	rdfs:comment "Jobs by course, percentage and order"@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    qb:component [ qb:dimension  kis:job ];
+    # The measures
+    qb:component [ qb:measure  kis:percentage ];
+    qb:component [ qb:measure  kis:order ]
+    .
+
+dset:continuation
+	a qb:DataSet;
+	rdfs:label "Contains data relating to continuation information for students on the courses";
+    qb:structure dset:continuationStructure 
+	.
+
+# the following needs revision
+dset:continuationStructure
+	a qb:DataStructureDefinition;
+	rdfs:comment "Continuation information for students on the courses"@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:continuing ];
+    qb:component [ qb:measure  kis:dormant ];
+    qb:component [ qb:measure  kis:left ];
+    qb:component [ qb:measure  kis:gained ];
+    qb:component [ qb:measure  kis:lower ]
+    .
+
+dset:courseStages
+	a qb:DataSet;
+	rdfs:label "Contains data relating to the learning, teaching and assessment methods for each course stage"@en;
+	qb:structure dset:courseStagesStructure 
+	.
+
+# the following needs revision
+dset:courseStagesStructure
+	a qb:DataStructureDefinition;
+	rdfs:comment "Information relating to the learning, teaching and assessment methods for each course stage"@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:stage ];
+    qb:component [ qb:measure  kis:subject ];
+    qb:component [ qb:measure  kis:assessmentMethod ];
+    qb:component [ qb:measure  kis:coursework ];
+    qb:component [ qb:measure  kis:written ];
+    qb:component [ qb:measure  kis:practical ];
+    qb:component [ qb:measure  kis:learningAndTeachingMethod ];
+    qb:component [ qb:measure  kis:independent ];
+    qb:component [ qb:measure  kis:placement ];
+    qb:component [ qb:measure  kis:scheduled ]
+    .
+
+dset:employment
+	a qb:DataSet;
+	rdfs:label "Contains data relating to the employment outcomes of students"@en;
+	qb:structure dset:employmentStructure 
+	.
+
+# the following needs revision
+dset:employmentStructureStructure
+	a qb:DataStructureDefinition;
+	rdfs:comment "Information relating to the employment outcomes of students"@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  kis:subject ];
+    qb:component [ qb:measure  kis:workAndStudy ];
+    qb:component [ qb:measure  kis:assumedUnemployed ];
+    qb:component [ qb:measure  kis:inWorkAndStudy ];
+    qb:component [ qb:measure  kis:noAvailable ];
+    qb:component [ qb:measure  kis:study ];
+    qb:component [ qb:measure  kis:work ]
+    .
+
+	
+
+dset:degreeClasses
+	a qb:DataSet;
+	rdfs:label "Contains data relating to the degree classifications obtained by students"@en;
+	qb:structure dset:degreeClassesStructure 
+	.
+
+# the following needs revision
+dset:degreeClassesStructure
+	a qb:DataStructureDefinition;
+	rdfs:comment "Information relating to the degree classifications obtained by students"@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  kis:firstClass ];
+    qb:component [ qb:measure  kis:upperSecondClass ];
+    qb:component [ qb:measure  kis:lowerSecondClass ];
+    qb:component [ qb:measure  kis:otherHonours ];
+    qb:component [ qb:measure  kis:ordinary ];
+    qb:component [ qb:measure  kis:notClassified ]
+    .
+
+dset:entryQualifications
+	a qb:DataSet;
+	rdfs:label "Contains data relating to the entry qualifications of students"@en;
+	qb:structure dset:entryQualificationsStructure 
+	.
+
+# the following needs revision
+dset:entryQualificationsStructure
+	a qb:DataStructureDefinition;
+	rdfs:comment "Information relating to the degree classifications obtained by students"@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  kis:accessCourse ];
+    qb:component [ qb:measure  kis:aLevel ];
+    qb:component [ qb:measure  kis:baccalaureate ];
+    qb:component [ qb:measure  kis:degree ];
+    qb:component [ qb:measure  kis:diploma ];
+    qb:component [ qb:measure  kis:foundation ];
+    qb:component [ qb:measure  kis:noQualifications ];
+    qb:component [ qb:measure  kis:other ];
+    qb:component [ qb:measure  kis:otherHE ]
+    .
+
+dset:jobTypes
+	a qb:DataSet;
+	rdfs:label "Contains elements relating to the types of profession entered by students"@en;
+	qb:structure dset:jobTypesStructure 
+	.
+
+# the following needs revision
+dset:jobTypesStructure
+	a qb:DataStructureDefinition;
+	rdfs:comment "Information relating to the types of profession entered by students."@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  dcterm:subject ];
+    qb:component [ qb:measure  kis:professional ];
+    qb:component [ qb:measure  kis:nonProfessional ];
+    qb:component [ qb:measure  kis:unknown ]
+    .
+
+dset:nationalStudentSurveyResults
+	a qb:DataSet;
+	rdfs:label "National Student Survey Results"@en;
+	qb:structure dset:nationalStudentSurveyResultsStructure 
+	.
+
+# the following needs revision
+dset:nationalStudentSurveyResultsStructure 
+	a qb:DataStructureDefinition;
+	rdfs:comment "National Student Survey results structure."@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  dcterm:subject ];
+    qb:component [ qb:measure  kis:nssQuestion1 ];
+    qb:component [ qb:measure  kis:nssQuestion2 ];
+    qb:component [ qb:measure  kis:nssQuestion3 ];
+    qb:component [ qb:measure  kis:nssQuestion4 ];
+    qb:component [ qb:measure  kis:nssQuestion5 ];
+    qb:component [ qb:measure  kis:nssQuestion6 ];
+    qb:component [ qb:measure  kis:nssQuestion7 ];
+    qb:component [ qb:measure  kis:nssQuestion8 ];
+    qb:component [ qb:measure  kis:nssQuestion9 ];
+    qb:component [ qb:measure  kis:nssQuestion10 ];
+    qb:component [ qb:measure  kis:nssQuestion11 ];
+    qb:component [ qb:measure  kis:nssQuestion12 ];
+    qb:component [ qb:measure  kis:nssQuestion13 ];
+    qb:component [ qb:measure  kis:nssQuestion14 ];
+    qb:component [ qb:measure  kis:nssQuestion15 ];
+    qb:component [ qb:measure  kis:nssQuestion16 ];
+    qb:component [ qb:measure  kis:nssQuestion17 ];
+    qb:component [ qb:measure  kis:nssQuestion18 ];
+    qb:component [ qb:measure  kis:nssQuestion19 ];
+    qb:component [ qb:measure  kis:nssQuestion20 ];
+    qb:component [ qb:measure  kis:nssQuestion21 ];
+    qb:component [ qb:measure  kis:nssQuestion22 ]
+    .
+
+dset:nationalStudentSurveyNHSResults
+	a qb:DataSet;
+	rdfs:label "National Student Survey (NHS) Results"@en;
+	qb:structure dset:nationalStudentSurveyNHSResultsStructure 
+	.
+
+# the following needs revision
+dset:nationalStudentSurveyNHSResultsStructure 
+	a qb:DataStructureDefinition;
+	rdfs:comment "National Student Survey (NHS) results structure."@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  dcterm:subject ];
+    qb:component [ qb:measure  kis:nhsnssQuestion1 ];
+    qb:component [ qb:measure  kis:nhsnssQuestion2 ];
+    qb:component [ qb:measure  kis:nhsnssQuestion3 ];
+    qb:component [ qb:measure  kis:nhsnssQuestion4 ];
+    qb:component [ qb:measure  kis:nhsnssQuestion5 ];
+    qb:component [ qb:measure  kis:nhsnssQuestion6 ]
+    .
+
+dset:salaries
+	a qb:DataSet;
+	rdfs:label "Contains data relating to the salary information of students"@en;
+	qb:structure dset:salariesStructure 
+	.
+
+# the following needs revision
+dset:salariesStructure 
+	a qb:DataStructureDefinition;
+	rdfs:comment "Information relating to the salary information of students."@en;
+	# The dimensions
+ 	qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  dcterm:subject ];
+    qb:component [ qb:measure  kis:sectorLowerForty ];
+    qb:component [ qb:measure  kis:sectorMedianForty ];
+    qb:component [ qb:measure  kis:sectorUpperForty ];
+    qb:component [ qb:measure  kis:sectorLowerSix ];
+    qb:component [ qb:measure  kis:sectorMedianSix ];
+    qb:component [ qb:measure  kis:sectorUpperSix ];
+    qb:component [ qb:measure  kis:courseLower ];
+    qb:component [ qb:measure  kis:courseMedian ];
+    qb:component [ qb:measure  kis:courseUpper ]
+	.
+
+dset:tariffs
+	a qb:DataSet;
+	rdfs:label "Contains data relating to the entry tariff points of students"@en;
+	qb:structure dset:tariffsStructure 
+	.
+
+# the following needs revision
+dset:tariffsStructure 
+	a qb:DataStructureDefinition;
+	rdfs:comment "Information relating to the entry tariff points of students."@en;
+	# The dimensions
+ 	qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  kis:tariff1 ];
+    qb:component [ qb:measure  kis:tariff120 ];
+    qb:component [ qb:measure  kis:tariff160 ];
+    qb:component [ qb:measure  kis:tariff200 ];
+    qb:component [ qb:measure  kis:tariff240 ];
+    qb:component [ qb:measure  kis:tariff280 ];
+    qb:component [ qb:measure  kis:tariff320 ];
+    qb:component [ qb:measure  kis:tariff360 ];
+    qb:component [ qb:measure  kis:tariff400 ];
+    qb:component [ qb:measure  kis:tariff440 ];
+    qb:component [ qb:measure  kis:tariff480 ];
+    qb:component [ qb:measure  kis:tariff520 ];
+    qb:component [ qb:measure  kis:tariff560 ];
+    qb:component [ qb:measure  kis:tariff600 ]
+	.
+	
+	
+	

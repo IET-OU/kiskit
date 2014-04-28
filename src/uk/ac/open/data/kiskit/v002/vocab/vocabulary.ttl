@@ -1,0 +1,2083 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix kis: <http://data.linkedu.eu/kis/ontology/> .
+@prefix dset: <http://data.linkedu.eu/kis/dataset/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix dcterm: <http://purl.org/dc/terms/> .
+@prefix courseware: <http://courseware.rkbexplorer.com/ontologies/courseware#> .
+@prefix aiiso: <http://purl.org/vocab/aiiso/schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+#
+# SCHEMA
+#
+kis: a owl:Ontology;
+	rdfs:label "Unistats dataset schema specification"@en ;
+	rdfs:comment """This document specifies the ontology for describing the Unistats data in RDF. 
+	It is based on the documentation of provided by HESA and makes use of/is aligned to other ontologies, 
+	most notably: 
+	OWL (http://www.w3.org/TR/owl2-overview/) ; 
+	The RDF Data Cube Vocabulary (http://www.w3.org/TR/vocab-data-cube/) ; 
+	RKB Courseware (http://courseware.rkbexplorer.com/ontologies/courseware) ;
+	AIISO (http://purl.org/vocab/aiiso/schema#) ;
+	Core organization ontology (http://www.w3.org/ns/org#) ;
+	WGS84 Geo Positioning (http://www.w3.org/2003/01/geo/wgs84_pos#)"""@en ;
+	dcterm:creator "Enrico Daga - Knowledge Media Institute (The Open University)"@en ;
+	owl:versionInfo "Version 002 - Designed on Unistats 2013/2014. This version applies to dumps downloaded from 19 September 2013."@en ;
+	dcterm:license """The Unistats Dataset is reproduced with the permission of the Higher Education Funding Council for England (HEFCE), the Higher Education Statistics Agency (HESA) and their licensors. The Unistats Dataset may be accessed in its original form here: http://www.hesa.ac.uk/unistatsdata.  All copyright and other intellectual property rights in the Unistats Dataset are owned by HEFCE, HESA and their licensors."""@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/index.php?option=com_studrec&Itemid=232&mnl=13061>
+	.
+
+#
+# classes
+#
+
+# Course
+kis:Course 
+	a rdfs:Class, owl:Class ;
+	rdfs:subClassOf courseware:Course, aiiso:Course ;
+	rdfs:label "Course"@en ;
+	rdfs:comment "A course in the Unistat Dataset"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/KISCourse.html> ;
+	rdfs:isDefinedBy kis: 
+	.
+
+courseware:Course
+	rdfs:isDefinedBy <http://courseware.rkbexplorer.com/ontologies/courseware> .
+aiiso:Course
+	rdfs:isDefinedBy <http://courseware.rkbexplorer.com/ontologies/courseware> .
+		
+kis:Institution
+	a rdfs:Class, owl:Class;
+	rdfs:subClassOf org:Organization, aiiso:Institution ;
+	rdfs:label "Institution"@en ;
+	rdfs:comment "An Institution providing courses (and data for Unistats)"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/KISInstitution.html> ;
+	rdfs:isDefinedBy kis:
+	.
+aiiso:Institution
+  	rdfs:isDefinedBy <http://purl.org/vocab/aiiso/schema#> 
+  	.
+
+kis:PartTimeCourse 
+	a rdfs:Class, owl:Class;
+	rdfs:subClassOf kis:Course;
+	rdfs:label "Part time KIS Course"@en;
+	rdfs:comment "Full-time and part-time in the context of unistats relates to how the institution advertises the delivery of the course."@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/KISMODE.html> ;
+	rdfs:isDefinedBy kis:
+	.
+	
+kis:FullTimeCourse 
+	a rdfs:Class, owl:Class ;
+	rdfs:subClassOf kis:Course ;
+	rdfs:label "Full time KIS Course"@en ;
+	rdfs:comment "Full-time and part-time in the context of unistats relates to how the institution advertises the delivery of the course."@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/KISMODE.html> ;
+	rdfs:isDefinedBy kis:
+	.
+
+
+kis:FullCourseLevelKIS
+	a rdfs:Class, owl:Class ;
+	rdfs:subClassOf kis:Course ;
+	rdfs:label "Full course level KIS"@en ;
+	rdfs:comment "See http://www.hesa.ac.uk/13061/Coverage.html"@en ;
+	skos:note "The value of this property is also reflected on an rdf:type, as follow: 1=FullCourseLevelKIS ; 2=MultipleSubjectCoursePlaceholderKIS ; 3=SubjectLevelKIS"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/13061/Coverage.html> ;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:MultipleSubjectCoursePlaceholderKIS
+	a rdfs:Class, owl:Class ;
+	rdfs:subClassOf kis:Course ;
+	rdfs:label "Multiple Subject Course Placeholder KIS"@en ;
+	rdfs:comment "See http://www.hesa.ac.uk/13061/Coverage.html"@en ;
+	skos:note "The value of this property is also reflected on an rdf:type, as follow: 1=FullCourseLevelKIS ; 2=MultipleSubjectCoursePlaceholderKIS ; 3=SubjectLevelKIS"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/13061/Coverage.html> ;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:SubjectLevelKIS
+	a rdfs:Class, owl:Class ;
+	rdfs:subClassOf kis:Course ;
+	rdfs:label "Subject Level KIS"@en ;
+	rdfs:comment "See http://www.hesa.ac.uk/13061/Coverage.html"@en ;
+	skos:note "The value of this property is also reflected on an rdf:type, as follow: 1=FullCourseLevelKIS ; 2=MultipleSubjectCoursePlaceholderKIS ; 3=SubjectLevelKIS"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/13061/Coverage.html> ;
+	rdfs:isDefinedBy kis:
+	.
+	
+kis:Accreditation
+	a rdfs:Class, owl:Class ;
+	rdfs:subClassOf owl:Thing ;
+	rdfs:label "Accreditation"@en ;
+	rdfs:comment "A professional accreditations for the course."@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/Accreditation.html> ;
+	rdfs:isDefinedBy kis:
+	.
+	
+kis:AccreditingBody
+	a rdfs:Class, owl:Class ;
+	rdfs:subClassOf org:Organization ;
+	rdfs:label "Accrediting body"@en ;
+	rdfs:comment "Institution of a Professional accreditation held by a course"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/ACCTYPE.html> ;
+	rdfs:isDefinedBy kis:
+	.
+	
+kis:AccreditationType
+	a rdfs:Class, owl:Class ;
+	rdfs:subClassOf owl:Thing ;
+	rdfs:label "Accreditation type"@en ;
+	rdfs:comment "Professional accreditation held by a number of courses. This entity is related to the course through a resource of type Accreditation"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/ACCTYPE.html> ;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:Job
+	a rdfs:Class, owl:Class ;
+	rdfs:subClassOf owl:Thing ;
+	rdfs:label "Job"@en ;
+	rdfs:comment  "A type of employment"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:Aim
+	a rdfs:Class, owl:Class ;
+	rdfs:subClassOf owl:Thing ;
+	rdfs:label "Aim"@en ;
+	rdfs:comment  "Describes the course qualification"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/KISAIM.html> ;
+	rdfs:isDefinedBy kis:
+	.
+
+#
+# properties
+#
+
+kis:courseId
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Identifier"@en;
+	rdfs:comment "This field is provided by the institution to uniquely identify each course."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/KISCOURSEID.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:string;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:ucasCourseId
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:label "UCAS Identifier"@en ;
+	rdfs:comment "This field records the UCAS course code(s) for the KISCourse."@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/UCASCOURSEID.html> ;
+	rdfs:domain kis:Course ;
+	rdfs:range xsd:string ;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:jacsCode
+	a rdf:Property, owl:ObjectProperty;
+	rdfs:label "JACS Code"@en;
+	rdfs:comment "Link to the JACS subject"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+#	rdfs:seeAlso <http://data.southampton.ac.uk/dumps/jacs/2014-02-21/jacs.ttl> ;
+	rdfs:domain kis:Course;
+	rdfs:range <http://id.southampton.ac.uk/ns/JACSCategory>;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:ldcsCode
+	a rdf:Property, owl:ObjectProperty ;
+	rdfs:label "LDCS Code"@en ;
+	rdfs:comment "An LDCS code"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/LDCS.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:string;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:ukPrnApply
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "UKPRN (apply)"@en;
+	rdfs:comment "This field records the UK Provider Reference Number (UKPRN) of the institution students apply to."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/UKPRNAPPLY.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:string;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:nonCreditAssessment
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Non-credit assessment"@en;
+	rdfs:comment "Indicator of whether course includes assessment not included within breakdown."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/NONCREDITASSESS.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:feeVariesByYear
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Fee varies by year"@en;
+	rdfs:comment "Whether fee varies by year"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/VARFEE.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:feeToBeConfirmed
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Fee to be confirmed"@en;
+	rdfs:comment "This field records whether fees are yet to be confirmed."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/FEETBC.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:waiverAvailable
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Waiver available"@en;
+	rdfs:comment "This field records whether fee waivers are available."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/WAIVER.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:meansSupport
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Means tested support"@en;
+	rdfs:comment "This field records whether means tested support is available."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/MEANSSUP.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:distanceOnly
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Distance learning only"@en;
+	rdfs:comment "This field records whether the course is offered through distance learning only."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/DISTANCE.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:honoursDegreeCourse
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Honours award provision"@en;
+	rdfs:comment "This field records whether the course aim, on successful completion, would result in an honours (Hons) degree."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/HONOURS.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:locationChange
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Change of course location"@en;
+	rdfs:comment "This field identifies if the course changes its teaching location during any part of the course."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/LOCCHNGE.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:sandwitch
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Change of course location"@en;
+	rdfs:comment "To identify whether a sandwich course component is available."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/SANDWICH.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:otherSupport
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Non-Means-tested support"@en;
+	rdfs:comment "This field records whether non-means-tested support is available."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/OTHSUP.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:yearAbroadAvailable
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Year abroad"@en;
+	rdfs:comment "This field records whether a year abroad is available."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/YEARABROAD.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:nhsFundedStudents
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Has NHS founded students"@en;
+	rdfs:comment "This field records whether the course has any NHS founded students."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/NHS.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:boolean;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:numStage
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Number of stages"@en;
+	rdfs:comment "This field records the total number of stages."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/NUMSTAGE.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:availableInWelsh
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Available in Welsh"@en;
+	rdfs:comment "This field records whether non-means-tested support is available."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/WELSH.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:englishFee
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Maximum fee for English domicile"@en;
+	rdfs:comment "This field records the average maximum annual fee for the course for an England domiciled student."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/ENGFEE.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:northernIrishFee
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Maximum fee for Northern Ireland domicile"@en;
+	rdfs:comment "This field records the average maximum annual fee for the course for a Northern Ireland domiciled student."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/NIFEE.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:scottishFee
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Maximum fee for Scotland domicile"@en;
+	rdfs:comment "This field records the average maximum annual fee for the course for a Scottish student."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/SCOTFEE.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:walesFee
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Maximum fee for Wales domicile"@en;
+	rdfs:comment "This field records the average maximum annual fee for the course for a Wales domiciled student."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/WAFEE.html> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:type
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:label "The type of KIS course"@en;
+	rdfs:comment "This field identifies whether the KIS is a full KIS (KISTYPE=1), a placeholder for a multiple subject course (KISTYPE=2) or a subject level KIS (KISTYPE=3). Further details of the coverage of the KISTYPES can be found at www.hesa.ac.uk/C13061/coverage. "@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/KISTYPE.html> ;
+	rdfs:seeAlso <www.hesa.ac.uk/C13061/coverage> ;
+	skos:note "The value of this property is also reflected on an rdf:type, as follow: 1=FullCourseLevelKIS ; 2=MultipleSubjectCoursePlaceholderKIS ; 3=SubjectLevelKIS"@en ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:mode
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:label "Full-time or part-time"@en;
+	rdfs:comment "This field indicates if a course is advertised as full-time (1), part-time (2) or both (3)."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/MODE.html> ;
+	skos:note "The value of this property is also reflected on an rdf:type : PartTimeCourse or FullTimeCourse"@en ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:averageOfWrittenAssessment
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:label "Average of written assessment"@en;
+	rdfs:comment "This is the average of the WRITTEN element taken over all COURSESTAGEs which contain an element of assessment. "@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:averageOfCourseworkAssessment
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:label "Average of coursework assessment"@en;
+	rdfs:comment "This is the average of the COURSEWORK element taken over all COURSESTAGEs which contain an element of assessment. "@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:averageOfScheduledActivities
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:label "Average of coursework assessment"@en;
+	rdfs:comment "This is the average of the SCHEDULED element taken over all COURSESTAGEs which contain an element of assessment. "@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis:
+	.
+	
+kis:assessmentMethodsUrl
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "About assessment methods"@en;
+	rdfs:comment "URL pointing to details about the assessment methods"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/ASSURL.html>;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri;
+	rdfs:isDefinedBy kis:
+	.	
+	
+kis:assessmentMethodsUrlW
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "About assessment methods (in Welsh)"@en;
+	rdfs:comment "URL pointing to details about the assessment methods (in Welsh)"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/ASSURLW.html>;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri;
+	rdfs:isDefinedBy kis:
+	.	
+	
+kis:courseUrl
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Course web page"@en;
+	rdfs:comment "This field provides a link back from Unistats to the page on the institutional website that hosts the widget (information box). "@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/CRSEURL.html>;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri;
+	rdfs:isDefinedBy kis:
+	.	
+	
+kis:courseUrlW
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Course web page (in Welsh)"@en;
+	rdfs:comment "This field provides a link back from Unistats to the page on the institutional website that hosts the widget (information box). (in Welsh) "@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/CRSEURLW.html>;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri;
+	rdfs:isDefinedBy kis:
+	.	
+	
+kis:supportUrl
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:label "About financial support"@en;
+	rdfs:comment "This field contains a URL for a web-page that contains further details about the financial support available to students. Institutions may link this to a general financial support page or to a course specific financial support page. "@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/SUPPORTURL.html>;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri;
+	rdfs:isDefinedBy kis:
+	.	
+	
+kis:supportUrlW
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:label "About financial support (in Welsh)"@en;
+	rdfs:comment "This field contains a URL for a web-page that contains further details about the financial support available to students. Institutions may link this to a general financial support page or to a course specific financial support page. (in Welsh) "@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/SUPPORTURLW.html>;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri;
+	rdfs:isDefinedBy kis:
+	.	
+	
+kis:employUrl
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Link to further details on employment"@en;
+	rdfs:comment "This field contains a URL which contains further details about the employment opportunities for students following successful completion of the course."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/EMPLOYURL.html>;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri;
+	rdfs:isDefinedBy kis:
+	.
+	
+kis:employUrlW
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "Link to further details on employment (in Welsh)"@en;
+	rdfs:comment "This field contains a URL which contains further details about the employment opportunities for students following successful completion of the course. (in Welsh)"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/EMPLOYURLW.html>;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri;
+	rdfs:isDefinedBy kis:
+	.
+	
+kis:learningAndTeachingUrl
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "About Learning and Teaching methods"@en;
+	rdfs:comment "This field contains a URL that links to further explanation about the learning and teaching methods for the course. In most cases it will be a link directly to the programme specification. "@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/LTURL.html>;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri ;
+	rdfs:isDefinedBy kis:
+	.
+	
+kis:learningAndTeachingUrlW
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:label "About Learning and Teaching methods (in Welsh)"@en;
+	rdfs:comment "This field contains a URL that links to further explanation about the learning and teaching methods for the course. In most cases it will be a link directly to the programme specification. (in Welsh)"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/LTURLW.html>;
+	rdfs:domain kis:Course;
+	rdfs:range xsd:anyUri ;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:awardLevel
+	a rdf:Property, owl:ObjectProperty ;
+	rdfs:domain kis:Course;
+	rdfs:label "Level of award"@en;
+	rdfs:comment "This field records the broad level of the award arising from the course."@en;
+	rdfs:range kis:AwardLevel;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/LEVEL.html>;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:firstDegreeAward a rdfs:Resource ;
+	a kis:AwardLevel ;
+	rdfs:label "First degree"@en;
+	rdfs:comment "Represents the First degree award"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/LEVEL.html>;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:otherUndergraduateAward a rdfs:Resource ;
+	a kis:AwardLevel ;
+	rdfs:label "Other undergraduate award"@en ;
+	rdfs:comment "Represents other undergraduate awards not being a First degree award (kis:firstDegreeAward)"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/LEVEL.html>;
+	rdfs:isDefinedBy kis:
+	.
+
+
+kis:accomodationUrl
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain kis:Location;
+	rdfs:label "About the accommodation costs"@en;
+	rdfs:comment "URL explaining accommodation costs"@en;
+	rdfs:range xsd:anyUri;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/ACCOMURL.html>;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:accomodationUrlW
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain kis:Location;
+	rdfs:label "About the accommodation costs (in Welsh)"@en;
+	rdfs:comment "URL explaining accommodation costs (in Welsh)"@en;
+	rdfs:range xsd:anyUri;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/ACCOMURLW.html>;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:numberOfBeds
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain kis:Location;
+	rdfs:label "Number of beds"@en;
+	rdfs:comment "This field records the number of institution owned/sponsored beds."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/INSTBEDS.html>;
+	rdfs:isDefinedBy kis: ;
+	rdfs:range xsd:int
+	.
+
+kis:bedsLowerPrice
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain kis:Location;
+	rdfs:label "Beds - lower price"@en ;
+	rdfs:comment "Lower quartile annual cost of institution owned/sponsored beds"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/INSTLOWER.html>;
+	rdfs:range xsd:int ;
+	rdfs:isDefinedBy kis: ;
+	.
+
+kis:bedsUpperPrice
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain kis:Location;
+	rdfs:label "Beds - upper price"@en ;
+	rdfs:comment "Upper quartile annual cost of institution owned/sponsored beds"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/INSTUPPER.html>;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis: ;
+	.
+
+kis:privateBedsLowerPrice
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain kis:Location;
+	rdfs:label "Private beds - lower price"@en ;
+	rdfs:comment "Lower quartile annual cost of private sector beds"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/PRIVATELOWER.html>;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis: ;
+	.
+
+kis:privateBedsUpperPrice
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain kis:Location;
+	rdfs:label "Private beds - upper price"@en ;
+	rdfs:comment "Upper quartile annual cost of private sector beds"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/PRIVATEUPPER.html>;
+	rdfs:range xsd:int;
+	rdfs:isDefinedBy kis: ;
+	.
+
+kis:studentsUnionURL
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain kis:Location;
+	rdfs:label "Students Union URL"@en ;
+	rdfs:comment "Web page of the Students Union"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/SUURL.html>;
+	rdfs:range xsd:anyUri;
+	rdfs:isDefinedBy kis: ;
+	.
+
+kis:studentsUnionWelshURL
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain kis:Location;
+	rdfs:label "Students Union URL (in Welsh)"@en ;
+	rdfs:comment "Web page of the Students Union"@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/SUURLW.html>;
+	rdfs:range xsd:anyUri;
+	rdfs:isDefinedBy kis: ;
+	.
+
+kis:country
+	a rdf:Property, owl:ObjectProperty;
+	rdfs:domain kis:Institution;
+	rdfs:label "Country";
+	rdfs:range rdfs:Resource; 
+	rdfs:comment "From the KIS codes: XF=England XG=Northern Ireland XH=Scotland XI=Wales"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/COUNTRY.html>;
+	rdfs:isDefinedBy kis:
+	.
+	
+kis:nspParticipant
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain kis:Institution;
+	rdfs:label "Whether the institution is participating in the English National Scholarship Programme"@en ;
+	rdfs:comment "This field records whether the institution is participating in the National Scholarship Programme."@en ;
+	rdfs:range xsd:boolean ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/NSP.html>;
+	rdfs:isDefinedBy kis:
+	.
+	
+kis:studentsUnionSatisfactory
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain kis:Institution;
+	rdfs:range xsd:int ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 24 on the NSS: "I am satisfied with the Students' Union at my institution'". (Question 23 is not included in Unistats; this was for free text responses.)"""@en ;
+	rdfs:label "Students Union satisfactory"@en ;
+	rdfs:isDefinedBy kis:
+	
+	.
+	
+kis:nssPopulation
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain kis:Institution;
+	rdfs:range xsd:int ;
+	rdfs:label "Students who responded to the NSS"@en ;
+	rdfs:comment "Population of students who responded to the NSS"@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:accreditation
+	a rdf:Property, owl:ObjectProperty ;
+	rdfs:label "Has accreditation"@en ;
+	rdfs:comment "Relates a course to an (optional) accreditation"@en ;
+	rdfs:domain kis:Course ;
+	rdfs:range kis:Accreditation ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/Accreditation.html> ;
+	rdfs:isDefinedBy kis:
+	.
+	
+kis:accreditationType
+	a rdf:Property, owl:ObjectProperty ;
+	rdfs:subPropertyOf rdfs:label;
+	rdfs:label "Description of the type of the accreditation"@en ;
+	rdfs:comment "Relates an Accreditation to an entity representing a type of, including description and accrediting body"@en ;
+	rdfs:domain kis:Accreditation ;
+	rdfs:range kis:accreditationType ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/Accreditation.html> ;
+	rdfs:isDefinedBy kis: 
+	.
+	
+kis:aggregation
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain qb:Observation;
+	rdfs:range xsd:string;
+	rdfs:label "Aggregation"@en ;
+	rdfs:comment "The level of aggregation for the entity. A full description of how data are aggregated is in Annex A. The first digit of this field indicates whether one (1) or two (2) years' data have been aggregated. The second digit indicates whether the data have been aggregated at KISCOURSE (4), JACS level 3 (3), JACS level 2 (2) or JACS level 1 (1)."@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:accreditationUrl
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:label "Accreditation url"@en ;
+	rdfs:comment "An URL that provides insights about the accreditation type"@en ;
+	rdfs:domain kis:AccreditationType ;
+	rdfs:range xsd:anyUri ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/13061/accreditation_list.html> ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:accreditingBody
+	a rdf:Property, owl:ObjectProperty ;
+	rdfs:label "Accrediting body"@en ;
+	rdfs:comment "The accrediting body of this accreditation type"@en ;
+	rdfs:domain kis:AccreditingType ;
+	rdfs:range kis:AccreditingBody ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/13061/accreditation_list.html"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:accreditationDependantOnChoice
+	a rdf:Property, owl:ObjectProperty ;
+	rdfs:label "Accreditation dependant on choice"@en ;
+	rdfs:comment "Is accreditation dependant on choice?"@en ;
+	rdfs:range xsd:boolean ;
+	rdfs:domain kis:Accreditation ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/13061/A/Accreditation.html> ;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:accreditationDependantOnChoiceUrl
+	a rdf:Property, owl:ObjectProperty ;
+	rdfs:label "Insights about the accreditation"@en ;
+	rdfs:comment "A URL that explains how the accreditation depends on module or other course choices made by the student."@en ;
+	rdfs:range xsd:anyUri ;
+	rdfs:domain kis:Accreditation ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/13061/A/Accreditation.html"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:accreditationDependantOnChoiceUrlW
+	a rdf:Property, owl:ObjectProperty ;
+	rdfs:label "Insights about the accreditation (in welsh)"@en ;
+	rdfs:comment "A URL that explains how the accreditation depends on module or other course choices made by the student (in welsh)."@en ;
+	rdfs:range xsd:anyUri ;
+	rdfs:domain kis:Accreditation ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/13061/A/Accreditation.html> ;
+	rdfs:isDefinedBy kis:
+	.
+
+kis:population
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain qb:Observation;
+	rdfs:range xsd:int;
+	rdfs:label "Population"@en;
+	rdfs:comment "Population to which the observation apply"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:course
+	a rdf:Property, owl:ObjectProperty ;
+	rdfs:domain rdfs:Resource;
+	rdfs:range kis:Course;
+	rdfs:label "course"@en;
+	rdfs:comment "Relates anything to a course"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+	
+aiiso:teaches
+	a rdf:Property, owl:ObjectProperty;
+	rdfs:range kis:Course;
+	rdfs:label "teaches"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:aim
+	a rdf:Property, owl:ObjectProperty;
+	rdfs:domain kis:Course ;
+	rdfs:range kis:Aim ;
+	rdfs:label "Aim"@en;
+	rdfs:comment "Links to the aim description of the course"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+	
+kis:job
+	a rdf:Property, owl:ObjectProperty;
+	rdfs:range kis:Job;
+	rdfs:domain qb:Observation;
+	rdfs:label "job"@en;
+	rdfs:comment "Observation about a course: a Job"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:percentage
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation;
+	rdfs:range xsd:int; # XXX this should be a percentage...
+	rdfs:label "percentage"@en;
+	rdfs:comment "Observation about a course/job: a percentage"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:order
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation;
+	rdfs:range xsd:int;
+	rdfs:label "order"@en;
+	rdfs:comment "The order to be used to display the observations (table rows)"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:continuing
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Continuing"@en;
+	rdfs:comment "The proportion of students who continued on their course at the institution in the year after entering HE."@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:dormant
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Dormant"@en;
+	rdfs:comment "The proportion of students recorded as dormant the year after they entered HE"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:gained
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Gained intended or higher"@en;
+	rdfs:comment "The proportion of students who gained their intended award (or higher) the year after they entered HE."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:left
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Left without award"@en;
+	rdfs:comment "The proportion of students who left without an award the year after they entered HE."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:lower
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Gained lower"@en;
+	rdfs:comment "The proportion of students who gained a lower award than the one originally intended the year after they entered HE."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:workOrStudy
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students in work and/or study"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students who are recorded as BOTH, WORK or STUDY six months after their course ended."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:assumedUnemployed
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students assumed unemployed"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students assumed to be unemployed six months after their course ended."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:workAndStudy
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students in work and study"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students in work and study six months after their course ended."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:notAvailable
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students not available for work or study"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students who are not available for work or study six months after their course ended."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:study
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students studying only"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students who are undertaking further study six months after their course ended."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:work
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Proportion of students working only"@en;
+	rdfs:comment "Taken from the Destination of Leavers data; the proportion of students in work six months after their course ended."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:firstClass
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "First class"@en;
+	rdfs:comment "The proportion of students gaining a first class degree (CLASS=01 on HESA student data.)."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:upperSecondClass
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Upper second class (2:1)"@en;
+	rdfs:comment "The proportion of students gaining a upper second class (2:1) degree (CLASS=02 on HESA student data.)."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:lowerSecondClass
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Lower (or undivided) second class"@en;
+	rdfs:comment "The proportion of students gaining a lower (or undivided) second class degree (CLASS=03, 04 on HESA student data.)."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:otherHonours
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Other Honours"@en;
+	rdfs:comment "The proportion of students gaining a other honours degree (CLASS=05,06,09 on HESA student data.)."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:ordinary
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Ordinary"@en;
+	rdfs:comment "The proportion of students gaining a ordinary degree (CLASS=10 on HESA student data)."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:notClassified
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Not classified"@en;
+	rdfs:comment "The proportion of students gaining a not classified degree (CLASS=07, 08,11, 12, 13, 14 on HESA student data)."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:accessCourse
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Access Course"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is an access course"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:aLevel
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "A-levels and Highers"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is A level or (Scottish) Highers. A full description of this field is given in Annex G."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:baccalaureate
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "International baccalaureate"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is an International Baccalaureate."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:degree
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Degree or higher"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is a degree or higher qualification."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:diploma
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Diploma"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is a diploma."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:foundation
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Foundation course"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is a foundation course."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:noQualifications
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "No qualifications"@en;
+	rdfs:comment "Proportion of students with no qualifications on entry."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:other
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Other qualifications"@en;
+	rdfs:comment "Proportion of students with other qualifications on entry."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:otherHE
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Other HE"@en;
+	rdfs:comment "Proportion of students whose highest qualification on entry is another HE qualification."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:professional
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Professional or managerial jobs"@en;
+	rdfs:comment "This field is derived from the SOC DLHE codes (http://www.hesa.ac.uk/content/view/102/143/1/9/). It gives the proportion of students in professional or managerial jobs. These are defined as those students whose occupation code starts with 1, 2 or 3."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:nonProfessional
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Non-professional or managerial"@en;
+	rdfs:comment "This field is derived from the SOC DLHE codes (http://www.hesa.ac.uk/content/view/102/143/1/9/). It gives the proportion of students in non professional or managerial jobs. It consists of all students whose SOC code is not in(00020,00010 or xxxxx) or does not start with 1, 2 or 3."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:unknown
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Unable to classify/Unknown"@en;
+	rdfs:comment "This field is derived from the SOC DLHE codes (http://www.hesa.ac.uk/content/view/102/143/1/9/). It gives the proportion of students whose job classification cannot be derived, or whose SOC code is unknown. These are all students whose SOC code is one of 00020,00010 or xxxxx"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:stage
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Stage"@en;
+	rdfs:comment "The stage of the course being observed"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:assessmentMethod
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:string;
+	rdfs:label "Assessment method"@en;
+	rdfs:comment "The assessment method of the stage of the course being observed"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:coursework
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Coursework"@en;
+	rdfs:comment "The coursework part of the stage of the course being observed"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:written
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "Written"@en;
+	rdfs:comment "The written part of the assessment of the stage of the course being observed"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:practical
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Practical"@en ;
+	rdfs:comment "The practical part of  of the stage of the course being observed"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:learningAndTeachingMethod
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:string ;
+	rdfs:label "Learning and teaching method"@en ;
+	rdfs:comment "The learning and teaching method of the stage of the course being observed"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:independent
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Independent"@en ;
+	rdfs:comment "The independent part of  of the stage of the course being observed"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:placement
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Placement"@en ;
+	rdfs:comment "The placement part of  of the stage of the course being observed"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:scheduled
+	a rdf:Property, owl:DatatypeProperty ;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Scheduled"@en ;
+	rdfs:comment "The scheduled part of  of the stage of the course being observed"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:nssQuestion1
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 1";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 1 on the NSS: "Staff are good at explaining things".""";
+	rdfs:label "Staff are good at explaining things"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:nssQuestion2
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 2";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 2 on the NSS: "Staff have made the subject interesting".""";
+	rdfs:label "Staff have made the subject interesting"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:nssQuestion3
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 3";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 3 on the NSS: "Staff are enthusiastic about what they are teaching".""";
+	rdfs:label "Staff are enthusiastic about what they are teaching"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion4
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 4";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 4 on the NSS: "The course is intellectually stimulating".""";
+	rdfs:label "The course is intellectually stimulating"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:nssQuestion5
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 5";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 5 on the NSS: "The criteria used in marking have been clear in advance".""";
+	rdfs:label "The criteria used in marking have been clear in advance"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion6
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 6";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 6 on the NSS: "Assessment arrangements and marking have been fair".""";
+	rdfs:label "Assessment arrangements and marking have been fair"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion7
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 7";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 7 on the NSS: "Feedback on my work has been prompt".""";
+	rdfs:label "Feedback on my work has been prompt"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion8
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 8";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 8 on the NSS: "I have received detailed comments on my work".""";
+	rdfs:label "I have received detailed comments on my work"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion9
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 9";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 9 on the NSS: "Feedback on my work has helped me clarify things I did not understand".""";
+	rdfs:label "Feedback on my work has helped me clarify things I did not understand"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion10
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 10";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 10 on the NSS: "I have received sufficient advice and support with my studies".""";
+	rdfs:label "I have received sufficient advice and support with my studies"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion11
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 11";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 11 on the NSS: "I have been able to contact staff when I needed to".""";
+	rdfs:label "I have been able to contact staff when I needed to"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion12
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 12";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 12 on the NSS: "Good advice was available when I needed to make study choices".""";
+	rdfs:label "Good advice was available when I needed to make study choices"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion13
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 13";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 13 on the NSS: "The timetable works efficiently as far as my activities are concerned".""";
+	rdfs:label "The timetable works efficiently as far as my activities are concerned"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion14
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 14";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 14 on the NSS: "Any changes in the course or teaching have beencommunicated effectively".""";
+	rdfs:label "Any changes in the course or teaching have beencommunicated effectively"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion15
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 15";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 15 on the NSS: "The course is well organised and is running smoothly".""";
+	rdfs:label "The course is well organised and is running smoothly"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion16
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 16";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 16 on the NSS: "The library resources and services are good enough for my needs".""";
+	rdfs:label "The library resources and services are good enough for my needs"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion17
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 17";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 17 on the NSS: "I have been able to access general IT resources when I needed to".""";
+	rdfs:label "I have been able to access general IT resources when I needed to"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion18
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 18";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 18 on the NSS: "I have been able to access specialised equipment, facilities or rooms when I needed to".""";
+	rdfs:label "I have been able to access specialised equipment, facilities or rooms when I needed to"@en ;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion19
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 19";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 19 on the NSS: "The course has helped me present myself with confidence".""";
+	rdfs:label "The course has helped me present myself with confidence"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion20
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 20";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 20 on the NSS: "My communication skills have improved".""";
+	rdfs:label "My communication skills have improved"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion21
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 21";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 21 on the NSS: "As a result of the course, I feel confident in tackling unfamiliar problems".""";
+	rdfs:label "As a result of the course, I feel confident in tackling unfamiliar problems"@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nssQuestion22
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int;
+	rdfs:label "NSS Question 22";
+	rdfs:comment """Proportion of students who "agree" or "strongly agree" with question 22 on the NSS: "Overall, I am satisfied with the quality of the course.".""";
+	rdfs:label "Overall, I am satisfied with the quality of the course."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:sectorLowerForty #LDLQ
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Sector lower quartile salary for subject (40 months)";
+	rdfs:comment "Contains the lower quartile salary of students at all institutions of the subject 40 months after graduation."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:sectorMedianForty #LDMED
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Sector Median salary for subject (40 months)";
+	rdfs:comment "Contains the median salary of students at all institutions of the subject 40 months after graduation."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:sectorUpperForty #LDUQ
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Sector upper quartile salary for subject(40 months)";
+	rdfs:comment "Contains the upper quartile salary of students at all institutions of the subject 40 months after graduation."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:sectorLowerSix #LQ
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Sector lower quartile salary for subject(6 months)";
+	rdfs:comment "Contains the lower quartile salary of students at all institutions of the subject 6 months after graduation."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:sectorMedianSix #MED
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Sector Median salary for subject (6 months)";
+	rdfs:comment "Contains the median salary of students at all institutions of the subject 6 months after graduation."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:sectorUpperSix #UQ
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Sector upper quartile salary for subject (6 months)";
+	rdfs:comment "Contains the upper quartile salary of students at all institutions of the subject 6 months after graduation."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:courseLower #INSTLQ
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Course lower quartile salary (6 months)";
+	rdfs:comment "Contains the lower quartile salary of students on the course 6 months after graduation. "@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:courseMedian #INSTMED
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Course Median salary (6 months)";
+	rdfs:comment "Contains the median salary of students on the course 6 months after graduation."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:courseUpper #INSTUQ
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Course upper quartile salary (6 months)";
+	rdfs:comment "Contains the upper quartile salary of students on the course 6 months after graduation."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+
+kis:nhsNssQuestion1 #NSHQ1
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:label "NSS (NHS) question 1";
+	rdfs:range xsd:int ;
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 1 on the NSS (NHS): "I received sufficient preparatory information prior to my placement(s) "."""@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nhsNssQuestion2 #NSHQ2
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "NSS (NHS) question 2";
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 2 on the NSS (NHS): "I was allocated placement(s) suitable for my course"."""@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nhsNssQuestion3 #NSHQ3
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "NSS (NHS) question 3";
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 3 on the NSS (NHS): "I received appropriate supervision on my placement(s)"."""@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nhsNssQuestion4 #NSHQ4
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "NSS (NHS) question 4";
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 4 on the NSS (NHS): "I was given opportunities to meet my required practice learning outcomes/competences"."""@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nhsNssQuestion5 #NSHQ5
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "NSS (NHS) question 5";
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 5 on the NSS (NHS): "My contribution during placement(s) as part of the clinical team was valued "."""@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:nhsNssQuestion6 #NSHQ6
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "NSS (NHS) question 6";
+	rdfs:comment """Proportion of students on NHS funded courses who "agree" or "strongly agree" with question 6 on the NSS (NHS): "My practice supervisor(s) understood how my placement(s) related to the broader requirements of my course"."""@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff1
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Less than 120 tariff points"@en;
+	rdfs:comment "The proportion of entrants with less than 120 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+	
+kis:tariff120
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 120 and 159 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 120 and 159 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff160
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 160 and 299 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 160 and 299 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff200
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 200 and 239 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 200 and 239 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff240
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 240 and 279 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 240 and 279 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff280
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 280 and 319 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 280 and 319 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff320
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 320 and 359 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 320 and 359 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff360
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 360 and 399 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 360 and 399 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff400
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 400 and 439 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 400 and 439 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff440
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 440 and 479 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 440 and 479 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff480
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 480 and 519 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 480 and 519 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff520
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 520 and 559 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 520 and 559 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff560
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Between 560 and 599 tariff points"@en;
+	rdfs:comment "The proportion of entrants with between 560 and 599 tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+kis:tariff600
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain qb:Observation ;
+	rdfs:range xsd:int ;
+	rdfs:label "Over 600 tariff points"@en;
+	rdfs:comment "The proportion of entrants with 600 or more tariff points."@en;
+	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
+	rdfs:isDefinedBy kis: 
+	.
+#
+# instances
+#
+
+dset:commonJobs 
+	a qb:DataSet;
+    rdfs:label "Common job types"@en ;
+    rdfs:comment "This is a DataCube DataSet including Common job types obtained by students taking a course. Jobs are described by course, percentage and order"@en ;
+    rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+    rdfs:isDefinedBy kis: ;
+    qb:structure dset:commonJobsStructure
+    .
+    
+# the following needs revision
+dset:commonJobsStructure 
+	a qb:DataStructureDefinition;
+	rdfs:label "Common jobs types (structure)"@en ;
+	rdfs:comment "Data structure definition of the Common job types DataSet: job, course, percentage and order."@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ] ;
+    qb:component [ qb:dimension  kis:job ] ;
+    # The measures
+    qb:component [ qb:measure  kis:percentage ] ;
+    qb:component [ qb:measure  kis:order ]
+    .
+
+dset:continuation
+	a qb:DataSet;
+	rdfs:label "Contains data relating to continuation information for students on the courses"@en ;
+	rdfs:comment "The continuation data are derived by linking two successive years’ of HESA student data."@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+    qb:structure dset:continuationStructure ;
+    rdfs:isDefinedBy kis:
+	.
+
+# the following needs revision
+dset:continuationStructure
+	a qb:DataStructureDefinition;
+	rdfs:comment "Continuation information for students on the courses"@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:continuing ];
+    qb:component [ qb:measure  kis:dormant ];
+    qb:component [ qb:measure  kis:left ];
+    qb:component [ qb:measure  kis:gained ];
+    qb:component [ qb:measure  kis:lower ];
+    rdfs:isDefinedBy kis:
+    .
+
+dset:courseStages
+	a qb:DataSet;
+	rdfs:comment "Contains data relating to the learning, teaching and assessment methods for each course stage"@en;
+	rdfs:label "Course stages"@en ;
+	qb:structure dset:courseStagesStructure ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/A/CourseStage.html> ;
+    rdfs:isDefinedBy kis:
+	.
+
+# the following needs revision
+dset:courseStagesStructure
+	a qb:DataStructureDefinition;
+	rdfs:label "Coursestages (structure)"@en ;
+	rdfs:comment "Information relating to the learning, teaching and assessment methods for each course stage"@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:stage ];
+    qb:component [ qb:measure  kis:subject ];
+    qb:component [ qb:measure  kis:assessmentMethod ];
+    qb:component [ qb:measure  kis:coursework ];
+    qb:component [ qb:measure  kis:written ];
+    qb:component [ qb:measure  kis:practical ];
+    qb:component [ qb:measure  kis:learningAndTeachingMethod ];
+    qb:component [ qb:measure  kis:independent ];
+    qb:component [ qb:measure  kis:placement ];
+    qb:component [ qb:measure  kis:scheduled ] ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/A/CourseStage.html> ;
+    rdfs:isDefinedBy kis:
+    .
+
+dset:employment
+	a qb:DataSet;
+	rdfs:label "Employment"@en ;
+	rdfs:comment "Contains data relating to the employment outcomes of students"@en;
+	qb:structure dset:employmentStructure ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis:
+	.
+
+# the following needs revision
+dset:employmentStructureStructure
+	a qb:DataStructureDefinition;
+	rdfs:label "Employment (structure)"@en ;
+	rdfs:comment "Information relating to the employment outcomes of students"@en ;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  kis:subject ];
+    qb:component [ qb:measure  kis:workAndStudy ];
+    qb:component [ qb:measure  kis:assumedUnemployed ];
+    qb:component [ qb:measure  kis:inWorkAndStudy ];
+    qb:component [ qb:measure  kis:noAvailable ];
+    qb:component [ qb:measure  kis:study ];
+    qb:component [ qb:measure  kis:work ] ;
+    rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis:
+    .
+
+dset:degreeClasses
+	a qb:DataSet;
+	rdfs:label "Degree classes"@en ;
+	rdfs:comment "Contains data relating to the degree classifications obtained by students"@en;
+	qb:structure dset:degreeClassesStructure ;
+    rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis:
+	.
+
+# the following needs revision
+dset:degreeClassesStructure
+	a qb:DataStructureDefinition;
+	rdfs:label "Degree classes (structure)"@en ;
+	rdfs:comment "Information relating to the degree classifications obtained by students"@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  kis:firstClass ];
+    qb:component [ qb:measure  kis:upperSecondClass ];
+    qb:component [ qb:measure  kis:lowerSecondClass ];
+    qb:component [ qb:measure  kis:otherHonours ];
+    qb:component [ qb:measure  kis:ordinary ];
+    qb:component [ qb:measure  kis:notClassified ] ;
+    rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis:
+	.
+
+dset:entryQualifications
+	a qb:DataSet;
+	rdfs:label "Entry qualifications"@en ;
+	rdfs:comment "Contains data relating to the entry qualifications of students"@en;
+	qb:structure dset:entryQualificationsStructure ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+	.
+
+# the following needs revision
+dset:entryQualificationsStructure
+	a qb:DataStructureDefinition;
+	rdfs:label "Entry qualifications (structure)"@en ;
+	rdfs:comment "Information relating to the degree classifications obtained by students"@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  kis:accessCourse ];
+    qb:component [ qb:measure  kis:aLevel ];
+    qb:component [ qb:measure  kis:baccalaureate ];
+    qb:component [ qb:measure  kis:degree ];
+    qb:component [ qb:measure  kis:diploma ];
+    qb:component [ qb:measure  kis:foundation ];
+    qb:component [ qb:measure  kis:noQualifications ];
+    qb:component [ qb:measure  kis:other ];
+    qb:component [ qb:measure  kis:otherHE ] ;
+   	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+    .
+
+dset:jobTypes
+	a qb:DataSet;
+	rdfs:label "Job types"@en ;
+	rdfs:comment "Contains elements relating to the types of profession entered by students"@en;
+	qb:structure dset:jobTypesStructure  ;
+   	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+	.
+
+# the following needs revision
+dset:jobTypesStructure
+	a qb:DataStructureDefinition;
+	rdfs:label "Job types (structure)"@en ;
+	rdfs:comment "Information relating to the types of profession entered by students."@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  dcterm:subject ];
+    qb:component [ qb:measure  kis:professional ];
+    qb:component [ qb:measure  kis:nonProfessional ];
+    qb:component [ qb:measure  kis:unknown ] ;
+   	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+    .
+
+dset:nationalStudentSurveyResults
+	a qb:DataSet;
+	rdfs:label "National Student Survey Results"@en;
+	rdfs:comment "DataSet containing the results of the National Student Survey"@en;
+	qb:structure dset:nationalStudentSurveyResultsStructure ;
+   	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+	.
+
+# the following needs revision
+dset:nationalStudentSurveyResultsStructure 
+	a qb:DataStructureDefinition;
+	rdfs:label "National Student Survey Results (structure)"@en;
+	rdfs:comment "National Student Survey results structure."@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  dcterm:subject ];
+    qb:component [ qb:measure  kis:nssQuestion1 ];
+    qb:component [ qb:measure  kis:nssQuestion2 ];
+    qb:component [ qb:measure  kis:nssQuestion3 ];
+    qb:component [ qb:measure  kis:nssQuestion4 ];
+    qb:component [ qb:measure  kis:nssQuestion5 ];
+    qb:component [ qb:measure  kis:nssQuestion6 ];
+    qb:component [ qb:measure  kis:nssQuestion7 ];
+    qb:component [ qb:measure  kis:nssQuestion8 ];
+    qb:component [ qb:measure  kis:nssQuestion9 ];
+    qb:component [ qb:measure  kis:nssQuestion10 ];
+    qb:component [ qb:measure  kis:nssQuestion11 ];
+    qb:component [ qb:measure  kis:nssQuestion12 ];
+    qb:component [ qb:measure  kis:nssQuestion13 ];
+    qb:component [ qb:measure  kis:nssQuestion14 ];
+    qb:component [ qb:measure  kis:nssQuestion15 ];
+    qb:component [ qb:measure  kis:nssQuestion16 ];
+    qb:component [ qb:measure  kis:nssQuestion17 ];
+    qb:component [ qb:measure  kis:nssQuestion18 ];
+    qb:component [ qb:measure  kis:nssQuestion19 ];
+    qb:component [ qb:measure  kis:nssQuestion20 ];
+    qb:component [ qb:measure  kis:nssQuestion21 ];
+    qb:component [ qb:measure  kis:nssQuestion22 ];
+   	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+	.
+
+dset:nationalStudentSurveyNHSResults
+	a qb:DataSet;
+	rdfs:comment "DataSet containing the results of the National Student Survey (NHS)"@en;
+	rdfs:label "National Student Survey (NHS) Results"@en;
+	qb:structure dset:nationalStudentSurveyNHSResultsStructure ;
+  	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+	.
+
+# the following needs revision
+dset:nationalStudentSurveyNHSResultsStructure 
+	a qb:DataStructureDefinition;
+	rdfs:label "National Student Survey (NHS) Results (structure)"@en;
+	rdfs:comment "National Student Survey (NHS) results structure."@en;
+	# The dimensions
+    qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  dcterm:subject ];
+    qb:component [ qb:measure  kis:nhsnssQuestion1 ];
+    qb:component [ qb:measure  kis:nhsnssQuestion2 ];
+    qb:component [ qb:measure  kis:nhsnssQuestion3 ];
+    qb:component [ qb:measure  kis:nhsnssQuestion4 ];
+    qb:component [ qb:measure  kis:nhsnssQuestion5 ];
+    qb:component [ qb:measure  kis:nhsnssQuestion6 ];
+    rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+	.
+
+dset:salaries
+	a qb:DataSet;
+	rdfs:label "Salaries"@en ;
+	rdfs:comment "Contains data relating to the salary information of students"@en;
+	qb:structure dset:salariesStructure ;
+    rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+	.
+
+# the following needs revision
+dset:salariesStructure 
+	a qb:DataStructureDefinition;
+	rdfs:label "Salaries (structure)"@en ;
+	rdfs:comment "Information relating to the salary information of students."@en;
+	# The dimensions
+ 	qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  dcterm:subject ];
+    qb:component [ qb:measure  kis:sectorLowerForty ];
+    qb:component [ qb:measure  kis:sectorMedianForty ];
+    qb:component [ qb:measure  kis:sectorUpperForty ];
+    qb:component [ qb:measure  kis:sectorLowerSix ];
+    qb:component [ qb:measure  kis:sectorMedianSix ];
+    qb:component [ qb:measure  kis:sectorUpperSix ];
+    qb:component [ qb:measure  kis:courseLower ];
+    qb:component [ qb:measure  kis:courseMedian ];
+    qb:component [ qb:measure  kis:courseUpper ] ;
+    rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+	.
+
+dset:tariffs
+	a qb:DataSet;
+	rdfs:label "Tariffs"@en ;
+	rdfs:comment "Contains data relating to the entry tariff points of students"@en ;
+	qb:structure dset:tariffsStructure ;
+    rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+	.
+
+# the following needs revision
+dset:tariffsStructure 
+	a qb:DataStructureDefinition;
+	rdfs:label "Tariffs (structure)"@en ;
+	rdfs:comment "Information relating to the entry tariff points of students."@en;
+	# The dimensions
+ 	qb:component [ qb:dimension  kis:course ];
+    # The measures
+    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:measure  kis:tariff1 ];
+    qb:component [ qb:measure  kis:tariff120 ];
+    qb:component [ qb:measure  kis:tariff160 ];
+    qb:component [ qb:measure  kis:tariff200 ];
+    qb:component [ qb:measure  kis:tariff240 ];
+    qb:component [ qb:measure  kis:tariff280 ];
+    qb:component [ qb:measure  kis:tariff320 ];
+    qb:component [ qb:measure  kis:tariff360 ];
+    qb:component [ qb:measure  kis:tariff400 ];
+    qb:component [ qb:measure  kis:tariff440 ];
+    qb:component [ qb:measure  kis:tariff480 ];
+    qb:component [ qb:measure  kis:tariff520 ];
+    qb:component [ qb:measure  kis:tariff560 ];
+    qb:component [ qb:measure  kis:tariff600 ];
+    rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
+	rdfs:isDefinedBy kis: ;
+	.
+	
+# This is used in the data
+qb:dataSet
+	rdfs:isDefinedBy qb: .	
+qb:Observation
+	rdfs:isDefinedBy qb: .	
+dcterm:title
+	rdfs:isDefinedBy dcterm: .
+dcterm:subject
+	rdfs:isDefinedBy dcterm: .
+courseware:taught-at
+	rdfs:isDefinedBy courseware: .	
+

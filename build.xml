@@ -1,0 +1,64 @@
+<project>
+    <property name="kiskit.version"  value="0.2.0-SNAPSHOT"/>  
+	
+    <property name="lib.dir"  value="lib"/>  
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+        <fileset dir="${lib.dir}" includes="*.jar"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+	<condition property="isWindows">
+			<os family="windows"/>
+	</condition>
+
+	<condition property="javac_executable" value="/usr/bin/javac">
+		<not>
+			<isset property="isWindows"/>
+		</not>
+	</condition>
+
+	<!-- in windows, the following assumes that java_home points to the root of a JDK -->
+	<condition property="javac_executable" value="${java.home}/../bin/javac.exe">
+		<isset property="isWindows"/>
+	</condition>
+	
+    <target name="build">
+    	<copy todir="build/classes">
+    		<fileset dir="src">
+    		<patternset>
+    			<include name="**/*.rdf"/>
+    			<include name="**/*.csv"/>
+    			<include name="**/*.ttl"/>
+    			<include name="**/*.xml"/>
+    			</patternset>
+    		</fileset>
+    	</copy>
+    	<echo message="Javac executable is: ${javac_executable}" />
+        <mkdir dir="build/classes"/>
+        <javac 
+	srcdir="src" 
+	destdir="build/classes" 
+	classpathref="classpath" 
+	debug="true" 
+	debuglevel="lines,vars,source"
+	fork="yes"
+	encoding="UTF-8"
+	executable="${javac_executable}"
+        compiler="javac1.5"
+	/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/kiskit-${kiskit.version}.jar" basedir="build/classes">
+            <manifest>
+            </manifest>
+        </jar>
+    </target>
+
+</project>

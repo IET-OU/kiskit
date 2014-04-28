@@ -1,0 +1,14 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix kis: <http://data.linkedu.eu/kis/ontology/> .
+@prefix qb: <http://purl.org/linked-data/cube#> .
+@prefix dcterm: <http://purl.org/dc/terms/> .
+@prefix q: <http://data.open.ac.uk/qualification/> .
+
+#
+# This file includes static RDF data to be added in the unistats endpoint
+#
+<http://data.linkedu.eu/kis/institution/10007773> owl:sameAs <http://data.open.ac.uk/organization/the_open_university> .
+# other universities?
