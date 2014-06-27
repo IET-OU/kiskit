@@ -16,24 +16,6 @@ To extract the data in full:
 	java -jar kiskit-<version>.jar <inputFile> <outputFile>
 To only extract data about a single institution
 	java -jar kiskit-<version>.jar <inputFile> <outputFile> <ukprn>
-### Resources and references
-Here are references to files used in the process.
-See also: http://www.hesa.ac.uk/index.php?option=com_studrec&Itemid=232&mnl=13061
-#### JACS codes:
-Southampton JACS codes (rdf file embedded)
-uk.ac.open.data.kiskit.vXXX.data/UNISTATS_subject_aggregation_lookup.xls
-From http://www.hesa.ac.uk/index.php?option=com_content&task=view&id=2609 
-#### Accreditation bodies
-uk.ac.open.data.kiskit.vXXX.data/ACCBODYIDs.csv
-See http://www.hesa.ac.uk/index.php?option=com_studrec&task=show_file&Itemid=233&mnl=12061&href=A^_^ACCBODYID.html
-
-#### SOC Job Categories: 
-SOC_JOB_CATEGORIES.csv (embedded)
-Job categories
-
-4) Institutions descriptions
-UNISTATS_UKPRN_lookup.csv (embedded)
-
 
 ## The Data
 The schema is mostly based on the W3C RDF Data Cube Vocabulary http://www.w3.org/TR/vocab-data-cube/
