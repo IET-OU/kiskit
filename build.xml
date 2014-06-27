@@ -56,7 +56,16 @@
     <target name="jar">
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/kiskit-${kiskit.version}.jar" basedir="build/classes">
+	<restrict>
+     		<!-- name name="**/*.class"/ -->
+     		<archives>
+       		<zips>
+         		<fileset dir="lib" includes="**/*.jar"/>
+       		</zips>
+     		</archives>
+    	</restrict>
             <manifest>
+		<attribute name="Main-Class" value="uk.ac.open.data.kiskit.UnistatsToNTriple"/>
             </manifest>
         </jar>
     </target>

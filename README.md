@@ -1,5 +1,8 @@
+# Kis-Kit
+This tool converts Unistats XML data to Linked Data.
 
-# Obtain the data
+## Usage
+### How to obtain the Unistats data
 To download the latest unistats archive go to this page: 
 
 http://www.hesa.ac.uk/index.php?option=com_content&task=view&id=2609
@@ -8,13 +11,14 @@ and click the button "Accept".
 
 Extract data from the archive. The file we need is called kis<timestamp>.xml
 
-# Run the extraction
+### Run the extraction
+To extract the data in full:
+	java -jar kiskit-<version>.jar <inputFile> <outputFile>
+To only extract data about a single institution
+	java -jar kiskit-<version>.jar <inputFile> <outputFile> <ukprn>
 
-java -classpath "..." uk.ac.open.data.extraction.unistats.UnistatsToNTriple <inputFile> <outputFile>
-
-
-Other resources used:
-http://www.hesa.ac.uk/index.php?option=com_studrec&Itemid=232&mnl=13061
+### Resources
+See also: http://www.hesa.ac.uk/index.php?option=com_studrec&Itemid=232&mnl=13061
 
 1) JACS codes:
 Southampton JACS codes (rdf file embedded)

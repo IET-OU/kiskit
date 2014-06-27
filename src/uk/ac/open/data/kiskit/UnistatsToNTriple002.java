@@ -13,10 +13,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.apache.commons.io.FileUtils;
-import org.xml.sax.SAXException;
 
 import uk.ac.open.data.kiskit.v002.data.AccreditationTypes;
 import uk.ac.open.data.kiskit.v002.data.AccreditationTypes.AccType;
@@ -24,8 +21,6 @@ import uk.ac.open.data.kiskit.v002.data.Institutions;
 import uk.ac.open.data.kiskit.v002.vocab.Unistats;
 import uk.ac.open.data.kiskit.v002.xml.KISAccreditationType;
 import uk.ac.open.data.kiskit.v002.xml.KISAim;
-import uk.ac.open.data.kiskit.v002.xml.KISCourse;
-import uk.ac.open.data.kiskit.v002.xml.KISCoursesXMLSlicer;
 import uk.ac.open.data.kiskit.v002.xml.KISCoursesXMLTraverser;
 import uk.ac.open.data.kiskit.v002.xml.KISInstitution;
 import uk.ac.open.data.kiskit.v002.xml.KISLocation;
@@ -252,53 +247,53 @@ public class UnistatsToNTriple002 {
 		o.print(':');
 		o.println("t written");	
 	}
-	
-	private static void extractCoursesOfUKPRN(File in, BufferedOutputStream bos, String ukprn){
-		KISCoursesXMLSlicer slicer = new KISCoursesXMLSlicer(in, ukprn);
-		o.println("Getting data about courses of " + ukprn + " (" + slicer.getXMLFragments().size() + ")");
-		int ttt = 0;
-		int cix = 0;
-		for (String xml : slicer.getXMLFragments()) {
-			cix++;
-			KISCourse kc;
-			try {
-				kc = new KISCourse(ukprn, xml);
-				kc.getModel().write(bos, "N-TRIPLE");
-				ttt += kc.getModel().size() ;
-				o.print('.');
-				if(cix % 50 == 0){
-					o.print(' ');
-					o.print(cix);
-					o.print(':');
-					o.print(ttt);
-					o.println('t');
-				}
-				o.flush();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			}
-		}
-		o.print(' ');
-		o.print(cix);
-		o.print(':');
-		o.print(ttt);
-		o.println("t written");
-	}
+//	
+//	private static void extractCoursesOfUKPRN(File in, BufferedOutputStream bos, String ukprn){
+//		KISCoursesXMLSlicer slicer = new KISCoursesXMLSlicer(in, ukprn);
+//		o.println("Getting data about courses of " + ukprn + " (" + slicer.getXMLFragments().size() + ")");
+//		int ttt = 0;
+//		int cix = 0;
+//		for (String xml : slicer.getXMLFragments()) {
+//			cix++;
+//			KISCourse kc;
+//			try {
+//				kc = new KISCourse(ukprn, xml);
+//				kc.getModel().write(bos, "N-TRIPLE");
+//				ttt += kc.getModel().size() ;
+//				o.print('.');
+//				if(cix % 50 == 0){
+//					o.print(' ');
+//					o.print(cix);
+//					o.print(':');
+//					o.print(ttt);
+//					o.println('t');
+//				}
+//				o.flush();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			} catch (ParserConfigurationException e) {
+//				e.printStackTrace();
+//			} catch (SAXException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		o.print(' ');
+//		o.print(cix);
+//		o.print(':');
+//		o.print(ttt);
+//		o.println("t written");
+//	}
 	
 	public static void help() {
 		o.println("KIS-KIT 2013/2014 (v002)");
 		o.println();
 		o.println("To extract all unistats (including the vocabulary specification).");
 		o.println();
-		o.println("\tjava -classpath \"...\" uk.ac.open.data.extraction.unistats.UnistatsToNTriple002 <inputDir> <outputFile>");
+		o.println("\tjava -jar <executable> <inputDir> <outputFile>");
 		o.println();
 		o.println("To extract data of a single institution.");
 		o.println();
-		o.println("\tjava -classpath \"...\" uk.ac.open.data.extraction.unistats.UnistatsToNTriple002 <inputDir> <outputFile> <ukprn>");
+		o.println("\tjava -jar <executable> <inputDir> <outputFile> <ukprn>");
 		o.println();
 		o.println("inputDir - is the directory of a unistats dump");
 		o.println("outputFile - is the file you want the output to be written");
