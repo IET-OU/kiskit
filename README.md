@@ -24,7 +24,7 @@ Namespace of the schema is http://data.linkedu.eu/kis/ontology/
 
 Data URIs are build from http://data.linkedu.eu/kis/
 
-# Run Old Versions
+## Run the Old Version (2012)
 By default the tool expects an XML respecting the HESA Unistats spec C13061 published on Sept 2013.
 However, the code includes also packages to translate the previous version, spec C12061 with data about year 2012.
 
