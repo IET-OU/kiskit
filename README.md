@@ -1,6 +1,13 @@
 # Kis-Kit
 This tool converts Unistats XML data to Linked Data.
+## Build
+This is a Java program.
+To build the project you need also http://ant.apache.org/. 
 
+Having ant in place, run the following command from the project main directory:
+```
+ant build jar
+```
 ## Usage
 ### How to obtain the Unistats data
 To download the latest unistats archive go to this page: 
@@ -13,10 +20,13 @@ Extract data from the archive. The file we need is called kis<timestamp>.xml
 
 ### Run the extraction
 To extract the data in full:
-	java -jar kiskit-<version>.jar <inputFile> <outputFile>
+```
+java -jar kiskit-<version>.jar <inputFile> <outputFile>
+```
 To only extract data about a single institution
-	java -jar kiskit-<version>.jar <inputFile> <outputFile> <ukprn>
-
+```
+java -jar kiskit-<version>.jar <inputFile> <outputFile> <ukprn>
+```
 ## The Data
 The schema is mostly based on the W3C RDF Data Cube Vocabulary http://www.w3.org/TR/vocab-data-cube/
 
