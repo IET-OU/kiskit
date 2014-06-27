@@ -1815,7 +1815,7 @@ dset:employment
 	.
 
 # the following needs revision
-dset:employmentStructureStructure
+dset:employmentStructure
 	a qb:DataStructureDefinition;
 	rdfs:label "Employment (structure)"@en ;
 	rdfs:comment "Information relating to the employment outcomes of students"@en ;
