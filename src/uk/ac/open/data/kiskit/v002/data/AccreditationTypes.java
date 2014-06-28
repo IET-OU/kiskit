@@ -2,8 +2,8 @@ package uk.ac.open.data.kiskit.v002.data;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -103,7 +103,7 @@ public class AccreditationTypes {
 	}
 
 	private static Logger log = LoggerFactory.getLogger(AccreditationTypes.class);
-	private final static URL dataFile = AccreditationTypes.class.getResource("./Accreditation_list.csv");
+	private final static URL dataFile = AccreditationTypes.class.getResource("Accreditation_list.csv");
 	private Map<String, AccType> accreditationTypes = new HashMap<String, AccType>();
 
 	/**
@@ -111,7 +111,7 @@ public class AccreditationTypes {
 	 */
 	private AccreditationTypes() {
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(dataFile.getFile()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(dataFile.openStream()));
 			String line;
 			while ((line = br.readLine()) != null) {
 				line = line.trim();

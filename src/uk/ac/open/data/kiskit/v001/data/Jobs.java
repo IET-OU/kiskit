@@ -2,8 +2,8 @@ package uk.ac.open.data.kiskit.v001.data;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,12 +15,12 @@ import org.slf4j.LoggerFactory;
 
 public class Jobs {
 	private static Logger log = LoggerFactory.getLogger(Jobs.class);
-	private final static URL dataFile = AccreditationBodies.class.getResource("./SOC_JOB_CATEGORIES.csv");
+	private final static URL dataFile = AccreditationBodies.class.getResource("SOC_JOB_CATEGORIES.csv");
 	private Map<String, String> jobCategories = new HashMap<String, String>();
 
 	private Jobs() {
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(dataFile.getFile()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(dataFile.openStream()));
 			String line;
 			while ((line = br.readLine()) != null) {
 				line = line.trim();

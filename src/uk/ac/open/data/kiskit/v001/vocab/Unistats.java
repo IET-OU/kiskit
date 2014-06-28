@@ -45,7 +45,7 @@ public class Unistats {
 
 	// Known universities
 	public final static String ns_SouthHampton = "http://id.southampton.ac.uk/";
-	private final static URL vocabularyTTL = Unistats.class.getResource("./vocabulary.ttl");
+	private final static URL vocabularyTTL = Unistats.class.getResource("/uk/ac/open/data/kiskit/v001/vocab/vocabulary.ttl");
 
 	/*
 	 * Classes

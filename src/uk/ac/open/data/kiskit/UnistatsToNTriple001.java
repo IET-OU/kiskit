@@ -29,7 +29,7 @@ import com.hp.hpl.jena.vocabulary.RDFS;
 public class UnistatsToNTriple001 {
 
 	private static PrintStream o = System.out;
-	public final static URL staticTTL = UnistatsToNTriple001.class.getResource("./static.v001.ttl");
+	public final static URL staticTTL = UnistatsToNTriple001.class.getResource("/uk/ac/open/data/kiskit/static.v001.ttl");
 	public static void main(String[] args) throws IOException {
 		File in = null;
 		File out = null;

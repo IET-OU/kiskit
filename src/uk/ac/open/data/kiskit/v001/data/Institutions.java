@@ -2,8 +2,8 @@ package uk.ac.open.data.kiskit.v001.data;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,13 +16,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Institutions {
-	private static Logger log = LoggerFactory.getLogger(AccreditationBodies.class);
-	private final static URL dataFile = AccreditationBodies.class.getResource("./UNISTATS_UKPRN_lookup.csv");
+	private static Logger log = LoggerFactory.getLogger(Institutions.class);
+	private final static URL dataFile = Institutions.class.getResource("UNISTATS_UKPRN_lookup.csv");
 	private Map<String, String> institutions = new HashMap<String, String>();
 
 	public Institutions() {
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(dataFile.getFile()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(dataFile.openStream()));
 			String line;
 			boolean firstline = true;
 			while ((line = br.readLine()) != null) {

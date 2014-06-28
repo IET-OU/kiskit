@@ -2,8 +2,8 @@ package uk.ac.open.data.kiskit.v002.jacs;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,8 +28,8 @@ import com.hp.hpl.jena.rdf.model.ResourceFactory;
 public class Jacs {
 
 	private static Logger log = LoggerFactory.getLogger(Jacs.class);
-	private final static URL dataFile = Jacs.class.getResource("./jacs-skos-southampton.rdf");
-	private final static URL jacsLookup = Jacs.class.getResource("./UNISTATS_subject_aggregation_lookup.csv");
+	private final static URL dataFile = Jacs.class.getResource("jacs-skos-southampton.rdf");
+	private final static URL jacsLookup = Jacs.class.getResource("UNISTATS_subject_aggregation_lookup.csv");
 
 	private Set<String> jacs_2_0;
 	private Set<String> jacs_level_1;
@@ -42,7 +42,7 @@ public class Jacs {
 
 	private Jacs() throws IOException {
 		model = ModelFactory.createDefaultModel();
-		model.read(dataFile.openConnection().getInputStream(), "RDF/XML");
+		model.read(new InputStreamReader(dataFile.openStream()), "RDF/XML");
 
 		jacs_2_0 = new HashSet<String>();
 		jacs_level_1 = new HashSet<String>();
@@ -53,7 +53,7 @@ public class Jacs {
 		jacs_2_0__3 = new HashMap<String, String>();
 
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(jacsLookup.getFile()));
+			BufferedReader br = new BufferedReader(new InputStreamReader(jacsLookup.openStream()));
 			String line;
 			boolean firstline = true;
 			while ((line = br.readLine()) != null) {
@@ -177,7 +177,7 @@ public class Jacs {
 				if(value.matches("[A-Z]")){
 					String f = value;
 					 value = Integer.toString((value.charAt(0) - 55));
-					 log.info("Adjusting L1 code from  {} to {}", f, value);
+					 log.debug("Adjusting L1 code from  {} to {}", f, value);
 				}
 				uri = Unistats.getJACSURI("L1." + StringUtils.leftPad(value, 2, '0'));
 			} else{

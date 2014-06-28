@@ -34,7 +34,7 @@ import com.ibm.icu.impl.Assert;
 public class UnistatsToNTriple002 {
 
 	private static PrintStream o = System.out;
-	public final static URL staticTTL = UnistatsToNTriple002.class.getResource("./static.v002.ttl");
+	public final static URL staticTTL = UnistatsToNTriple002.class.getResource("/uk/ac/open/data/kiskit/static.v002.ttl");
 
 	public static void main(String[] args) {
 		try {
