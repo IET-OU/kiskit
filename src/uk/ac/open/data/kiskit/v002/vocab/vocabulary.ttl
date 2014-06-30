@@ -725,7 +725,7 @@ kis:accreditationType
 	.
 	
 kis:aggregation
-	a rdf:Property, owl:DatatypeProperty ;
+	a rdf:Property, owl:DatatypeProperty, qb:AttributeProperty ;
 	rdfs:domain qb:Observation;
 	rdfs:range xsd:string;
 	rdfs:label "Aggregation"@en ;
@@ -1823,7 +1823,7 @@ dset:employmentStructure
     qb:component [ qb:dimension  kis:course ];
     # The measures
     qb:component [ qb:measure  kis:population ];
-    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
     qb:component [ qb:measure  kis:subject ];
     qb:component [ qb:measure  kis:workAndStudy ];
     qb:component [ qb:measure  kis:assumedUnemployed ];
@@ -1853,7 +1853,7 @@ dset:degreeClassesStructure
     qb:component [ qb:dimension  kis:course ];
     # The measures
     qb:component [ qb:measure  kis:population ];
-    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
     qb:component [ qb:measure  kis:firstClass ];
     qb:component [ qb:measure  kis:upperSecondClass ];
     qb:component [ qb:measure  kis:lowerSecondClass ];
@@ -1882,7 +1882,7 @@ dset:entryQualificationsStructure
     qb:component [ qb:dimension  kis:course ];
     # The measures
     qb:component [ qb:measure  kis:population ];
-    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
     qb:component [ qb:measure  kis:accessCourse ];
     qb:component [ qb:measure  kis:aLevel ];
     qb:component [ qb:measure  kis:baccalaureate ];
@@ -1914,7 +1914,7 @@ dset:jobTypesStructure
     qb:component [ qb:dimension  kis:course ];
     # The measures
     qb:component [ qb:measure  kis:population ];
-    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
     qb:component [ qb:measure  dcterm:subject ];
     qb:component [ qb:measure  kis:professional ];
     qb:component [ qb:measure  kis:nonProfessional ];
@@ -1941,7 +1941,7 @@ dset:nationalStudentSurveyResultsStructure
     qb:component [ qb:dimension  kis:course ];
     # The measures
     qb:component [ qb:measure  kis:population ];
-    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
     qb:component [ qb:measure  dcterm:subject ];
     qb:component [ qb:measure  kis:nssQuestion1 ];
     qb:component [ qb:measure  kis:nssQuestion2 ];
@@ -1987,7 +1987,7 @@ dset:nationalStudentSurveyNHSResultsStructure
     qb:component [ qb:dimension  kis:course ];
     # The measures
     qb:component [ qb:measure  kis:population ];
-    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
     qb:component [ qb:measure  dcterm:subject ];
     qb:component [ qb:measure  kis:nhsnssQuestion1 ];
     qb:component [ qb:measure  kis:nhsnssQuestion2 ];
@@ -2017,7 +2017,7 @@ dset:salariesStructure
  	qb:component [ qb:dimension  kis:course ];
     # The measures
     qb:component [ qb:measure  kis:population ];
-    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
     qb:component [ qb:measure  dcterm:subject ];
     qb:component [ qb:measure  kis:sectorLowerForty ];
     qb:component [ qb:measure  kis:sectorMedianForty ];
@@ -2050,7 +2050,7 @@ dset:tariffsStructure
  	qb:component [ qb:dimension  kis:course ];
     # The measures
     qb:component [ qb:measure  kis:population ];
-    qb:component [ qb:measure  kis:aggregation ];
+    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
     qb:component [ qb:measure  kis:tariff1 ];
     qb:component [ qb:measure  kis:tariff120 ];
     qb:component [ qb:measure  kis:tariff160 ];
