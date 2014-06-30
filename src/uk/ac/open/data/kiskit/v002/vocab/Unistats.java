@@ -360,6 +360,7 @@ public class Unistats {
 
 		// Check that all constants are described in the vocabulary
 		Field [] fields = Unistats.class.getFields();
+		p.println(fields.length + " terms found.");
 		for(Field field : fields){
 			// only Resources
 			if(RDFNode.class.isAssignableFrom(field.getType())){

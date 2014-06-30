@@ -785,8 +785,8 @@ kis:accreditationDependantOnChoiceUrlW
 	.
 
 kis:population
-	a rdf:Property, owl:DatatypeProperty ;
-	rdfs:domain qb:Observation;
+	a rdf:Property, owl:DatatypeProperty, qb:AttributeProperty ;
+	rdfs:domain qb:Observation; # Is this an AttributeProperty?
 	rdfs:range xsd:int;
 	rdfs:label "Population"@en;
 	rdfs:comment "Population to which the observation apply"@en;
@@ -795,7 +795,7 @@ kis:population
 	.
 
 kis:course
-	a rdf:Property, owl:ObjectProperty ;
+	a rdf:Property, owl:ObjectProperty, qb:DimensionProperty ;
 	rdfs:domain rdfs:Resource;
 	rdfs:range kis:Course;
 	rdfs:label "course"@en;
@@ -823,7 +823,7 @@ kis:aim
 	.
 	
 kis:job
-	a rdf:Property, owl:ObjectProperty;
+	a rdf:Property, owl:ObjectProperty, qb:DimensionProperty;
 	rdfs:range kis:Job;
 	rdfs:domain qb:Observation;
 	rdfs:label "job"@en;
@@ -833,7 +833,7 @@ kis:job
 	.
 
 kis:percentage
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation;
 	rdfs:range xsd:int; # XXX this should be a percentage...
 	rdfs:label "percentage"@en;
@@ -843,7 +843,7 @@ kis:percentage
 	.
 
 kis:order
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:AttributeProperty;
 	rdfs:domain qb:Observation;
 	rdfs:range xsd:int;
 	rdfs:label "order"@en;
@@ -853,7 +853,7 @@ kis:order
 	.
 
 kis:continuing
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Continuing"@en;
@@ -863,7 +863,7 @@ kis:continuing
 	.
 
 kis:dormant
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Dormant"@en;
@@ -873,7 +873,7 @@ kis:dormant
 	.
 
 kis:gained
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Gained intended or higher"@en;
@@ -883,7 +883,7 @@ kis:gained
 	.
 
 kis:left
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Left without award"@en;
@@ -893,7 +893,7 @@ kis:left
 	.
 
 kis:lower
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Gained lower"@en;
@@ -903,7 +903,7 @@ kis:lower
 	.
 
 kis:workOrStudy
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Proportion of students in work and/or study"@en;
@@ -913,7 +913,7 @@ kis:workOrStudy
 	.
 
 kis:assumedUnemployed
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Proportion of students assumed unemployed"@en;
@@ -923,7 +923,7 @@ kis:assumedUnemployed
 	.
 
 kis:workAndStudy
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Proportion of students in work and study"@en;
@@ -933,7 +933,7 @@ kis:workAndStudy
 	.
 
 kis:notAvailable
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Proportion of students not available for work or study"@en;
@@ -943,7 +943,7 @@ kis:notAvailable
 	.
 
 kis:study
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Proportion of students studying only"@en;
@@ -953,7 +953,7 @@ kis:study
 	.
 
 kis:work
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Proportion of students working only"@en;
@@ -963,7 +963,7 @@ kis:work
 	.
 
 kis:firstClass
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "First class"@en;
@@ -973,7 +973,7 @@ kis:firstClass
 	.
 
 kis:upperSecondClass
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Upper second class (2:1)"@en;
@@ -983,7 +983,7 @@ kis:upperSecondClass
 	.
 
 kis:lowerSecondClass
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Lower (or undivided) second class"@en;
@@ -993,7 +993,7 @@ kis:lowerSecondClass
 	.
 
 kis:otherHonours
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Other Honours"@en;
@@ -1003,7 +1003,7 @@ kis:otherHonours
 	.
 
 kis:ordinary
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Ordinary"@en;
@@ -1013,7 +1013,7 @@ kis:ordinary
 	.
 
 kis:notClassified
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Not classified"@en;
@@ -1023,7 +1023,7 @@ kis:notClassified
 	.
 
 kis:accessCourse
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Access Course"@en;
@@ -1033,7 +1033,7 @@ kis:accessCourse
 	.
 
 kis:aLevel
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "A-levels and Highers"@en;
@@ -1043,7 +1043,7 @@ kis:aLevel
 	.
 
 kis:baccalaureate
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "International baccalaureate"@en;
@@ -1053,7 +1053,7 @@ kis:baccalaureate
 	.
 
 kis:degree
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Degree or higher"@en;
@@ -1063,7 +1063,7 @@ kis:degree
 	.
 
 kis:diploma
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Diploma"@en;
@@ -1073,7 +1073,7 @@ kis:diploma
 	.
 
 kis:foundation
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Foundation course"@en;
@@ -1083,7 +1083,7 @@ kis:foundation
 	.
 
 kis:noQualifications
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "No qualifications"@en;
@@ -1093,7 +1093,7 @@ kis:noQualifications
 	.
 
 kis:other
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Other qualifications"@en;
@@ -1103,7 +1103,7 @@ kis:other
 	.
 
 kis:otherHE
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Other HE"@en;
@@ -1113,7 +1113,7 @@ kis:otherHE
 	.
 
 kis:professional
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Professional or managerial jobs"@en;
@@ -1123,7 +1123,7 @@ kis:professional
 	.
 
 kis:nonProfessional
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Non-professional or managerial"@en;
@@ -1133,7 +1133,7 @@ kis:nonProfessional
 	.
 
 kis:unknown
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Unable to classify/Unknown"@en;
@@ -1143,7 +1143,7 @@ kis:unknown
 	.
 
 kis:stage
-	a rdf:Property, owl:DatatypeProperty ;
+	a rdf:Property, owl:DatatypeProperty , qb:DimensionProperty ;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Stage"@en;
@@ -1153,7 +1153,7 @@ kis:stage
 	.
 
 kis:assessmentMethod
-	a rdf:Property, owl:DatatypeProperty ;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty ;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:string;
 	rdfs:label "Assessment method"@en;
@@ -1163,7 +1163,7 @@ kis:assessmentMethod
 	.
 
 kis:coursework
-	a rdf:Property, owl:DatatypeProperty ;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty ;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Coursework"@en;
@@ -1173,7 +1173,7 @@ kis:coursework
 	.
 
 kis:written
-	a rdf:Property, owl:DatatypeProperty ;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty ;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "Written"@en;
@@ -1183,7 +1183,7 @@ kis:written
 	.
 
 kis:practical
-	a rdf:Property, owl:DatatypeProperty ;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty ;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Practical"@en ;
@@ -1193,7 +1193,7 @@ kis:practical
 	.
 
 kis:learningAndTeachingMethod
-	a rdf:Property, owl:DatatypeProperty ;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty ;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:string ;
 	rdfs:label "Learning and teaching method"@en ;
@@ -1203,7 +1203,7 @@ kis:learningAndTeachingMethod
 	.
 
 kis:independent
-	a rdf:Property, owl:DatatypeProperty ;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty ;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Independent"@en ;
@@ -1213,7 +1213,7 @@ kis:independent
 	.
 
 kis:placement
-	a rdf:Property, owl:DatatypeProperty ;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty ;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Placement"@en ;
@@ -1223,7 +1223,7 @@ kis:placement
 	.
 
 kis:scheduled
-	a rdf:Property, owl:DatatypeProperty ;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty ;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Scheduled"@en ;
@@ -1233,7 +1233,7 @@ kis:scheduled
 	.
 
 kis:nssQuestion1
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty ;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 1";
@@ -1244,7 +1244,7 @@ kis:nssQuestion1
 	.
 
 kis:nssQuestion2
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 2";
@@ -1255,7 +1255,7 @@ kis:nssQuestion2
 	.
 
 kis:nssQuestion3
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 3";
@@ -1265,7 +1265,7 @@ kis:nssQuestion3
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion4
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 4";
@@ -1276,7 +1276,7 @@ kis:nssQuestion4
 	.
 
 kis:nssQuestion5
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 5";
@@ -1286,7 +1286,7 @@ kis:nssQuestion5
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion6
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 6";
@@ -1296,7 +1296,7 @@ kis:nssQuestion6
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion7
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 7";
@@ -1306,7 +1306,7 @@ kis:nssQuestion7
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion8
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 8";
@@ -1316,7 +1316,7 @@ kis:nssQuestion8
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion9
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 9";
@@ -1326,7 +1326,7 @@ kis:nssQuestion9
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion10
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 10";
@@ -1336,7 +1336,7 @@ kis:nssQuestion10
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion11
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 11";
@@ -1346,7 +1346,7 @@ kis:nssQuestion11
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion12
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 12";
@@ -1356,7 +1356,7 @@ kis:nssQuestion12
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion13
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 13";
@@ -1366,7 +1366,7 @@ kis:nssQuestion13
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion14
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 14";
@@ -1376,7 +1376,7 @@ kis:nssQuestion14
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion15
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 15";
@@ -1386,7 +1386,7 @@ kis:nssQuestion15
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion16
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 16";
@@ -1396,7 +1396,7 @@ kis:nssQuestion16
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion17
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 17";
@@ -1406,7 +1406,7 @@ kis:nssQuestion17
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion18
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 18";
@@ -1416,7 +1416,7 @@ kis:nssQuestion18
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion19
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 19";
@@ -1426,7 +1426,7 @@ kis:nssQuestion19
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion20
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 20";
@@ -1436,7 +1436,7 @@ kis:nssQuestion20
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion21
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 21";
@@ -1446,7 +1446,7 @@ kis:nssQuestion21
 	rdfs:isDefinedBy kis: 
 	.
 kis:nssQuestion22
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int;
 	rdfs:label "NSS Question 22";
@@ -1457,7 +1457,7 @@ kis:nssQuestion22
 	.
 
 kis:sectorLowerForty #LDLQ
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Sector lower quartile salary for subject (40 months)";
@@ -1467,7 +1467,7 @@ kis:sectorLowerForty #LDLQ
 	.
 
 kis:sectorMedianForty #LDMED
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Sector Median salary for subject (40 months)";
@@ -1476,7 +1476,7 @@ kis:sectorMedianForty #LDMED
 	rdfs:isDefinedBy kis: 
 	.
 kis:sectorUpperForty #LDUQ
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Sector upper quartile salary for subject(40 months)";
@@ -1485,7 +1485,7 @@ kis:sectorUpperForty #LDUQ
 	rdfs:isDefinedBy kis: 
 	.
 kis:sectorLowerSix #LQ
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Sector lower quartile salary for subject(6 months)";
@@ -1495,7 +1495,7 @@ kis:sectorLowerSix #LQ
 	.
 
 kis:sectorMedianSix #MED
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Sector Median salary for subject (6 months)";
@@ -1505,7 +1505,7 @@ kis:sectorMedianSix #MED
 	.
 
 kis:sectorUpperSix #UQ
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Sector upper quartile salary for subject (6 months)";
@@ -1514,7 +1514,7 @@ kis:sectorUpperSix #UQ
 	rdfs:isDefinedBy kis: 
 	.
 kis:courseLower #INSTLQ
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Course lower quartile salary (6 months)";
@@ -1524,7 +1524,7 @@ kis:courseLower #INSTLQ
 	.
 
 kis:courseMedian #INSTMED
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Course Median salary (6 months)";
@@ -1534,7 +1534,7 @@ kis:courseMedian #INSTMED
 	.
 
 kis:courseUpper #INSTUQ
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Course upper quartile salary (6 months)";
@@ -1544,7 +1544,7 @@ kis:courseUpper #INSTUQ
 	.
 
 kis:nhsNssQuestion1 #NSHQ1
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:label "NSS (NHS) question 1";
 	rdfs:range xsd:int ;
@@ -1553,7 +1553,7 @@ kis:nhsNssQuestion1 #NSHQ1
 	rdfs:isDefinedBy kis: 
 	.
 kis:nhsNssQuestion2 #NSHQ2
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "NSS (NHS) question 2";
@@ -1562,7 +1562,7 @@ kis:nhsNssQuestion2 #NSHQ2
 	rdfs:isDefinedBy kis: 
 	.
 kis:nhsNssQuestion3 #NSHQ3
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "NSS (NHS) question 3";
@@ -1571,7 +1571,7 @@ kis:nhsNssQuestion3 #NSHQ3
 	rdfs:isDefinedBy kis: 
 	.
 kis:nhsNssQuestion4 #NSHQ4
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "NSS (NHS) question 4";
@@ -1580,7 +1580,7 @@ kis:nhsNssQuestion4 #NSHQ4
 	rdfs:isDefinedBy kis: 
 	.
 kis:nhsNssQuestion5 #NSHQ5
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "NSS (NHS) question 5";
@@ -1589,7 +1589,7 @@ kis:nhsNssQuestion5 #NSHQ5
 	rdfs:isDefinedBy kis: 
 	.
 kis:nhsNssQuestion6 #NSHQ6
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "NSS (NHS) question 6";
@@ -1598,7 +1598,7 @@ kis:nhsNssQuestion6 #NSHQ6
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff1
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Less than 120 tariff points"@en;
@@ -1608,7 +1608,7 @@ kis:tariff1
 	.
 	
 kis:tariff120
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 120 and 159 tariff points"@en;
@@ -1617,7 +1617,7 @@ kis:tariff120
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff160
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 160 and 299 tariff points"@en;
@@ -1626,7 +1626,7 @@ kis:tariff160
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff200
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 200 and 239 tariff points"@en;
@@ -1635,7 +1635,7 @@ kis:tariff200
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff240
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 240 and 279 tariff points"@en;
@@ -1644,7 +1644,7 @@ kis:tariff240
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff280
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 280 and 319 tariff points"@en;
@@ -1653,7 +1653,7 @@ kis:tariff280
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff320
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 320 and 359 tariff points"@en;
@@ -1662,7 +1662,7 @@ kis:tariff320
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff360
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 360 and 399 tariff points"@en;
@@ -1671,7 +1671,7 @@ kis:tariff360
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff400
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 400 and 439 tariff points"@en;
@@ -1680,7 +1680,7 @@ kis:tariff400
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff440
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 440 and 479 tariff points"@en;
@@ -1689,7 +1689,7 @@ kis:tariff440
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff480
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 480 and 519 tariff points"@en;
@@ -1698,7 +1698,7 @@ kis:tariff480
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff520
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 520 and 559 tariff points"@en;
@@ -1707,7 +1707,7 @@ kis:tariff520
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff560
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Between 560 and 599 tariff points"@en;
@@ -1716,7 +1716,7 @@ kis:tariff560
 	rdfs:isDefinedBy kis: 
 	.
 kis:tariff600
-	a rdf:Property, owl:DatatypeProperty;
+	a rdf:Property, owl:DatatypeProperty, qb:MeasureProperty;
 	rdfs:domain qb:Observation ;
 	rdfs:range xsd:int ;
 	rdfs:label "Over 600 tariff points"@en;
@@ -1724,9 +1724,12 @@ kis:tariff600
 	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
 	rdfs:isDefinedBy kis: 
 	.
-#
-# instances
-#
+
+# 
+# Instances
+# 
+# Datasets and Data Structure Definitions
+# 
 
 dset:commonJobs 
 	a qb:DataSet;
@@ -1745,9 +1748,10 @@ dset:commonJobsStructure
 	# The dimensions
     qb:component [ qb:dimension  kis:course ] ;
     qb:component [ qb:dimension  kis:job ] ;
+	# The attribute
+    qb:component [ qb:attribute  kis:order ]
     # The measures
     qb:component [ qb:measure  kis:percentage ] ;
-    qb:component [ qb:measure  kis:order ]
     .
 
 dset:continuation
@@ -1759,7 +1763,6 @@ dset:continuation
     rdfs:isDefinedBy kis:
 	.
 
-# the following needs revision
 dset:continuationStructure
 	a qb:DataStructureDefinition;
 	rdfs:comment "Continuation information for students on the courses"@en;
@@ -1783,16 +1786,15 @@ dset:courseStages
     rdfs:isDefinedBy kis:
 	.
 
-# the following needs revision
 dset:courseStagesStructure
 	a qb:DataStructureDefinition;
 	rdfs:label "Coursestages (structure)"@en ;
 	rdfs:comment "Information relating to the learning, teaching and assessment methods for each course stage"@en;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
+    qb:component [ qb:dimension  kis:stage ];
+    qb:component [ qb:dimension  dcterms:subject ];
     # The measures
-    qb:component [ qb:measure  kis:stage ];
-    qb:component [ qb:measure  kis:subject ];
     qb:component [ qb:measure  kis:assessmentMethod ];
     qb:component [ qb:measure  kis:coursework ];
     qb:component [ qb:measure  kis:written ];
@@ -1814,17 +1816,17 @@ dset:employment
 	rdfs:isDefinedBy kis:
 	.
 
-# the following needs revision
 dset:employmentStructure
 	a qb:DataStructureDefinition;
 	rdfs:label "Employment (structure)"@en ;
 	rdfs:comment "Information relating to the employment outcomes of students"@en ;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
-    # The measures
-    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:dimension  dcterms:subject ];
+	# The attributes
+    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
-    qb:component [ qb:measure  kis:subject ];
+    # The measures
     qb:component [ qb:measure  kis:workAndStudy ];
     qb:component [ qb:measure  kis:assumedUnemployed ];
     qb:component [ qb:measure  kis:inWorkAndStudy ];
@@ -1844,16 +1846,16 @@ dset:degreeClasses
 	rdfs:isDefinedBy kis:
 	.
 
-# the following needs revision
 dset:degreeClassesStructure
 	a qb:DataStructureDefinition;
 	rdfs:label "Degree classes (structure)"@en ;
 	rdfs:comment "Information relating to the degree classifications obtained by students"@en;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
-    # The measures
-    qb:component [ qb:measure  kis:population ];
+	# The attributes
+    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
+    # The measures
     qb:component [ qb:measure  kis:firstClass ];
     qb:component [ qb:measure  kis:upperSecondClass ];
     qb:component [ qb:measure  kis:lowerSecondClass ];
@@ -1873,16 +1875,16 @@ dset:entryQualifications
 	rdfs:isDefinedBy kis: ;
 	.
 
-# the following needs revision
 dset:entryQualificationsStructure
 	a qb:DataStructureDefinition;
 	rdfs:label "Entry qualifications (structure)"@en ;
 	rdfs:comment "Information relating to the degree classifications obtained by students"@en;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
-    # The measures
-    qb:component [ qb:measure  kis:population ];
+	# The attributes
+    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
+    # The measures
     qb:component [ qb:measure  kis:accessCourse ];
     qb:component [ qb:measure  kis:aLevel ];
     qb:component [ qb:measure  kis:baccalaureate ];
@@ -1912,10 +1914,11 @@ dset:jobTypesStructure
 	rdfs:comment "Information relating to the types of profession entered by students."@en;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
-    # The measures
-    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:dimension  dcterm:subject ];
+	# The attributes
+    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
-    qb:component [ qb:measure  dcterm:subject ];
+    # The measures
     qb:component [ qb:measure  kis:professional ];
     qb:component [ qb:measure  kis:nonProfessional ];
     qb:component [ qb:measure  kis:unknown ] ;
@@ -1932,17 +1935,17 @@ dset:nationalStudentSurveyResults
 	rdfs:isDefinedBy kis: ;
 	.
 
-# the following needs revision
 dset:nationalStudentSurveyResultsStructure 
 	a qb:DataStructureDefinition;
 	rdfs:label "National Student Survey Results (structure)"@en;
 	rdfs:comment "National Student Survey results structure."@en;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
-    # The measures
-    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:dimension  dcterm:subject ];
+	# The attributes
+    qb:component [ qb:attribute  kis:population ; qb:componentRequired true ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
-    qb:component [ qb:measure  dcterm:subject ];
+    # The measures
     qb:component [ qb:measure  kis:nssQuestion1 ];
     qb:component [ qb:measure  kis:nssQuestion2 ];
     qb:component [ qb:measure  kis:nssQuestion3 ];
@@ -1978,17 +1981,17 @@ dset:nationalStudentSurveyNHSResults
 	rdfs:isDefinedBy kis: ;
 	.
 
-# the following needs revision
 dset:nationalStudentSurveyNHSResultsStructure 
 	a qb:DataStructureDefinition;
 	rdfs:label "National Student Survey (NHS) Results (structure)"@en;
 	rdfs:comment "National Student Survey (NHS) results structure."@en;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
-    # The measures
-    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:dimension  dcterm:subject ];
+	# The attributes
+    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
-    qb:component [ qb:measure  dcterm:subject ];
+    # The measures
     qb:component [ qb:measure  kis:nhsnssQuestion1 ];
     qb:component [ qb:measure  kis:nhsnssQuestion2 ];
     qb:component [ qb:measure  kis:nhsnssQuestion3 ];
@@ -2008,17 +2011,17 @@ dset:salaries
 	rdfs:isDefinedBy kis: ;
 	.
 
-# the following needs revision
 dset:salariesStructure 
 	a qb:DataStructureDefinition;
 	rdfs:label "Salaries (structure)"@en ;
 	rdfs:comment "Information relating to the salary information of students."@en;
 	# The dimensions
  	qb:component [ qb:dimension  kis:course ];
-    # The measures
-    qb:component [ qb:measure  kis:population ];
+    qb:component [ qb:dimension  dcterm:subject ];
+	# The attributes
+    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
-    qb:component [ qb:measure  dcterm:subject ];
+    # The measures
     qb:component [ qb:measure  kis:sectorLowerForty ];
     qb:component [ qb:measure  kis:sectorMedianForty ];
     qb:component [ qb:measure  kis:sectorUpperForty ];
@@ -2041,16 +2044,16 @@ dset:tariffs
 	rdfs:isDefinedBy kis: ;
 	.
 
-# the following needs revision
 dset:tariffsStructure 
 	a qb:DataStructureDefinition;
 	rdfs:label "Tariffs (structure)"@en ;
 	rdfs:comment "Information relating to the entry tariff points of students."@en;
 	# The dimensions
  	qb:component [ qb:dimension  kis:course ];
-    # The measures
-    qb:component [ qb:measure  kis:population ];
+	# The attributes
+    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
+    # The measures
     qb:component [ qb:measure  kis:tariff1 ];
     qb:component [ qb:measure  kis:tariff120 ];
     qb:component [ qb:measure  kis:tariff160 ];
