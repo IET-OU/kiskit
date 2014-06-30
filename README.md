@@ -16,16 +16,16 @@ http://www.hesa.ac.uk/index.php?option=com_content&task=view&id=2609
 
 and click the button "Accept".
 
-Extract data from the archive. The file we need is called kis<timestamp>.xml
+Unpack the archive. 
 
 ### Run the extraction
 To extract the data in full:
 ```
-java -jar kiskit-<version>.jar <inputFile> <outputFile>
+java -jar kiskit-<version>.jar <inputDir> <outputFile>
 ```
 To only extract data about a single institution
 ```
-java -jar kiskit-<version>.jar <inputFile> <outputFile> <ukprn>
+java -jar kiskit-<version>.jar <inputDir> <outputFile> <ukprn>
 ```
 ## The Data
 The schema is mostly based on the W3C RDF Data Cube Vocabulary http://www.w3.org/TR/vocab-data-cube/
