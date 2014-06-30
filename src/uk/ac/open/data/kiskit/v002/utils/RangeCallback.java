@@ -32,21 +32,16 @@ public interface RangeCallback {
 	};
 
 	public final static RangeCallback en = new RangeCallback() {
-		// this is idiot... there is no other way to build a langed
-		// literal???
-		// ResourceFactory does not have this method...
 		@Override
 		public RDFNode get(String value) throws URISyntaxException {
 			return ModelFactory.createDefaultModel().createLiteral(value, "en");
 		}
 	};
+	
 	public final static RangeCallback cy = new RangeCallback() {
-		// this is idiot... there is no other way to build a langed
-		// literal???
-		// ResourceFactory does not have this method...
 		@Override
 		public RDFNode get(String value) throws URISyntaxException {
-			return ModelFactory.createDefaultModel().createLiteral(value, "en");
+			return ModelFactory.createDefaultModel().createLiteral(value, "cy");
 		}
 	};
 	public final static RangeCallback plain = new RangeCallback() {
