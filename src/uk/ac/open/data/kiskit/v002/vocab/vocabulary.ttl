@@ -1744,10 +1744,11 @@ dset:commonJobs
 dset:commonJobsStructure 
 	a qb:DataStructureDefinition ;
 	rdfs:label "Common jobs types (structure)"@en ;
-	rdfs:comment "Data structure definition of the Common job types DataSet: job, course, percentage and order."@en ;
+	rdfs:comment "Data structure definition of the Common job types DataSet: subject, job, course, percentage and order. Subject is the JACS subject area for the KIS course."@en ;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ] ;
     qb:component [ qb:dimension  kis:job ] ;
+    qb:component [ qb:dimension  dcterm:subject ] ;	
 	# The attribute
     qb:component [ qb:attribute  kis:order ] ;
     # The measures 
