@@ -1742,16 +1742,16 @@ dset:commonJobs
     
 # the following needs revision
 dset:commonJobsStructure 
-	a qb:DataStructureDefinition;
+	a qb:DataStructureDefinition ;
 	rdfs:label "Common jobs types (structure)"@en ;
-	rdfs:comment "Data structure definition of the Common job types DataSet: job, course, percentage and order."@en;
+	rdfs:comment "Data structure definition of the Common job types DataSet: job, course, percentage and order."@en ;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ] ;
     qb:component [ qb:dimension  kis:job ] ;
 	# The attribute
-    qb:component [ qb:attribute  kis:order ]
-    # The measures
-    qb:component [ qb:measure  kis:percentage ] ;
+    qb:component [ qb:attribute  kis:order ] ;
+    # The measures 
+    qb:component [ qb:measure  kis:percentage ] 
     .
 
 dset:continuation
@@ -1793,7 +1793,7 @@ dset:courseStagesStructure
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
     qb:component [ qb:dimension  kis:stage ];
-    qb:component [ qb:dimension  dcterms:subject ];
+    qb:component [ qb:dimension  dcterm:subject ];
     # The measures
     qb:component [ qb:measure  kis:assessmentMethod ];
     qb:component [ qb:measure  kis:coursework ];
@@ -1822,7 +1822,7 @@ dset:employmentStructure
 	rdfs:comment "Information relating to the employment outcomes of students"@en ;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
-    qb:component [ qb:dimension  dcterms:subject ];
+    qb:component [ qb:dimension  dcterm:subject ];
 	# The attributes
     qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
