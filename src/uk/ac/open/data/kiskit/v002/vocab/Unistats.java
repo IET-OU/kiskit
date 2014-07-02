@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import com.hp.hpl.jena.rdf.model.AnonId;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -37,6 +38,7 @@ public class Unistats {
 	private static final String ns_AIM = ns_DATA + "aim/";
 	private static final String ns_LOCATION = ns_DATA + "location/";
 	public final static String ns_SKOLEMIZED = ns_DATA + "genid/";
+	public final static String ns_OBSERVATION = ns_DATA + "observation/";
 
 	// to be used as default in KisCourse
 	public final static String ns_COURSE_DEFAULT = ns_COURSE;
@@ -81,9 +83,9 @@ public class Unistats {
 	public static final Resource entryQualifications = ResourceFactory.createResource(ns_DSET + "entryQualifications");
 	public static final Resource jobTypes = ResourceFactory.createResource(ns_DSET + "jobTypes");
 	public static final Resource nationalStudentSurveyResults = ResourceFactory.createResource(ns_DSET + "nationalStudentSurveyResults");
-	public static final RDFNode nationalStudentSurveyNHSResults = ResourceFactory.createResource(ns_DSET + "nationalStudentSurveyNHSResults");
+	public static final Resource nationalStudentSurveyNHSResults = ResourceFactory.createResource(ns_DSET + "nationalStudentSurveyNHSResults");
 	public static final Resource salaries = ResourceFactory.createResource(ns_DSET + "salaries");
-	public static final RDFNode tariffs = ResourceFactory.createResource(ns_DSET + "tariffs");
+	public static final Resource tariffs = ResourceFactory.createResource(ns_DSET + "tariffs");
 
 	/*
 	 * Properties
@@ -334,9 +336,20 @@ public class Unistats {
 		return ns_SKOLEMIZED + new String(Base64.encodeBase64(bnodeId.getLabelString().getBytes()));
 	}
 
-	public static String createSkolemizedResource() {
-		return skolemizedURI(ResourceFactory.createResource().getId());
+	public static String getObservationURI(Resource dataSet, String... objects){
+		HashCodeBuilder hcb = new HashCodeBuilder();
+		hcb.append(dataSet);
+		for(String o : objects){
+			hcb.append(o);
+		}
+		
+		return new StringBuilder().append(ns_OBSERVATION).append(dataSet.getLocalName()).append("/").append(Integer.toHexString(hcb.toHashCode())).toString();
+
 	}
+	
+//	public static String createSkolemizedResource() {
+//		return skolemizedURI(ResourceFactory.createResource().getId());
+//	}
 
 	public static String getAimURI(String value) {
 		return ns_AIM + urify(value.toLowerCase());

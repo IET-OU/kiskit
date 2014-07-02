@@ -110,9 +110,11 @@ public class KISCourse {
 		many(doc, courseResource, "LDCS", Unistats.ldcsCode, RangeCallback.xsdString);
 
 		many(doc, courseResource, "JACS", Unistats.jacsCode, Jacs.getRangeCallback_2_0());
-
+		single(doc, courseResource, "TITLE", SKOS.prefLabel, RangeCallback.xsdString);
 		single(doc, courseResource, "TITLE", Unistats.title, RangeCallback.en);
+		single(doc, courseResource, "TITLE", RDFS.label, RangeCallback.en);
 		single(doc, courseResource, "TITLEW", Unistats.title, RangeCallback.cy);
+		single(doc, courseResource, "TITLEW", RDFS.label, RangeCallback.cy);
 
 		single(doc, courseResource, "CRSEURL", Unistats.courseUrl, RangeCallback.anyUri);
 		single(doc, courseResource, "CRSEURLW", Unistats.courseUrlW, RangeCallback.anyUri);
@@ -244,8 +246,8 @@ public class KISCourse {
 				if (n.getNodeType() == Node.ELEMENT_NODE && n.getNodeName().toUpperCase().equals("JOBLIST")) {
 
 					// this is an observation
-					Resource commonJobsResource = model.createResource(Unistats.createSkolemizedResource());
-					
+					Resource commonJobsResource = model.createResource(Unistats.getObservationURI(Unistats.commonJobs, ukprn, kisCourseId, pop, agg, sbj));
+					observationPreferredLabel(commonJobsResource);
 					model.add(commonJobsResource, RDF.type, Unistats.Observation);
 
 					single(commonJobsResource, n, "JOB", Unistats.job, new RangeCallback() {
@@ -294,7 +296,8 @@ public class KISCourse {
 		log.debug(" > CONTINUATION: {}", continuationNodes.getLength());
 		for (int ii = 0; ii < continuationNodes.getLength(); ii++) {
 			Node continuationNode = continuationNodes.item(ii);
-			Resource continuationResource = model.createResource(Unistats.createSkolemizedResource());
+			Resource continuationResource = model.createResource(Unistats.getObservationURI(Unistats.continuation, ukprn, kisCourseId, Integer.toString(ii)));
+			observationPreferredLabel(continuationResource);
 			model.add(continuationResource, RDF.type, Unistats.Observation);
 			model.add(continuationResource, Unistats.dataSet, Unistats.continuation);
 			model.add(continuationResource, Unistats.course, courseResource);
@@ -320,7 +323,8 @@ public class KISCourse {
 		log.debug(" > COURSESTAGE: {}", courseStageNodes.getLength());
 		for (int ii = 0; ii < courseStageNodes.getLength(); ii++) {
 			Node courseStageNode = courseStageNodes.item(ii);
-			Resource courseStageResource = model.createResource(Unistats.createSkolemizedResource());
+			Resource courseStageResource = model.createResource(Unistats.getObservationURI(Unistats.courseStages, ukprn, kisCourseId, Integer.toString(ii)));
+			observationPreferredLabel(courseStageResource);
 			model.add(courseStageResource, RDF.type, Unistats.Observation);
 			model.add(courseStageResource, Unistats.dataSet, Unistats.courseStages);
 			model.add(courseStageResource, Unistats.course, courseResource);
@@ -345,7 +349,8 @@ public class KISCourse {
 		log.debug(" > EMPLOYMENT: {}", employmentNodes.getLength());
 		for (int ii = 0; ii < employmentNodes.getLength(); ii++) {
 			Node employmentNode = employmentNodes.item(ii);
-			Resource employmentResource = model.createResource(Unistats.createSkolemizedResource());
+			Resource employmentResource = model.createResource(Unistats.getObservationURI(Unistats.employment, ukprn, kisCourseId, Integer.toString(ii)));
+			observationPreferredLabel(employmentResource);
 			model.add(employmentResource, RDF.type, Unistats.Observation);
 			model.add(employmentResource, Unistats.dataSet, Unistats.employment);
 			model.add(employmentResource, Unistats.course, courseResource);
@@ -369,7 +374,8 @@ public class KISCourse {
 		log.debug(" > DEGREECLASS: {}", degreeClassNodes.getLength());
 		for (int ii = 0; ii < degreeClassNodes.getLength(); ii++) {
 			Node degreeClassNode = degreeClassNodes.item(ii);
-			Resource degreeClassResource = model.createResource(Unistats.createSkolemizedResource());
+			Resource degreeClassResource = model.createResource(Unistats.getObservationURI(Unistats.degreeClasses, ukprn, kisCourseId, Integer.toString(ii)));
+			observationPreferredLabel(degreeClassResource);
 			model.add(degreeClassResource, RDF.type, Unistats.Observation);
 			model.add(degreeClassResource, Unistats.dataSet, Unistats.degreeClasses);
 			model.add(degreeClassResource, Unistats.course, courseResource);
@@ -393,7 +399,8 @@ public class KISCourse {
 		log.debug(" > ENTRY: {}", entryNodes.getLength());
 		for (int ii = 0; ii < entryNodes.getLength(); ii++) {
 			Node entryNode = entryNodes.item(ii);
-			Resource entryResource = model.createResource(Unistats.createSkolemizedResource());
+			Resource entryResource = model.createResource(Unistats.getObservationURI(Unistats.entryQualifications, ukprn, kisCourseId, Integer.toString(ii)));
+			observationPreferredLabel(entryResource);
 			model.add(entryResource, RDF.type, Unistats.Observation);
 			model.add(entryResource, Unistats.dataSet, Unistats.entryQualifications);
 			model.add(entryResource, Unistats.course, courseResource);
@@ -420,7 +427,8 @@ public class KISCourse {
 		log.debug(" > JOBTYPE: {}", jobtypeNodes.getLength());
 		for (int ii = 0; ii < jobtypeNodes.getLength(); ii++) {
 			Node jobtypeNode = jobtypeNodes.item(ii);
-			Resource jobtypeResource = model.createResource(Unistats.createSkolemizedResource());
+			Resource jobtypeResource = model.createResource(Unistats.getObservationURI(Unistats.jobTypes, ukprn, kisCourseId, Integer.toString(ii)));
+			observationPreferredLabel(jobtypeResource);
 			model.add(jobtypeResource, RDF.type, Unistats.Observation);
 			model.add(jobtypeResource, Unistats.dataSet, Unistats.jobTypes);
 			model.add(jobtypeResource, Unistats.course, courseResource);
@@ -441,7 +449,8 @@ public class KISCourse {
 		log.debug(" > NSS: {}", nssNodes.getLength());
 		for (int ii = 0; ii < nssNodes.getLength(); ii++) {
 			Node nssNode = nssNodes.item(ii);
-			Resource nssResource = model.createResource(Unistats.createSkolemizedResource());
+			Resource nssResource = model.createResource(Unistats.getObservationURI(Unistats.nationalStudentSurveyResults, ukprn, kisCourseId, Integer.toString(ii)));
+			observationPreferredLabel(nssResource);
 			model.add(nssResource, RDF.type, Unistats.Observation);
 			model.add(nssResource, Unistats.dataSet, Unistats.nationalStudentSurveyResults);
 			model.add(nssResource, Unistats.course, courseResource);
@@ -484,7 +493,8 @@ public class KISCourse {
 		log.debug(" > NHSNSS: {}", nhsnssNodes.getLength());
 		for (int ii = 0; ii < nhsnssNodes.getLength(); ii++) {
 			Node nhsnssNode = nhsnssNodes.item(ii);
-			Resource nhsnssResource = model.createResource(Unistats.createSkolemizedResource());
+			Resource nhsnssResource = model.createResource(Unistats.getObservationURI(Unistats.nationalStudentSurveyNHSResults, ukprn, kisCourseId, Integer.toString(ii)));
+			observationPreferredLabel(nhsnssResource);
 			model.add(nhsnssResource, RDF.type, Unistats.Observation);
 			model.add(nhsnssResource, Unistats.dataSet, Unistats.nationalStudentSurveyNHSResults);
 			model.add(nhsnssResource, Unistats.course, courseResource);
@@ -519,7 +529,8 @@ public class KISCourse {
 		log.debug(" > SALARY: {}", salaryNodes.getLength());
 		for (int ii = 0; ii < salaryNodes.getLength(); ii++) {
 			Node salaryNode = salaryNodes.item(ii);
-			Resource salaryResource = model.createResource(Unistats.createSkolemizedResource());
+			Resource salaryResource = model.createResource(Unistats.getObservationURI(Unistats.salaries, ukprn, kisCourseId, Integer.toString(ii)));
+			observationPreferredLabel(salaryResource);
 			model.add(salaryResource, RDF.type, Unistats.Observation);
 			model.add(salaryResource, Unistats.dataSet, Unistats.salaries);
 			model.add(salaryResource, Unistats.course, courseResource);
@@ -547,7 +558,8 @@ public class KISCourse {
 		log.debug(" > TARIFF: {}", tariffNodes.getLength());
 		for (int ii = 0; ii < tariffNodes.getLength(); ii++) {
 			Node tariffNode = tariffNodes.item(ii);
-			Resource tariffResource = model.createResource(Unistats.createSkolemizedResource());
+			Resource tariffResource = model.createResource(Unistats.getObservationURI(Unistats.tariffs, ukprn, kisCourseId, Integer.toString(ii)));
+			observationPreferredLabel(tariffResource);
 			model.add(tariffResource, RDF.type, Unistats.Observation);
 			model.add(tariffResource, Unistats.dataSet, Unistats.tariffs);
 			model.add(tariffResource, Unistats.course, courseResource);
@@ -571,6 +583,10 @@ public class KISCourse {
 			single(tariffResource, tariffNode, "T600", Unistats.tariff600, RangeCallback.xsdInt);
 		}
 		log.debug(" > {} triples so far", model.size());
+	}
+
+	private void observationPreferredLabel(Resource resource) {
+		resource.addLiteral(SKOS.prefLabel, new StringBuilder("Observation #").append(resource.getLocalName()).toString());
 	}
 
 	public Model getModel() {

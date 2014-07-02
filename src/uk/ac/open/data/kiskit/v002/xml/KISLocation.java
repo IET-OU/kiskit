@@ -117,54 +117,81 @@ public class KISLocation {
 								skip = true;
 							}
 						}
-						if (LOCID != null && (LOCUKPRN != null || UKPRN != null) && !skip) {
-							Resource r = model.createResource(Unistats.getLocationURI(LOCID));
-							if (LOCNAME == null) {
-								LOCNAME = "Location " + LOCID;
+						if (!skip) {
+							if (LOCID != null
+									&& (LOCUKPRN != null || UKPRN != null)) {
+								Resource r = model.createResource(Unistats
+										.getLocationURI(LOCID));
+								if (LOCNAME == null) {
+									LOCNAME = "Location " + LOCID;
+								}
+								r.addProperty(RDFS.label, LOCNAME, "en");
+								r.addProperty(SKOS.prefLabel, LOCNAME);
+								if (LOCNAMEW != null) {
+									r.addProperty(RDFS.label, LOCNAMEW, "cy");
+								}
+								if (ACCOMURL != null) {
+									r.addProperty(RDFS.seeAlso, ACCOMURL,
+											XSDDatatype.XSDanyURI);
+									r.addProperty(Unistats.accomodationUrl,
+											ACCOMURL, XSDDatatype.XSDanyURI);
+								}
+								if (ACCOMURLW != null) {
+									r.addProperty(Unistats.accomodationUrlW,
+											ACCOMURLW, XSDDatatype.XSDanyURI);
+								}
+								if (LATITUDE != null && LONGITUDE != null) {
+									r.addProperty(model
+											.createProperty(Unistats.ns_GEO
+													+ "lat"), LATITUDE);
+									r.addProperty(model
+											.createProperty(Unistats.ns_GEO
+													+ "long"), LONGITUDE);
+								}
+								if (LOCUKPRN == null) {
+									LOCUKPRN = UKPRN;
+								}
+								r.addProperty(DCTerms.isPartOf,
+										Unistats.getInstitutionURI(LOCUKPRN));
+								if (PRIVATELOWER != null
+										&& PRIVATEUPPER != null) {
+									model.addLiteral(r,
+											Unistats.privateBedsLowerPrice,
+											(int) PRIVATELOWER);
+									model.addLiteral(r,
+											Unistats.privateBedsUpperPrice,
+											(int) PRIVATEUPPER);
+								}
+								if (SUURL != null) {
+									r.addProperty(Unistats.studentsUnionURL,
+											SUURL, XSDDatatype.XSDanyURI);
+								}
+								if (SUURLW != null) {
+									r.addProperty(
+											Unistats.studentsUnionWelshURL,
+											SUURLW, XSDDatatype.XSDanyURI);
+								}
+								if (INSTBED != null) {
+									model.addLiteral(r, Unistats.numberOfBeds,
+											(int) INSTBED);
+								}
+								if (INSTLOWER != null) {
+									model.addLiteral(r,
+											Unistats.bedsLowerPrice,
+											(int) INSTLOWER);
+								}
+								if (INSTUPPER != null) {
+									model.addLiteral(r,
+											Unistats.bedsUpperPrice,
+											(int) INSTUPPER);
+								}
+							} else {
+								log.error(
+										"Skipping location, LOCID: {} UKPRN: {} LOCUKPRN: {} LOCNAME: {}",
+										new Object[] { LOCID, UKPRN, LOCUKPRN,
+												LOCNAME });
 							}
-							r.addProperty(RDFS.label, LOCNAME, "en");
-							r.addProperty(SKOS.prefLabel, LOCNAME);
-							if (LOCNAMEW != null) {
-								r.addProperty(RDFS.label, LOCNAMEW, "cy");
-							}
-							if (ACCOMURL != null) {
-								r.addProperty(RDFS.seeAlso, ACCOMURL, XSDDatatype.XSDanyURI);
-								r.addProperty(Unistats.accomodationUrl, ACCOMURL, XSDDatatype.XSDanyURI);
-							}
-							if (ACCOMURLW != null) {
-								r.addProperty(Unistats.accomodationUrlW, ACCOMURLW, XSDDatatype.XSDanyURI);
-							}
-							if (LATITUDE != null && LONGITUDE != null) {
-								r.addProperty(model.createProperty(Unistats.ns_GEO + "lat"), LATITUDE);
-								r.addProperty(model.createProperty(Unistats.ns_GEO + "long"), LONGITUDE);
-							}
-							if (LOCUKPRN == null) {
-								LOCUKPRN = UKPRN;
-							}
-							r.addProperty(DCTerms.isPartOf, Unistats.getInstitutionURI(LOCUKPRN));
-							if (PRIVATELOWER != null && PRIVATEUPPER != null) {
-								model.addLiteral(r, Unistats.privateBedsLowerPrice, (int) PRIVATELOWER);
-								model.addLiteral(r, Unistats.privateBedsUpperPrice, (int) PRIVATEUPPER);
-							}
-							if (SUURL != null) {
-								r.addProperty(Unistats.studentsUnionURL, SUURL, XSDDatatype.XSDanyURI);
-							}
-							if (SUURLW != null) {
-								r.addProperty(Unistats.studentsUnionWelshURL, SUURLW, XSDDatatype.XSDanyURI);
-							}
-							if (INSTBED != null) {
-								model.addLiteral(r, Unistats.numberOfBeds, (int) INSTBED);
-							}
-							if (INSTLOWER != null) {
-								model.addLiteral(r, Unistats.bedsLowerPrice, (int) INSTLOWER);
-							}
-							if (INSTUPPER != null) {
-								model.addLiteral(r, Unistats.bedsUpperPrice, (int) INSTUPPER);
-							}
-						} else {
-							log.error("Skipping location, LOCID: {} UKPRN: {} LOCUKPRN: {} LOCNAME: {}", new Object[] { LOCID, UKPRN, LOCUKPRN, LOCNAME });
 						}
-
 						ACCOMURL = null;
 						ACCOMURLW = null;
 						LOCID = null;
