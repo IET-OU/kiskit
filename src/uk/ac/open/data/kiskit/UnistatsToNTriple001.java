@@ -20,6 +20,7 @@ import uk.ac.open.data.kiskit.v001.vocab.Unistats;
 import uk.ac.open.data.kiskit.v001.xml.KISCourse;
 import uk.ac.open.data.kiskit.v001.xml.KISCoursesXMLSlicer;
 import uk.ac.open.data.kiskit.v001.xml.KISInstitution;
+import uk.ac.open.data.kiskit.v002.vocab.SKOS;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -69,6 +70,7 @@ public class UnistatsToNTriple001 {
 		Model istlbl = ModelFactory.createDefaultModel();
 		for (Entry<String, String> e : Institutions.getInstance().getMap().entrySet()) {
 			istlbl.add(ResourceFactory.createResource(Unistats.getInstitutionURI(e.getKey())), RDFS.label, ResourceFactory.createPlainLiteral(e.getValue()));
+			istlbl.add(ResourceFactory.createResource(Unistats.getInstitutionURI(e.getKey())), SKOS.prefLabel, ResourceFactory.createPlainLiteral(e.getValue()));
 		}
 		istlbl.write(bos, "N-TRIPLE");
 

@@ -1,5 +1,8 @@
 package uk.ac.open.data.kiskit.v002.xml;
 
+import static uk.ac.open.data.kiskit.v002.utils.XML2ModelUtils.many;
+import static uk.ac.open.data.kiskit.v002.utils.XML2ModelUtils.single;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +22,7 @@ import org.xml.sax.SAXException;
 import uk.ac.open.data.kiskit.v002.data.Jobs;
 import uk.ac.open.data.kiskit.v002.jacs.Jacs;
 import uk.ac.open.data.kiskit.v002.utils.RangeCallback;
+import uk.ac.open.data.kiskit.v002.vocab.SKOS;
 import uk.ac.open.data.kiskit.v002.vocab.Unistats;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
@@ -30,9 +34,6 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
-
-import static uk.ac.open.data.kiskit.v002.utils.XML2ModelUtils.single;
-import static uk.ac.open.data.kiskit.v002.utils.XML2ModelUtils.many;
 
 public class KISCourse {
 
@@ -210,6 +211,7 @@ public class KISCourse {
 			try {
 				String albl = "Accreditation of: " + courseResource.getProperty(Unistats.title).getLiteral().getString();
 				model.add(accreditationRes, RDFS.label, model.createLiteral(albl, "en"));
+				model.add(accreditationRes, SKOS.prefLabel, model.createLiteral(albl));
 			} catch (Exception e) {
 				log.warn("Cannot produce label for {}", accreditationRes);
 			}
@@ -260,6 +262,7 @@ public class KISCourse {
 							Resource jobr = ResourceFactory.createResource(job);
 							model.add(jobr, RDF.type, Unistats.Job);
 							model.add(jobr, RDFS.label, value, "en");
+							model.add(jobr, SKOS.prefLabel, value);
 							return jobr;
 						}
 					});

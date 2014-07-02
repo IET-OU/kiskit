@@ -14,6 +14,7 @@ import javax.xml.stream.events.XMLEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import uk.ac.open.data.kiskit.v002.vocab.SKOS;
 import uk.ac.open.data.kiskit.v002.vocab.Unistats;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -66,6 +67,7 @@ public class KISAim {
 							Resource r = model.createResource(Unistats.getAimURI(KISAIMCODE));
 							r.addProperty(RDF.type, Unistats.Aim);
 							r.addProperty(RDFS.label, KISAIMLABEL);
+							r.addProperty(SKOS.prefLabel, KISAIMLABEL);
 						} else {
 							log.error("Skipping location, KISAIMCODE: {} KISAIMLABEL: {} ", new Object[] { KISAIMCODE, KISAIMLABEL });
 						}

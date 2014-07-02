@@ -22,6 +22,7 @@ import uk.ac.open.data.kiskit.v001.jacs.Jacs;
 import uk.ac.open.data.kiskit.v001.utils.RangeCallback;
 import uk.ac.open.data.kiskit.v001.utils.UnknownValueError;
 import uk.ac.open.data.kiskit.v001.vocab.Unistats;
+import uk.ac.open.data.kiskit.v002.vocab.SKOS;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
@@ -281,6 +282,7 @@ public class KISCourse {
 			try {
 				String albl = "Accreditation of: " + courseResource.getProperty(Unistats.title).getLiteral().getString();
 				model.add(accreditationRes, RDFS.label, model.createLiteral(albl, "en"));
+				model.add(accreditationRes, SKOS.prefLabel, model.createLiteral(albl));
 			} catch (Exception e) {
 				log.warn("Cannot produce label for {}", accreditationRes);
 			}
@@ -292,6 +294,7 @@ public class KISCourse {
 					Resource accbody = ResourceFactory.createResource(Unistats.getAccreditingBodyURI(code));
 					model.add(accbody, RDF.type, Unistats.AccreditingBody);
 					model.add(accbody, RDFS.label, AccreditationBodies.getInstance().getDescription(code));
+					model.add(accbody, SKOS.prefLabel, AccreditationBodies.getInstance().getDescription(code));
 					return accbody;
 				}
 			});
@@ -332,6 +335,7 @@ public class KISCourse {
 							String job = Unistats.getJobURI(j);
 							Resource jobr = ResourceFactory.createResource(job);
 							model.add(jobr, RDFS.label, value);
+							model.add(jobr, SKOS.prefLabel, value);
 							return jobr;
 						}
 					});

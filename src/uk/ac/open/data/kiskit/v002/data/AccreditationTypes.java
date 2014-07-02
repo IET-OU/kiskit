@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import uk.ac.open.data.kiskit.v002.vocab.SKOS;
 import uk.ac.open.data.kiskit.v002.vocab.Unistats;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -149,10 +150,12 @@ public class AccreditationTypes {
 			Resource u = m.createResource(Unistats.getAccreditationTypeURI(y.getAccTypeCode()));
 			u.addProperty(RDF.type, Unistats.AccreditationType);
 			u.addProperty(RDFS.label, y.getAccTypeLabel(), "en");
+			u.addProperty(SKOS.prefLabel, y.getAccTypeLabel());
 			Resource accb = m.createResource(Unistats.getAccreditingBodyURI(y.getAccBodyCode()));
 			u.addProperty(Unistats.accreditingBody, accb);
 			accb.addProperty(RDF.type, Unistats.AccreditingBody);
 			accb.addProperty(RDFS.label, y.getAccBodyLabel(), "en");
+			accb.addProperty(SKOS.prefLabel, y.getAccBodyLabel());
 		}
 		return m;
 	}

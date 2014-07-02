@@ -415,6 +415,9 @@ public class Unistats {
 				if(!m.contains((Resource) n, RDFS.label)){
 					p.println("\tAdd rdfs:label to " + n);				
 				} 
+				if(!m.contains((Resource) n, SKOS.prefLabel)){
+					p.println("\tAdd skos:prefLabel to " + n);				
+				} 
 				if(!m.contains((Resource) n, RDFS.comment)){
 					p.println("\tAdd rdfs:comment to " + n);	
 				} 

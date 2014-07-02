@@ -1,5 +1,8 @@
 package uk.ac.open.data.kiskit.v002.xml;
 
+import static uk.ac.open.data.kiskit.v002.utils.XML2ModelUtils.intValue;
+import static uk.ac.open.data.kiskit.v002.utils.XML2ModelUtils.stringValue;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,9 +16,8 @@ import javax.xml.stream.events.XMLEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import uk.ac.open.data.kiskit.v002.vocab.SKOS;
 import uk.ac.open.data.kiskit.v002.vocab.Unistats;
-import static uk.ac.open.data.kiskit.v002.utils.XML2ModelUtils.intValue;
-import static uk.ac.open.data.kiskit.v002.utils.XML2ModelUtils.stringValue;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -121,6 +123,7 @@ public class KISLocation {
 								LOCNAME = "Location " + LOCID;
 							}
 							r.addProperty(RDFS.label, LOCNAME, "en");
+							r.addProperty(SKOS.prefLabel, LOCNAME);
 							if (LOCNAMEW != null) {
 								r.addProperty(RDFS.label, LOCNAMEW, "cy");
 							}

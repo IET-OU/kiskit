@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import uk.ac.open.data.kiskit.v002.vocab.SKOS;
 import uk.ac.open.data.kiskit.v002.vocab.Unistats;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -87,6 +88,7 @@ public class Institutions {
 			Resource i = ResourceFactory.createResource(Unistats.getInstitutionURI(e.getKey()));
 			m.add(i, RDF.type, Unistats.Institution);
 			m.add(i, RDFS.label, ResourceFactory.createPlainLiteral(e.getValue()));
+			m.add(i, SKOS.prefLabel, ResourceFactory.createPlainLiteral(e.getValue()));
 		}
 		return m;
 	}

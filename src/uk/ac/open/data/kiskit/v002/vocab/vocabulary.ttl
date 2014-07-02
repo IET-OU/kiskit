@@ -2084,4 +2084,188 @@ dcterm:subject
 	rdfs:isDefinedBy dcterm: .
 courseware:taught-at
 	rdfs:isDefinedBy courseware: .	
+	
+	
+	# SKOS preferred labels
 
+	<http://data.linkedu.eu/kis/ontology/Institution> skos:prefLabel """Institution""" .
+	<http://data.linkedu.eu/kis/ontology/Course> skos:prefLabel """Course""" .
+	<http://data.linkedu.eu/kis/ontology/PartTimeCourse> skos:prefLabel """Part Time Course""" .
+	<http://data.linkedu.eu/kis/ontology/FullTimeCourse> skos:prefLabel """Full Time Course""" .
+	<http://data.linkedu.eu/kis/ontology/FullCourseLevelKIS> skos:prefLabel """Full Course Level KIS""" .
+	<http://data.linkedu.eu/kis/ontology/MultipleSubjectCoursePlaceholderKIS> skos:prefLabel """Multiple Subject Course Placeholder KIS""" .
+	<http://data.linkedu.eu/kis/ontology/SubjectLevelKIS> skos:prefLabel """Subject Level KIS""" .
+	<http://data.linkedu.eu/kis/ontology/Accreditation> skos:prefLabel """Accreditation""" .
+	<http://data.linkedu.eu/kis/ontology/AccreditingBody> skos:prefLabel """Accrediting Body""" .
+	<http://data.linkedu.eu/kis/dataset/commonJobs> skos:prefLabel """Common Jobs""" .
+	<http://data.linkedu.eu/kis/dataset/continuation> skos:prefLabel """Continuation""" .
+	<http://data.linkedu.eu/kis/dataset/courseStages> skos:prefLabel """Course Stages""" .
+	<http://data.linkedu.eu/kis/dataset/employment> skos:prefLabel """Employment""" .
+	<http://data.linkedu.eu/kis/dataset/degreeClasses> skos:prefLabel """Degree Classes""" .
+	<http://data.linkedu.eu/kis/dataset/entryQualifications> skos:prefLabel """Entry Qualifications""" .
+	<http://data.linkedu.eu/kis/dataset/jobTypes> skos:prefLabel """Job Types""" .
+	<http://data.linkedu.eu/kis/dataset/nationalStudentSurveyResults> skos:prefLabel """National Student Survey Results""" .
+	<http://data.linkedu.eu/kis/dataset/nationalStudentSurveyNHSResults> skos:prefLabel """National Student Survey NHS Results""" .
+	<http://data.linkedu.eu/kis/dataset/salaries> skos:prefLabel """Salaries""" .
+	<http://data.linkedu.eu/kis/dataset/tariffs> skos:prefLabel """Tariffs""" .
+	<http://data.linkedu.eu/kis/ontology/courseId> skos:prefLabel """Course Id""" .
+	<http://data.linkedu.eu/kis/ontology/type> skos:prefLabel """Type""" .
+	<http://data.linkedu.eu/kis/ontology/accomodationUrl> skos:prefLabel """Accomodation Url""" .
+	<http://data.linkedu.eu/kis/ontology/accomodationUrlW> skos:prefLabel """Accomodation Url (Welsh)""" .
+	<http://data.linkedu.eu/kis/ontology/courseUrl> skos:prefLabel """Course Url""" .
+	<http://data.linkedu.eu/kis/ontology/courseUrl> skos:prefLabel """Course Url""" .
+	<http://data.linkedu.eu/kis/ontology/ukPrnApply> skos:prefLabel """UK PRN Apply""" .
+	<http://data.linkedu.eu/kis/ontology/courseUrlW> skos:prefLabel """Course Url (Welsh)""" .
+	<http://data.linkedu.eu/kis/ontology/supportUrl> skos:prefLabel """Support Url""" .
+	<http://data.linkedu.eu/kis/ontology/supportUrlW> skos:prefLabel """Support Url (Welsh)""" .
+	<http://data.linkedu.eu/kis/ontology/employUrl> skos:prefLabel """Employ Url""" .
+	<http://data.linkedu.eu/kis/ontology/employUrlW> skos:prefLabel """Employ Url (Welsh)""" .
+	<http://data.linkedu.eu/kis/ontology/learningAndTeachingUrl> skos:prefLabel """Learning And Teaching Url""" .
+	<http://data.linkedu.eu/kis/ontology/learningAndTeachingUrlW> skos:prefLabel """Learning And Teaching Url (Welsh)""" .
+	<http://data.linkedu.eu/kis/ontology/jacsCode> skos:prefLabel """JACS Code""" .
+	<http://data.linkedu.eu/kis/ontology/ldcsCode> skos:prefLabel """LDCS Code""" .
+	<http://data.linkedu.eu/kis/ontology/nonCreditAssessment> skos:prefLabel """Non Credit Assessment""" .
+	<http://data.linkedu.eu/kis/ontology/assessmentMethodsUrl> skos:prefLabel """Assessment Methods Url""" .
+	<http://data.linkedu.eu/kis/ontology/assessmentMethodsUrlW> skos:prefLabel """AssessmentMethods Url (Welsh)""" .
+	<http://data.linkedu.eu/kis/ontology/ucasCourseId> skos:prefLabel """UCAS Course Id""" .
+	<http://data.linkedu.eu/kis/ontology/feeVariesByYear> skos:prefLabel """Fee Varies By Year""" .
+	<http://data.linkedu.eu/kis/ontology/feeToBeConfirmed> skos:prefLabel """Fee To Be Confirmed""" .
+	<http://data.linkedu.eu/kis/ontology/waiverAvailable> skos:prefLabel """Waiver Available""" .
+	<http://data.linkedu.eu/kis/ontology/meansSupport> skos:prefLabel """Means Support""" .
+	<http://data.linkedu.eu/kis/ontology/otherSupport> skos:prefLabel """Other Support""" .
+	<http://data.linkedu.eu/kis/ontology/englishFee> skos:prefLabel """English Fee""" .
+	<http://data.linkedu.eu/kis/ontology/northernIrishFee> skos:prefLabel """Northern Irish Fee""" .
+	<http://data.linkedu.eu/kis/ontology/scottishFee> skos:prefLabel """Scottish Fee""" .
+	<http://data.linkedu.eu/kis/ontology/walesFee> skos:prefLabel """Wales Fee""" .
+	<http://data.linkedu.eu/kis/ontology/availableInWelsh> skos:prefLabel """Available In Welsh""" .
+	<http://data.linkedu.eu/kis/ontology/mode> skos:prefLabel """Mode""" .
+	<http://data.linkedu.eu/kis/ontology/awardLevel> skos:prefLabel """Award Level""" .
+	<http://data.linkedu.eu/kis/ontology/averageOfWrittenAssessment> skos:prefLabel """Average Of Written Assessment""" .
+	<http://data.linkedu.eu/kis/ontology/averageOfCourseworkAssessment> skos:prefLabel """Average Of Coursework Assessment""" .
+	<http://data.linkedu.eu/kis/ontology/averageOfScheduledActivities> skos:prefLabel """Average Of Scheduled Activities""" .
+	<http://data.linkedu.eu/kis/ontology/accreditation> skos:prefLabel """Accreditation""" .
+	<http://data.linkedu.eu/kis/ontology/accreditationUrl> skos:prefLabel """Accreditation Url""" .
+	<http://data.linkedu.eu/kis/ontology/accreditingBody> skos:prefLabel """Accrediting Body""" .
+	<http://data.linkedu.eu/kis/ontology/accreditationType> skos:prefLabel """Accreditation Type""" .
+	<http://data.linkedu.eu/kis/ontology/accreditationDependantOnChoice> skos:prefLabel """Accreditation Dependant On Choice""" .
+	<http://data.linkedu.eu/kis/ontology/accreditationDependantOnChoiceUrl> skos:prefLabel """AccreditationDependant On Choice Url""" .
+	<http://data.linkedu.eu/kis/ontology/accreditationDependantOnChoiceUrlW> skos:prefLabel """Accreditation Dependant On Choice Url (Welsh)""" .
+	<http://data.linkedu.eu/kis/ontology/course> skos:prefLabel """Course""" .
+	<http://data.linkedu.eu/kis/ontology/job> skos:prefLabel """Job""" .
+	<http://data.linkedu.eu/kis/ontology/percentage> skos:prefLabel """Percentage""" .
+	<http://data.linkedu.eu/kis/ontology/order> skos:prefLabel """Order""" .
+	<http://data.linkedu.eu/kis/ontology/population> skos:prefLabel """Population""" .
+	<http://data.linkedu.eu/kis/ontology/aggregation> skos:prefLabel """Aggregation""" .
+	<http://data.linkedu.eu/kis/ontology/continuing> skos:prefLabel """Continuing""" .
+	<http://data.linkedu.eu/kis/ontology/dormant> skos:prefLabel """Dormant""" .
+	<http://data.linkedu.eu/kis/ontology/left> skos:prefLabel """Left""" .
+	<http://data.linkedu.eu/kis/ontology/gained> skos:prefLabel """Gained""" .
+	<http://data.linkedu.eu/kis/ontology/lower> skos:prefLabel """Lower""" .
+	<http://data.linkedu.eu/kis/ontology/stage> skos:prefLabel """Stage""" .
+	<http://data.linkedu.eu/kis/ontology/assessmentMethod> skos:prefLabel """Assessment Method""" .
+	<http://data.linkedu.eu/kis/ontology/coursework> skos:prefLabel """Coursework""" .
+	<http://data.linkedu.eu/kis/ontology/written> skos:prefLabel """Written""" .
+	<http://data.linkedu.eu/kis/ontology/practical> skos:prefLabel """Practical""" .
+	<http://data.linkedu.eu/kis/ontology/learningAndTeachingMethod> skos:prefLabel """Learning And Teaching Method""" .
+	<http://data.linkedu.eu/kis/ontology/independent> skos:prefLabel """Independent""" .
+	<http://data.linkedu.eu/kis/ontology/placement> skos:prefLabel """Placement""" .
+	<http://data.linkedu.eu/kis/ontology/scheduled> skos:prefLabel """Scheduled""" .
+	<http://data.linkedu.eu/kis/ontology/workOrStudy> skos:prefLabel """WorkOrStudy""" .
+	<http://data.linkedu.eu/kis/ontology/assumedUnemployed> skos:prefLabel """AssumedU nemployed""" .
+	<http://data.linkedu.eu/kis/ontology/workAndStudy> skos:prefLabel """Work And Study""" .
+	<http://data.linkedu.eu/kis/ontology/notAvailable> skos:prefLabel """Not Available""" .
+	<http://data.linkedu.eu/kis/ontology/study> skos:prefLabel """Study""" .
+	<http://data.linkedu.eu/kis/ontology/work> skos:prefLabel """Work""" .
+	<http://data.linkedu.eu/kis/ontology/firstClass> skos:prefLabel """First Class""" .
+	<http://data.linkedu.eu/kis/ontology/upperSecondClass> skos:prefLabel """Upper Second Class""" .
+	<http://data.linkedu.eu/kis/ontology/lowerSecondClass> skos:prefLabel """Lower Second Class""" .
+	<http://data.linkedu.eu/kis/ontology/otherHonours> skos:prefLabel """Other Honours""" .
+	<http://data.linkedu.eu/kis/ontology/ordinary> skos:prefLabel """Ordinary""" .
+	<http://data.linkedu.eu/kis/ontology/notClassified> skos:prefLabel """Not Classified""" .
+	<http://data.linkedu.eu/kis/ontology/accessCourse> skos:prefLabel """Access Course""" .
+	<http://data.linkedu.eu/kis/ontology/aLevel> skos:prefLabel """A Level""" .
+	<http://data.linkedu.eu/kis/ontology/baccalaureate> skos:prefLabel """Baccalaureate""" .
+	<http://data.linkedu.eu/kis/ontology/degree> skos:prefLabel """Degree""" .
+	<http://data.linkedu.eu/kis/ontology/diploma> skos:prefLabel """Diploma""" .
+	<http://data.linkedu.eu/kis/ontology/foundation> skos:prefLabel """Foundation""" .
+	<http://data.linkedu.eu/kis/ontology/noQualifications> skos:prefLabel """No Qualifications""" .
+	<http://data.linkedu.eu/kis/ontology/other> skos:prefLabel """Other""" .
+	<http://data.linkedu.eu/kis/ontology/otherHE> skos:prefLabel """OtherHE""" .
+	<http://data.linkedu.eu/kis/ontology/professional> skos:prefLabel """Professional""" .
+	<http://data.linkedu.eu/kis/ontology/nonProfessional> skos:prefLabel """Non Professional""" .
+	<http://data.linkedu.eu/kis/ontology/unknown> skos:prefLabel """Unknown""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion1> skos:prefLabel """NSS Q1""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion2> skos:prefLabel """NSS Q2""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion3> skos:prefLabel """NSS Q3""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion4> skos:prefLabel """NSS Q4""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion5> skos:prefLabel """NSS Q5""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion6> skos:prefLabel """NSS Q6""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion7> skos:prefLabel """NSS Q7""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion8> skos:prefLabel """NSS Q8""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion9> skos:prefLabel """NSS Q9""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion10> skos:prefLabel """NSS Q10""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion11> skos:prefLabel """NSS Q11""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion12> skos:prefLabel """NSS Q12""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion13> skos:prefLabel """NSS Q13""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion14> skos:prefLabel """NSS Q14""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion15> skos:prefLabel """NSS Q15""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion16> skos:prefLabel """NSS Q16""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion17> skos:prefLabel """NSS Q17""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion18> skos:prefLabel """NSS Q18""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion19> skos:prefLabel """NSS Q19""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion20> skos:prefLabel """NSS Q20""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion21> skos:prefLabel """NSS Q21""" .
+	<http://data.linkedu.eu/kis/ontology/nssQuestion22> skos:prefLabel """NSS Q22""" .
+	<http://data.linkedu.eu/kis/ontology/sectorLowerForty> skos:prefLabel """Sector Lower Forty""" .
+	<http://data.linkedu.eu/kis/ontology/sectorMedianForty> skos:prefLabel """Sector Median Forty""" .
+	<http://data.linkedu.eu/kis/ontology/sectorUpperForty> skos:prefLabel """Sector Upper Forty""" .
+	<http://data.linkedu.eu/kis/ontology/sectorLowerSix> skos:prefLabel """Sector Lower Six""" .
+	<http://data.linkedu.eu/kis/ontology/sectorMedianSix> skos:prefLabel """Sector Median Six""" .
+	<http://data.linkedu.eu/kis/ontology/sectorUpperSix> skos:prefLabel """Sector Upper Six""" .
+	<http://data.linkedu.eu/kis/ontology/courseLower> skos:prefLabel """Course Lower""" .
+	<http://data.linkedu.eu/kis/ontology/courseMedian> skos:prefLabel """Course Median""" .
+	<http://data.linkedu.eu/kis/ontology/courseUpper> skos:prefLabel """Course Upper""" .
+	<http://data.linkedu.eu/kis/ontology/nhsNssQuestion1> skos:prefLabel """NHS NSS Q1""" .
+	<http://data.linkedu.eu/kis/ontology/nhsNssQuestion2> skos:prefLabel """NHS NSS Q2""" .
+	<http://data.linkedu.eu/kis/ontology/nhsNssQuestion3> skos:prefLabel """NHS NSS Q3""" .
+	<http://data.linkedu.eu/kis/ontology/nhsNssQuestion4> skos:prefLabel """NHS NSS Q4""" .
+	<http://data.linkedu.eu/kis/ontology/nhsNssQuestion5> skos:prefLabel """NHS NSS Q5""" .
+	<http://data.linkedu.eu/kis/ontology/nhsNssQuestion6> skos:prefLabel """NHS NSS Q6""" .
+	<http://data.linkedu.eu/kis/ontology/tariff1> skos:prefLabel """Tariff: 1""" .
+	<http://data.linkedu.eu/kis/ontology/tariff120> skos:prefLabel """Tariff: 120""" .
+	<http://data.linkedu.eu/kis/ontology/tariff160> skos:prefLabel """Tariff: 160""" .
+	<http://data.linkedu.eu/kis/ontology/tariff200> skos:prefLabel """Tariff: 200""" .
+	<http://data.linkedu.eu/kis/ontology/tariff240> skos:prefLabel """Tariff: 240""" .
+	<http://data.linkedu.eu/kis/ontology/tariff280> skos:prefLabel """Tariff: 280""" .
+	<http://data.linkedu.eu/kis/ontology/tariff320> skos:prefLabel """Tariff: 320""" .
+	<http://data.linkedu.eu/kis/ontology/tariff360> skos:prefLabel """Tariff: 360""" .
+	<http://data.linkedu.eu/kis/ontology/tariff400> skos:prefLabel """Tariff: 400""" .
+	<http://data.linkedu.eu/kis/ontology/tariff440> skos:prefLabel """Tariff: 440""" .
+	<http://data.linkedu.eu/kis/ontology/tariff480> skos:prefLabel """Tariff: 480""" .
+	<http://data.linkedu.eu/kis/ontology/tariff520> skos:prefLabel """Tariff: 520""" .
+	<http://data.linkedu.eu/kis/ontology/tariff560> skos:prefLabel """Tariff: 560""" .
+	<http://data.linkedu.eu/kis/ontology/tariff600> skos:prefLabel """Tariff: 600""" .
+	<http://data.linkedu.eu/kis/ontology/numberOfBeds> skos:prefLabel """Number Of Beds""" .
+	<http://data.linkedu.eu/kis/ontology/bedsLowerPrice> skos:prefLabel """Beds Lower Price""" .
+	<http://data.linkedu.eu/kis/ontology/bedsUpperPrice> skos:prefLabel """Beds Upper Price""" .
+	<http://data.linkedu.eu/kis/ontology/privateBedsLowerPrice> skos:prefLabel """Private Beds Lower Price""" .
+	<http://data.linkedu.eu/kis/ontology/privateBedsUpperPrice> skos:prefLabel """Private Beds Upper Price""" .
+	<http://data.linkedu.eu/kis/ontology/country> skos:prefLabel """Country""" .
+	<http://data.linkedu.eu/kis/ontology/nspParticipant> skos:prefLabel """NSP Participant""" .
+	<http://data.linkedu.eu/kis/ontology/studentsUnionSatisfactory> skos:prefLabel """Students Union Satisfactory""" .
+	<http://data.linkedu.eu/kis/ontology/nssPopulation> skos:prefLabel """NSS Population""" .
+	<http://data.linkedu.eu/kis/ontology/distanceOnly> skos:prefLabel """Distance Only""" .
+	<http://data.linkedu.eu/kis/ontology/honoursDegreeCourse> skos:prefLabel """Honours Degree Course""" .
+	<http://data.linkedu.eu/kis/ontology/locationChange> skos:prefLabel """Location Change""" .
+	<http://data.linkedu.eu/kis/ontology/sandwitch> skos:prefLabel """Sandwitch""" .
+	<http://data.linkedu.eu/kis/ontology/aim> skos:prefLabel """Aim""" .
+	<http://data.linkedu.eu/kis/ontology/studentsUnionURL> skos:prefLabel """Students Union URL""" .
+	<http://data.linkedu.eu/kis/ontology/studentsUnionWelshURL> skos:prefLabel """Students Union URL (Welsh)""" .
+	<http://data.linkedu.eu/kis/ontology/Aim> skos:prefLabel """Aim""" .
+	<http://data.linkedu.eu/kis/ontology/yearAbroadAvailable> skos:prefLabel """Year Abroad Available""" .
+	<http://data.linkedu.eu/kis/ontology/AccreditationType> skos:prefLabel """Accreditation Type""" .
+	<http://data.linkedu.eu/kis/ontology/nhsFundedStudents> skos:prefLabel """NHS Funded Students""" .
+	<http://data.linkedu.eu/kis/ontology/numStage> skos:prefLabel """Num Stage""" .
+	<http://data.linkedu.eu/kis/ontology/firstDegreeAward> skos:prefLabel """First Degree Award""" .
+	<http://data.linkedu.eu/kis/ontology/otherUndergraduateAward> skos:prefLabel """Other Undergraduate Award""" .
+	<http://data.linkedu.eu/kis/ontology/Job> skos:prefLabel """Job""" .

@@ -12,6 +12,7 @@ import javax.xml.stream.events.XMLEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import uk.ac.open.data.kiskit.v002.vocab.SKOS;
 import uk.ac.open.data.kiskit.v002.vocab.Unistats;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
@@ -90,6 +91,7 @@ public class KISAccreditationType {
 						if (acctype != null && acctext != null) {
 							Resource r = model.createResource(Unistats.getAccreditationTypeURI(acctype));
 							r.addProperty(RDFS.label, acctext, "en");
+							r.addProperty(SKOS.prefLabel, acctext);
 							if (acctextw != null) {
 								r.addProperty(RDFS.label, acctextw, "cy");
 							}
