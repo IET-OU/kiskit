@@ -803,6 +803,17 @@ kis:course
 	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
 	rdfs:isDefinedBy kis: 
 	.
+
+kis:institution
+	a rdf:Property, owl:ObjectProperty, qb:DimensionProperty ;
+	rdfs:domain rdfs:Resource;
+	rdfs:range kis:Institution;
+	rdfs:label "institution"@en;
+	rdfs:comment "Relates anything to an institution"@en;
+	skos:note "This dimension is useful to obtain views of data for institutions. It materializes the inference of \"observation course aCourse . institution teaches aCourse\" as \"observation institution aInstitution\"."@en;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/KISInstitution.html> ;
+	rdfs:isDefinedBy kis: 
+	.
 	
 aiiso:teaches
 	a rdf:Property, owl:ObjectProperty;
@@ -2162,6 +2173,7 @@ courseware:taught-at
 	<http://data.linkedu.eu/kis/ontology/accreditationDependantOnChoiceUrl> skos:prefLabel """AccreditationDependant On Choice Url""" .
 	<http://data.linkedu.eu/kis/ontology/accreditationDependantOnChoiceUrlW> skos:prefLabel """Accreditation Dependant On Choice Url (Welsh)""" .
 	<http://data.linkedu.eu/kis/ontology/course> skos:prefLabel """Course""" .
+	<http://data.linkedu.eu/kis/ontology/institution> skos:prefLabel """Institution""" .	
 	<http://data.linkedu.eu/kis/ontology/job> skos:prefLabel """Job""" .
 	<http://data.linkedu.eu/kis/ontology/percentage> skos:prefLabel """Percentage""" .
 	<http://data.linkedu.eu/kis/ontology/order> skos:prefLabel """Order""" .

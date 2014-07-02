@@ -135,6 +135,7 @@ public class Unistats {
 	public final static Property accreditationDependantOnChoiceUrlW = ResourceFactory.createProperty(ns_ONTOLOGY + "accreditationDependantOnChoiceUrlW");
 	public final static Property subject = ResourceFactory.createProperty(ns_DC + "subject");
 	public final static Property course = ResourceFactory.createProperty(ns_ONTOLOGY + "course");
+	public final static Property institution = ResourceFactory.createProperty(ns_ONTOLOGY + "institution");
 	public final static Property teaches = ResourceFactory.createProperty(ns_AIISO + "teaches");
 	public final static Property taughtAt = ResourceFactory.createProperty(ns_RKB_COURSEWARE + "taught-at");
 	public final static Property job = ResourceFactory.createProperty(ns_ONTOLOGY + "job");
