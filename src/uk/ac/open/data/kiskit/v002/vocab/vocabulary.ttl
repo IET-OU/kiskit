@@ -1761,6 +1761,7 @@ dset:commonJobsStructure
     qb:component [ qb:dimension  kis:course ] ;
     qb:component [ qb:dimension  kis:job ] ;
     qb:component [ qb:dimension  dcterm:subject ] ;	
+ 	qb:component [ qb:dimension  kis:institution ];	
 	# The attribute
     qb:component [ qb:attribute  kis:order ] ;
     # The measures 
@@ -1782,6 +1783,7 @@ dset:continuationStructure
 	skos:prefLabel "Continuation (structure)" ;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
+ 	qb:component [ qb:dimension  kis:institution ];	
     # The measures
     qb:component [ qb:measure  kis:continuing ];
     qb:component [ qb:measure  kis:dormant ];
@@ -1809,6 +1811,7 @@ dset:courseStagesStructure
     qb:component [ qb:dimension  kis:course ];
     qb:component [ qb:dimension  kis:stage ];
     qb:component [ qb:dimension  dcterm:subject ];
+ 	qb:component [ qb:dimension  kis:institution ];	
     # The measures
     qb:component [ qb:measure  kis:assessmentMethod ];
     qb:component [ qb:measure  kis:coursework ];
@@ -1839,6 +1842,7 @@ dset:employmentStructure
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
     qb:component [ qb:dimension  dcterm:subject ];
+ 	qb:component [ qb:dimension  kis:institution ];	
 	# The attributes
     qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
@@ -1869,6 +1873,7 @@ dset:degreeClassesStructure
 	rdfs:comment "Information relating to the degree classifications obtained by students"@en;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
+ 	qb:component [ qb:dimension  kis:institution ];	
 	# The attributes
     qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
@@ -1899,6 +1904,7 @@ dset:entryQualificationsStructure
 	rdfs:comment "Information relating to the degree classifications obtained by students"@en;
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
+ 	qb:component [ qb:dimension  kis:institution ];	
 	# The attributes
     qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
@@ -1934,6 +1940,7 @@ dset:jobTypesStructure
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
     qb:component [ qb:dimension  dcterm:subject ];
+ 	qb:component [ qb:dimension  kis:institution ];	
 	# The attributes
     qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
@@ -1962,6 +1969,7 @@ dset:nationalStudentSurveyResultsStructure
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
     qb:component [ qb:dimension  dcterm:subject ];
+ 	qb:component [ qb:dimension  kis:institution ];	
 	# The attributes
     qb:component [ qb:attribute  kis:population ; qb:componentRequired true ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
@@ -2009,6 +2017,7 @@ dset:nationalStudentSurveyNHSResultsStructure
 	# The dimensions
     qb:component [ qb:dimension  kis:course ];
     qb:component [ qb:dimension  dcterm:subject ];
+ 	qb:component [ qb:dimension  kis:institution ];	
 	# The attributes
     qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
@@ -2040,6 +2049,7 @@ dset:salariesStructure
 	# The dimensions
  	qb:component [ qb:dimension  kis:course ];
     qb:component [ qb:dimension  dcterm:subject ];
+ 	qb:component [ qb:dimension  kis:institution ];	
 	# The attributes
     qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
@@ -2073,6 +2083,7 @@ dset:tariffsStructure
 	rdfs:comment "Information relating to the entry tariff points of students."@en;
 	# The dimensions
  	qb:component [ qb:dimension  kis:course ];
+ 	qb:component [ qb:dimension  kis:institution ];
 	# The attributes
     qb:component [ qb:attribute  kis:population  ; qb:componentRequired true ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
