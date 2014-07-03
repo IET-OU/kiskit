@@ -1829,8 +1829,7 @@ dset:courseStagesStructure
 	# The dimensions
     qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ];
     qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:stage ; skos:prefLabel "Specification dimension: stage" ];
-    qb:component [ a qb:ComponentSpecification ; qb:dimension  dcterm:subject ; skos:prefLabel "Specification dimension: subject"];
- 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
     # The measures
     qb:component [ a qb:ComponentSpecification ; qb:measure  kis:assessmentMethod ; skos:prefLabel "Specification measure: assessmentMethod" ];
     qb:component [ a qb:ComponentSpecification ; qb:measure  kis:coursework ; skos:prefLabel "Specification measure: coursework" ];

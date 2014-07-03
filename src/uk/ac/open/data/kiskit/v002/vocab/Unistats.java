@@ -384,6 +384,38 @@ public class Unistats {
 		return ns_ACCREDITINGTYPE + urify(value.toLowerCase());
 	}
 	
+//	public static void validate(Model model){
+//		// Domain and Range
+//		Model vocabulary = getVocabulary();
+//		PrintStream p = System.err;
+//		for(Statement st : model.listStatements().toSet()){
+//			Property property = st.getPredicate();
+//			RDFNode value = st.getObject();
+//			if(vocabulary.contains(property, RDFS.range)){
+//				NodeIterator dit = vocabulary.listObjectsOfProperty(property, RDFS.range);
+//				while(dit.hasNext()){
+//					Resource nd = (Resource) dit.next();
+//					// if literal, check datatype
+//					if(value.isLiteral() ){
+//						Literal lv = ((Literal)	value);
+//						if(lv.getDatatypeURI()==null){
+//							// No datatype
+//							p.println("Value without datatype");
+//						}else if(lv.getDatatypeURI().toString().equals(nd.getURI())){
+//							// Same datatype
+//							p.println("Value the same datatype");
+//							
+//						}else{
+//							// different datatype
+//							p.println("Value with different datatype");
+//							
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
+	
 	public static void main(String args[]) throws URISyntaxException, IllegalArgumentException, IllegalAccessException {
 
 		Model m = getVocabulary();
