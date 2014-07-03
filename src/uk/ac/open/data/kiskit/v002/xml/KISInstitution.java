@@ -3,6 +3,10 @@ package uk.ac.open.data.kiskit.v002.xml;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,13 +19,17 @@ import javax.xml.stream.events.XMLEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import uk.ac.open.data.kiskit.v002.vocab.FOAF;
 import uk.ac.open.data.kiskit.v002.vocab.Unistats;
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
+import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 /**
@@ -136,9 +144,15 @@ public class KISInstitution {
 								collect = false;
 								continue; // don't load this istitution
 							}
-							Resource r = ResourceFactory.createResource(Unistats.getInstitutionURI(ukprn));
+							Resource r = model.createResource(Unistats.getInstitutionURI(ukprn));
 							model.add(r, RDF.type, Unistats.AIISOInstitution);
 							model.add(r, RDF.type, Unistats.Institution);
+							
+							r.addProperty(Unistats.ukprn, ukprn);
+							// Implements GH Issue #3
+							r.addProperty(FOAF.page, model.createResource("http://learning-provider.data.ac.uk/ukprn/" + ukprn + ".html"));
+							r.addProperty(OWL.sameAs, model.createResource("http://id.learning-provider.data.ac.uk/ukprn/" + ukprn ));
+							
 							lastukprn = ukprn;
 							// in any case we add the code
 							// this is because it is possible that
@@ -227,11 +241,32 @@ public class KISInstitution {
 	}
 
 	public static void main(String[] args) {
-		KISInstitution i = new KISInstitution(new File(args[0]), "urn:x-kis-course-test:", "10000093");
+		KISInstitution i = new KISInstitution(new File(args[0]), "urn:x-kis-course-test:");
 		Model m = i.getModel();
-		StmtIterator s = m.listStatements();
+		StmtIterator s = m.listStatements(null, Unistats.ukprn, (RDFNode) null);
 		while (s.hasNext()) {
-			System.out.println(s.next());
+			Statement st = s.next();
+			String ukprn = st.getString();
+			System.out.println("UKPRN: " + ukprn);
+			Resource in = st.getSubject();
+			for(Statement is : in.listProperties().toSet()){
+				// Verify link to external resources
+				if(is.getPredicate().equals(FOAF.page)||is.getPredicate().equals(OWL.sameAs)){
+					try {
+						HttpURLConnection huc = (HttpURLConnection) new URL(is.getResource().getURI()).openConnection();
+						HttpURLConnection.setFollowRedirects(true);
+						if(huc.getResponseCode()!=200){
+							System.err.println(is.getResource() + " [" + huc.getResponseCode()+ "]");
+						}else{
+							System.out.println(is.getResource() + " [" + huc.getResponseCode()+ "]");
+						}
+					} catch (MalformedURLException e) {
+						System.err.println("Bad URL: " + is.getResource());
+					} catch (IOException e) {
+						System.err.println("Broken link: " + is.getResource());
+					}
+				}
+			}
 		}
 	}
 }
