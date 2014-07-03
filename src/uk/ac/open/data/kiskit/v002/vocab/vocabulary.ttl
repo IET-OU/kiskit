@@ -2022,12 +2022,12 @@ dset:nationalStudentSurveyNHSResultsStructure
     qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
     qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
     # The measures
-    qb:component [ qb:measure  kis:nhsnssQuestion1 ];
-    qb:component [ qb:measure  kis:nhsnssQuestion2 ];
-    qb:component [ qb:measure  kis:nhsnssQuestion3 ];
-    qb:component [ qb:measure  kis:nhsnssQuestion4 ];
-    qb:component [ qb:measure  kis:nhsnssQuestion5 ];
-    qb:component [ qb:measure  kis:nhsnssQuestion6 ];
+    qb:component [ qb:measure  kis:nhsNssQuestion1 ];
+    qb:component [ qb:measure  kis:nhsNssQuestion2 ];
+    qb:component [ qb:measure  kis:nhsNssQuestion3 ];
+    qb:component [ qb:measure  kis:nhsNssQuestion4 ];
+    qb:component [ qb:measure  kis:nhsNssQuestion5 ];
+    qb:component [ qb:measure  kis:nhsNssQuestion6 ];
     rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
 	rdfs:isDefinedBy kis: ;
 	.
