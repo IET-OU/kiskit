@@ -6,6 +6,8 @@ import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -15,8 +17,11 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
+import com.hp.hpl.jena.rdf.model.Statement;
+import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -75,6 +80,8 @@ public class Unistats {
 	 * instances
 	 * 
 	 */
+	public final static Resource ontology = ResourceFactory.createResource(ns_ONTOLOGY);
+	
 	public final static Resource commonJobs = ResourceFactory.createResource(ns_DSET + "commonJobs");
 	public final static Resource continuation = ResourceFactory.createResource(ns_DSET + "continuation");
 	public final static Resource courseStages = ResourceFactory.createResource(ns_DSET + "courseStages");
@@ -86,6 +93,18 @@ public class Unistats {
 	public static final Resource nationalStudentSurveyNHSResults = ResourceFactory.createResource(ns_DSET + "nationalStudentSurveyNHSResults");
 	public static final Resource salaries = ResourceFactory.createResource(ns_DSET + "salaries");
 	public static final Resource tariffs = ResourceFactory.createResource(ns_DSET + "tariffs");
+
+	public final static Resource commonJobsStructure = ResourceFactory.createResource(ns_DSET + "commonJobsStructure");
+	public final static Resource continuationStructure = ResourceFactory.createResource(ns_DSET + "continuationStructure");
+	public final static Resource courseStagesStructure = ResourceFactory.createResource(ns_DSET + "courseStagesStructure");
+	public static final Resource employmentStructure = ResourceFactory.createResource(ns_DSET + "employmentStructure");
+	public static final Resource degreeClassesStructure = ResourceFactory.createResource(ns_DSET + "degreeClassesStructure");
+	public static final Resource entryQualificationsStructure = ResourceFactory.createResource(ns_DSET + "entryQualificationsStructure");
+	public static final Resource jobTypesStructure = ResourceFactory.createResource(ns_DSET + "jobTypesStructure");
+	public static final Resource nationalStudentSurveyResultsStructure = ResourceFactory.createResource(ns_DSET + "nationalStudentSurveyResultsStructure");
+	public static final Resource nationalStudentSurveyNHSResultsStructure = ResourceFactory.createResource(ns_DSET + "nationalStudentSurveyNHSResultsStructure");
+	public static final Resource salariesStructure = ResourceFactory.createResource(ns_DSET + "salariesStructure");
+	public static final Resource tariffsStructure = ResourceFactory.createResource(ns_DSET + "tariffsStructure");
 
 	/*
 	 * Properties
@@ -371,14 +390,29 @@ public class Unistats {
 		PrintStream p = System.out;
 		p.println(" -- Unistat Vocabulary :: Quality Check -- ");
 		p.println();
+		
+		Field [] fields = Unistats.class.getFields();
+		
+		// Check that all entities starting with the unistats NS in vocabulary.ttl
+		Set<String> fieldNames = new HashSet<String>();
+		for(Field field : fields){
+			fieldNames.add(field.getName());
+		}
+		// have a related field in the Unistats class
+		for(Resource r : m.listResourcesWithProperty(RDF.type).toSet()){
+			if(!r.isAnon() && r.getNameSpace().startsWith(Unistats.BASE)){
+				String name = r.getLocalName();
+				if(!fieldNames.contains(name) && !name.equals("")){
+					p.println("Add <" + r.getURI() + "> to the fields of Unistats.class");
+				}
+			}
+		}
 
 		// Check that all constants are described in the vocabulary
-		Field [] fields = Unistats.class.getFields();
 		p.println(fields.length + " terms found.");
 		for(Field field : fields){
 			// only Resources
 			if(RDFNode.class.isAssignableFrom(field.getType())){
-				
 				RDFNode n = (RDFNode) field.get(null);
 				if(!m.containsResource(n)){
 					p.println("\tDescribe " + n);
@@ -455,37 +489,29 @@ public class Unistats {
 				}
 			}
 		}
-		// Check that all classes and properties have a single rdfs:label with lang "en"
+
+		//p.println(" -- Check that all classes and properties have a single skos:prefLabel without lang -- ");
 		
-		// Classes
-//		p.println(" -- CLASSES -- ");
-//		p.println();
-//		ResIterator classes = m.listResourcesWithProperty(RDF.type, RDFS.Class);
-//		while (classes.hasNext()) {
-//			Resource c = classes.next();
-//			p.println("Class: " + c);
-//			StmtIterator aboutc = c.listProperties();
-//			while (aboutc.hasNext()) {
-//				Statement s = aboutc.next();
-//				p.println(" > " + s.getPredicate());
-//				p.println("      " + s.getObject());
-//			}
-//			p.println();
-//		}
-//
-//		p.println(" -- PROPERTIES -- ");
-//		p.println();
-//		ResIterator properties = m.listResourcesWithProperty(RDF.type, RDF.Property);
-//		while (properties.hasNext()) {
-//			Resource c = properties.next();
-//			p.println("Property: " + c);
-//			StmtIterator aboutp = c.listProperties();
-//			while (aboutp.hasNext()) {
-//				Statement s = aboutp.next();
-//				p.println(" > " + s.getPredicate());
-//				p.println("      " + s.getObject());
-//			}
-//			p.println();
-//		}
+		p.println();
+		ResIterator resses = m.listResourcesWithProperty(RDF.type);
+		while (resses.hasNext()) {
+			Resource c = resses.next();
+			StmtIterator aboutc = c.listProperties();
+			int check = 0;
+			while (aboutc.hasNext()) {
+				Statement s = aboutc.next();
+				if(s.getPredicate().equals(SKOS.prefLabel)){
+					check++;
+					if(s.getLiteral().getLanguage() != null && !s.getLiteral().getLanguage().equals("")){
+						p.println("Remove lang from skos:prefLabel of " + c);
+					}
+				}
+			}
+			if(check == 0){
+				p.println("Add skos:prefLabel to " + c);
+			}else if(check>1){
+				p.println("Too many (" + check + ") skos:prefLabel for " + c);
+			}
+		}
 	}
 }

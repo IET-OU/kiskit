@@ -11,16 +11,17 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
-#
+# 
 # SCHEMA
-#
+# 
 kis: a owl:Ontology;
-	rdfs:label "Unistats dataset schema specification"@en ;
+	rdfs:label "Unistats RDF Dataset Schema Specification"@en ;
+	skos:prefLabel "Unistats RDF Dataset Schema Specification" ;
 	rdfs:comment """This document specifies the ontology for describing the Unistats data in RDF. 
 	It is based on the documentation of provided by HESA and makes use of/is aligned to other ontologies, 
 	most notably: 
-	OWL (http://www.w3.org/TR/owl2-overview/) ; 
 	The RDF Data Cube Vocabulary (http://www.w3.org/TR/vocab-data-cube/) ; 
+	OWL (http://www.w3.org/TR/owl2-overview/) ; 
 	RKB Courseware (http://courseware.rkbexplorer.com/ontologies/courseware) ;
 	AIISO (http://purl.org/vocab/aiiso/schema#) ;
 	Core organization ontology (http://www.w3.org/ns/org#) ;
@@ -29,12 +30,13 @@ kis: a owl:Ontology;
 	owl:versionInfo "Version 002 - Designed on Unistats 2013/2014. This version applies to dumps downloaded from 19 September 2013."@en ;
 	dcterm:license """The Unistats Dataset is reproduced with the permission of the Higher Education Funding Council for England (HEFCE), the Higher Education Statistics Agency (HESA) and their licensors. The Unistats Dataset may be accessed in its original form here: http://www.hesa.ac.uk/unistatsdata.  All copyright and other intellectual property rights in the Unistats Dataset are owned by HEFCE, HESA and their licensors."""@en ;
 	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
-	rdfs:seeAlso <http://www.hesa.ac.uk/index.php?option=com_studrec&Itemid=232&mnl=13061>
+	rdfs:seeAlso <http://www.hesa.ac.uk/index.php?option=com_studrec&Itemid=232&mnl=13061> ;
+	rdfs:isDefinedBy kis: 	
 	.
 
-#
+# 
 # classes
-#
+# 
 
 # Course
 kis:Course 
@@ -819,8 +821,9 @@ aiiso:teaches
 	a rdf:Property, owl:ObjectProperty;
 	rdfs:range kis:Course;
 	rdfs:label "teaches"@en;
+	skos:prefLabel "Teaches" ;
 	rdfs:seeAlso "http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12"^^xsd:anyUri ;
-	rdfs:isDefinedBy kis: 
+	rdfs:isDefinedBy aiiso: 
 	.
 
 kis:aim
@@ -1758,14 +1761,16 @@ dset:commonJobsStructure
 	skos:prefLabel "Common Jobs (structure)" ;
 	rdfs:comment "Data structure definition of the Common job types DataSet: subject, job, course, percentage and order. Subject is the JACS subject area for the KIS course."@en ;
 	# The dimensions
-    qb:component [ qb:dimension  kis:course ] ;
-    qb:component [ qb:dimension  kis:job ] ;
-    qb:component [ qb:dimension  dcterm:subject ] ;	
- 	qb:component [ qb:dimension  kis:institution ];	
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:job ; skos:prefLabel "Specification dimension: job" ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  dcterm:subject ; skos:prefLabel "Specification dimension: subject" ] ;	
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
 	# The attribute
-    qb:component [ qb:attribute  kis:order ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:order ; skos:prefLabel "Specification attribute: order" ] ;
     # The measures 
-    qb:component [ qb:measure  kis:percentage ] 
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:percentage ; skos:prefLabel "Specification measure: percentage" ] ;
+	rdfs:isDefinedBy kis: ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
     .
 
 dset:continuation
@@ -1781,15 +1786,17 @@ dset:continuationStructure
 	a qb:DataStructureDefinition;
 	rdfs:comment "Continuation information for students on the courses"@en;
 	skos:prefLabel "Continuation (structure)" ;
+	rdfs:label "Continuation (structure)"@en ;	
 	# The dimensions
-    qb:component [ qb:dimension  kis:course ];
- 	qb:component [ qb:dimension  kis:institution ];	
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ];
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
     # The measures
-    qb:component [ qb:measure  kis:continuing ];
-    qb:component [ qb:measure  kis:dormant ];
-    qb:component [ qb:measure  kis:left ];
-    qb:component [ qb:measure  kis:gained ];
-    qb:component [ qb:measure  kis:lower ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:continuing ; skos:prefLabel "Specification measure: continuing" ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:dormant ; skos:prefLabel "Specification measure: dormant" ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:left ; skos:prefLabel "Specification measure: left" ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:gained ; skos:prefLabel "Specification measure: gained" ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:lower ; skos:prefLabel "Specification measure: lower" ] ; 
+	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;	
     rdfs:isDefinedBy kis:
     .
 
@@ -1808,19 +1815,19 @@ dset:courseStagesStructure
 	skos:prefLabel "Course Stages (structure)" ;
 	rdfs:comment "Information relating to the learning, teaching and assessment methods for each course stage"@en;
 	# The dimensions
-    qb:component [ qb:dimension  kis:course ];
-    qb:component [ qb:dimension  kis:stage ];
-    qb:component [ qb:dimension  dcterm:subject ];
- 	qb:component [ qb:dimension  kis:institution ];	
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ];
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:stage ; skos:prefLabel "Specification dimension: stage" ];
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  dcterm:subject ; skos:prefLabel "Specification dimension: subject"];
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
     # The measures
-    qb:component [ qb:measure  kis:assessmentMethod ];
-    qb:component [ qb:measure  kis:coursework ];
-    qb:component [ qb:measure  kis:written ];
-    qb:component [ qb:measure  kis:practical ];
-    qb:component [ qb:measure  kis:learningAndTeachingMethod ];
-    qb:component [ qb:measure  kis:independent ];
-    qb:component [ qb:measure  kis:placement ];
-    qb:component [ qb:measure  kis:scheduled ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:assessmentMethod ; skos:prefLabel "Specification measure: assessmentMethod" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:coursework ; skos:prefLabel "Specification measure: coursework" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:written ; skos:prefLabel "Specification measure: written" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:practical ; skos:prefLabel "Specification measure: practical" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:learningAndTeachingMethod ; skos:prefLabel "Specification measure: learningAndTeachingMethod" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:independent ; skos:prefLabel "Specification measure: independent" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:placement ; skos:prefLabel "Specification measure: placement" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:scheduled ; skos:prefLabel "Specification measure: scheduled" ] ;
 	rdfs:seeAlso <http://www.hesa.ac.uk/A/CourseStage.html> ;
     rdfs:isDefinedBy kis:
     .
@@ -1840,19 +1847,19 @@ dset:employmentStructure
 	skos:prefLabel "Employment (structure)" ;
 	rdfs:comment "Information relating to the employment outcomes of students"@en ;
 	# The dimensions
-    qb:component [ qb:dimension  kis:course ];
-    qb:component [ qb:dimension  dcterm:subject ];
- 	qb:component [ qb:dimension  kis:institution ];	
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ];
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  dcterm:subject ; skos:prefLabel "Specification dimension: subject" ];
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
 	# The attributes
-    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
-    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:population ; skos:prefLabel "Specification attribute: population"  ; qb:componentRequired true  ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:aggregation ; skos:prefLabel "Specification attribute: aggregation" ; qb:componentRequired true ];
     # The measures
-    qb:component [ qb:measure  kis:workAndStudy ];
-    qb:component [ qb:measure  kis:assumedUnemployed ];
-    qb:component [ qb:measure  kis:inWorkAndStudy ];
-    qb:component [ qb:measure  kis:noAvailable ];
-    qb:component [ qb:measure  kis:study ];
-    qb:component [ qb:measure  kis:work ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:workAndStudy ; skos:prefLabel "Specification measure: workAndStudy" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:assumedUnemployed ; skos:prefLabel "Specification measure: assumedUnemployed" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:workOrStudy ; skos:prefLabel "Specification measure: workOrStudy" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:notAvailable ; skos:prefLabel "Specification measure: notAvailable" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:study ; skos:prefLabel "Specification measure: study" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:work ; skos:prefLabel "Specification measure: work" ] ;
     rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
 	rdfs:isDefinedBy kis:
     .
@@ -1872,18 +1879,18 @@ dset:degreeClassesStructure
 	skos:prefLabel "Degree classes (structure)" ;
 	rdfs:comment "Information relating to the degree classifications obtained by students"@en;
 	# The dimensions
-    qb:component [ qb:dimension  kis:course ];
- 	qb:component [ qb:dimension  kis:institution ];	
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ];
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
 	# The attributes
-    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
-    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:population ; skos:prefLabel "Specification attribute: population"  ; qb:componentRequired true  ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:aggregation ; skos:prefLabel "Specification attribute: aggregation" ; qb:componentRequired true ];
     # The measures
-    qb:component [ qb:measure  kis:firstClass ];
-    qb:component [ qb:measure  kis:upperSecondClass ];
-    qb:component [ qb:measure  kis:lowerSecondClass ];
-    qb:component [ qb:measure  kis:otherHonours ];
-    qb:component [ qb:measure  kis:ordinary ];
-    qb:component [ qb:measure  kis:notClassified ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:firstClass ; skos:prefLabel "Specification measure: firstClass" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:upperSecondClass ; skos:prefLabel "Specification measure: upperSecondClass" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:lowerSecondClass ; skos:prefLabel "Specification measure: lowerSecondClass" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:otherHonours ; skos:prefLabel "Specification measure: otherHonours" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:ordinary ; skos:prefLabel "Specification measure: ordinary" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:notClassified ; skos:prefLabel "Specification measure: notClassified" ] ;
     rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
 	rdfs:isDefinedBy kis:
 	.
@@ -1903,21 +1910,21 @@ dset:entryQualificationsStructure
 	skos:prefLabel "Entry Qualifications (structure)" ;
 	rdfs:comment "Information relating to the degree classifications obtained by students"@en;
 	# The dimensions
-    qb:component [ qb:dimension  kis:course ];
- 	qb:component [ qb:dimension  kis:institution ];	
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ];
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
 	# The attributes
-    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
-    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:population ; skos:prefLabel "Specification attribute: population"  ; qb:componentRequired true  ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:aggregation ; skos:prefLabel "Specification attribute: aggregation" ; qb:componentRequired true ];
     # The measures
-    qb:component [ qb:measure  kis:accessCourse ];
-    qb:component [ qb:measure  kis:aLevel ];
-    qb:component [ qb:measure  kis:baccalaureate ];
-    qb:component [ qb:measure  kis:degree ];
-    qb:component [ qb:measure  kis:diploma ];
-    qb:component [ qb:measure  kis:foundation ];
-    qb:component [ qb:measure  kis:noQualifications ];
-    qb:component [ qb:measure  kis:other ];
-    qb:component [ qb:measure  kis:otherHE ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:accessCourse ; skos:prefLabel "Specification measure: accessCourse" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:aLevel ; skos:prefLabel "Specification measure: aLevel" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:baccalaureate ; skos:prefLabel "Specification measure: baccalaureate" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:degree ; skos:prefLabel "Specification measure: degree" ];
+#    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:diploma ; skos:prefLabel "Specification measure: diploma" ];
+#    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:foundation ; skos:prefLabel "Specification measure: foundation" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:noQualifications ; skos:prefLabel "Specification measure: noQualifications" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:other ; skos:prefLabel "Specification measure: other" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:otherHE ; skos:prefLabel "Specification measure: otherHE" ] ;
    	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
 	rdfs:isDefinedBy kis: ;
     .
@@ -1938,16 +1945,16 @@ dset:jobTypesStructure
 	skos:prefLabel "Job Types (structure)" ;
 	rdfs:comment "Information relating to the types of profession entered by students."@en;
 	# The dimensions
-    qb:component [ qb:dimension  kis:course ];
-    qb:component [ qb:dimension  dcterm:subject ];
- 	qb:component [ qb:dimension  kis:institution ];	
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ];
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  dcterm:subject ; skos:prefLabel "Specification dimension: subject"];
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
 	# The attributes
-    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
-    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:population ; skos:prefLabel "Specification attribute: population"  ; qb:componentRequired true  ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:aggregation ; skos:prefLabel "Specification attribute: aggregation" ; qb:componentRequired true ];
     # The measures
-    qb:component [ qb:measure  kis:professional ];
-    qb:component [ qb:measure  kis:nonProfessional ];
-    qb:component [ qb:measure  kis:unknown ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:professional ; skos:prefLabel "Specification measure: professional" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nonProfessional ; skos:prefLabel "Specification measure: nonProfessional" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:unknown ; skos:prefLabel "Specification measure: unknown" ] ;
    	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
 	rdfs:isDefinedBy kis: ;
     .
@@ -1967,35 +1974,35 @@ dset:nationalStudentSurveyResultsStructure
 	skos:prefLabel "National Student Survey Results (structure)" ;
 	rdfs:comment "National Student Survey results structure."@en ;
 	# The dimensions
-    qb:component [ qb:dimension  kis:course ];
-    qb:component [ qb:dimension  dcterm:subject ];
- 	qb:component [ qb:dimension  kis:institution ];	
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ];
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  dcterm:subject ; skos:prefLabel "Specification dimension: subject"];
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
 	# The attributes
-    qb:component [ qb:attribute  kis:population ; qb:componentRequired true ];
-    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:population ; skos:prefLabel "Specification attribute: population" ; qb:componentRequired true ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:aggregation ; skos:prefLabel "Specification attribute: aggregation" ; qb:componentRequired true ];
     # The measures
-    qb:component [ qb:measure  kis:nssQuestion1 ];
-    qb:component [ qb:measure  kis:nssQuestion2 ];
-    qb:component [ qb:measure  kis:nssQuestion3 ];
-    qb:component [ qb:measure  kis:nssQuestion4 ];
-    qb:component [ qb:measure  kis:nssQuestion5 ];
-    qb:component [ qb:measure  kis:nssQuestion6 ];
-    qb:component [ qb:measure  kis:nssQuestion7 ];
-    qb:component [ qb:measure  kis:nssQuestion8 ];
-    qb:component [ qb:measure  kis:nssQuestion9 ];
-    qb:component [ qb:measure  kis:nssQuestion10 ];
-    qb:component [ qb:measure  kis:nssQuestion11 ];
-    qb:component [ qb:measure  kis:nssQuestion12 ];
-    qb:component [ qb:measure  kis:nssQuestion13 ];
-    qb:component [ qb:measure  kis:nssQuestion14 ];
-    qb:component [ qb:measure  kis:nssQuestion15 ];
-    qb:component [ qb:measure  kis:nssQuestion16 ];
-    qb:component [ qb:measure  kis:nssQuestion17 ];
-    qb:component [ qb:measure  kis:nssQuestion18 ];
-    qb:component [ qb:measure  kis:nssQuestion19 ];
-    qb:component [ qb:measure  kis:nssQuestion20 ];
-    qb:component [ qb:measure  kis:nssQuestion21 ];
-    qb:component [ qb:measure  kis:nssQuestion22 ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion1 ; skos:prefLabel "Specification measure: nssQuestion1" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion2 ; skos:prefLabel "Specification measure: nssQuestion2" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion3 ; skos:prefLabel "Specification measure: nssQuestion3" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion4 ; skos:prefLabel "Specification measure: nssQuestion4" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion5 ; skos:prefLabel "Specification measure: nssQuestion5" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion6 ; skos:prefLabel "Specification measure: nssQuestion6" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion7 ; skos:prefLabel "Specification measure: nssQuestion7" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion8 ; skos:prefLabel "Specification measure: nssQuestion8" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion9 ; skos:prefLabel "Specification measure: nssQuestion9" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion10 ; skos:prefLabel "Specification measure: nssQuestion10" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion11 ; skos:prefLabel "Specification measure: nssQuestion11" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion12 ; skos:prefLabel "Specification measure: nssQuestion12" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion13 ; skos:prefLabel "Specification measure: nssQuestion13" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion14 ; skos:prefLabel "Specification measure: nssQuestion14" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion15 ; skos:prefLabel "Specification measure: nssQuestion15" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion16 ; skos:prefLabel "Specification measure: nssQuestion16" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion17 ; skos:prefLabel "Specification measure: nssQuestion17" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion18 ; skos:prefLabel "Specification measure: nssQuestion18" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion19 ; skos:prefLabel "Specification measure: nssQuestion19" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion20 ; skos:prefLabel "Specification measure: nssQuestion20" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion21 ; skos:prefLabel "Specification measure: nssQuestion21" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nssQuestion22 ; skos:prefLabel "Specification measure: nssQuestion22" ];
    	rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
 	rdfs:isDefinedBy kis: ;
 	.
@@ -2015,19 +2022,19 @@ dset:nationalStudentSurveyNHSResultsStructure
 	skos:prefLabel "National Student Survey (NHS) Results (structure)" ;
 	rdfs:comment "National Student Survey (NHS) results structure."@en;
 	# The dimensions
-    qb:component [ qb:dimension  kis:course ];
-    qb:component [ qb:dimension  dcterm:subject ];
- 	qb:component [ qb:dimension  kis:institution ];	
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ];
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  dcterm:subject ; skos:prefLabel "Specification dimension: subject"];
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
 	# The attributes
-    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
-    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:population ; skos:prefLabel "Specification attribute: population"  ; qb:componentRequired true  ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:aggregation ; skos:prefLabel "Specification attribute: aggregation" ; qb:componentRequired true ];
     # The measures
-    qb:component [ qb:measure  kis:nhsNssQuestion1 ];
-    qb:component [ qb:measure  kis:nhsNssQuestion2 ];
-    qb:component [ qb:measure  kis:nhsNssQuestion3 ];
-    qb:component [ qb:measure  kis:nhsNssQuestion4 ];
-    qb:component [ qb:measure  kis:nhsNssQuestion5 ];
-    qb:component [ qb:measure  kis:nhsNssQuestion6 ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nhsNssQuestion1 ; skos:prefLabel "Specification measure: nhsNssQuestion1" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nhsNssQuestion2 ; skos:prefLabel "Specification measure: nhsNssQuestion2" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nhsNssQuestion3 ; skos:prefLabel "Specification measure: nhsNssQuestion3" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nhsNssQuestion4 ; skos:prefLabel "Specification measure: nhsNssQuestion4" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nhsNssQuestion5 ; skos:prefLabel "Specification measure: nhsNssQuestion5" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:nhsNssQuestion6 ; skos:prefLabel "Specification measure: nhsNssQuestion6" ];
     rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
 	rdfs:isDefinedBy kis: ;
 	.
@@ -2047,22 +2054,22 @@ dset:salariesStructure
 	skos:prefLabel "Salaries (structure)" ;
 	rdfs:comment "Information relating to the salary information of students."@en;
 	# The dimensions
- 	qb:component [ qb:dimension  kis:course ];
-    qb:component [ qb:dimension  dcterm:subject ];
- 	qb:component [ qb:dimension  kis:institution ];	
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ];
+    qb:component [ a qb:ComponentSpecification ; qb:dimension  dcterm:subject ; skos:prefLabel "Specification dimension: subject" ];
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];	
 	# The attributes
-    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true  ];
-    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:population ; skos:prefLabel "Specification attribute: population"  ; qb:componentRequired true  ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:aggregation ; skos:prefLabel "Specification attribute: aggregation" ; qb:componentRequired true ];
     # The measures
-    qb:component [ qb:measure  kis:sectorLowerForty ];
-    qb:component [ qb:measure  kis:sectorMedianForty ];
-    qb:component [ qb:measure  kis:sectorUpperForty ];
-    qb:component [ qb:measure  kis:sectorLowerSix ];
-    qb:component [ qb:measure  kis:sectorMedianSix ];
-    qb:component [ qb:measure  kis:sectorUpperSix ];
-    qb:component [ qb:measure  kis:courseLower ];
-    qb:component [ qb:measure  kis:courseMedian ];
-    qb:component [ qb:measure  kis:courseUpper ] ;
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:sectorLowerForty ; skos:prefLabel "Specification measure: sectorLowerForty" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:sectorMedianForty ; skos:prefLabel "Specification measure: sectorMedianForty" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:sectorUpperForty ; skos:prefLabel "Specification measure: sectorUpperForty" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:sectorLowerSix ; skos:prefLabel "Specification measure: sectorLowerSix" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:sectorMedianSix ; skos:prefLabel "Specification measure: sectorMedianSix" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:sectorUpperSix ; skos:prefLabel "Specification measure: sectorUpperSix" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:courseLower ; skos:prefLabel "Specification measure: courseLower" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:courseMedian ; skos:prefLabel "Specification measure: courseMedian" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:courseUpper ; skos:prefLabel "Specification measure: courseUpper" ] ;
     rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
 	rdfs:isDefinedBy kis: ;
 	.
@@ -2082,26 +2089,26 @@ dset:tariffsStructure
 	skos:prefLabel "Tariffs (structure)" ;
 	rdfs:comment "Information relating to the entry tariff points of students."@en;
 	# The dimensions
- 	qb:component [ qb:dimension  kis:course ];
- 	qb:component [ qb:dimension  kis:institution ];
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:course ; skos:prefLabel "Specification dimension: course" ];
+ 	qb:component [ a qb:ComponentSpecification ; qb:dimension  kis:institution ; skos:prefLabel "Specification dimension: institution" ];
 	# The attributes
-    qb:component [ qb:attribute  kis:population  ; qb:componentRequired true ];
-    qb:component [ qb:attribute  kis:aggregation ; qb:componentRequired true ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:population ; skos:prefLabel "Specification attribute: population"  ; qb:componentRequired true ];
+    qb:component [ a qb:ComponentSpecification ; qb:attribute  kis:aggregation ; skos:prefLabel "Specification attribute: aggregation" ; qb:componentRequired true ];
     # The measures
-    qb:component [ qb:measure  kis:tariff1 ];
-    qb:component [ qb:measure  kis:tariff120 ];
-    qb:component [ qb:measure  kis:tariff160 ];
-    qb:component [ qb:measure  kis:tariff200 ];
-    qb:component [ qb:measure  kis:tariff240 ];
-    qb:component [ qb:measure  kis:tariff280 ];
-    qb:component [ qb:measure  kis:tariff320 ];
-    qb:component [ qb:measure  kis:tariff360 ];
-    qb:component [ qb:measure  kis:tariff400 ];
-    qb:component [ qb:measure  kis:tariff440 ];
-    qb:component [ qb:measure  kis:tariff480 ];
-    qb:component [ qb:measure  kis:tariff520 ];
-    qb:component [ qb:measure  kis:tariff560 ];
-    qb:component [ qb:measure  kis:tariff600 ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff1 ; skos:prefLabel "Specification measure: tariff1" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff120 ; skos:prefLabel "Specification measure: tariff120" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff160 ; skos:prefLabel "Specification measure: tariff160" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff200 ; skos:prefLabel "Specification measure: tariff200" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff240 ; skos:prefLabel "Specification measure: tariff240" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff280 ; skos:prefLabel "Specification measure: tariff280" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff320 ; skos:prefLabel "Specification measure: tariff320" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff360 ; skos:prefLabel "Specification measure: tariff360" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff400 ; skos:prefLabel "Specification measure: tariff400" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff440 ; skos:prefLabel "Specification measure: tariff440" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff480 ; skos:prefLabel "Specification measure: tariff480" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff520 ; skos:prefLabel "Specification measure: tariff520" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff560 ; skos:prefLabel "Specification measure: tariff560" ];
+    qb:component [ a qb:ComponentSpecification ; qb:measure  kis:tariff600 ; skos:prefLabel "Specification measure: tariff600" ];
     rdfs:seeAlso <http://www.hesa.ac.uk/includes/C13061_resources/Unistats_checkdoc_definitions.pdf?v=1.12> ;
 	rdfs:isDefinedBy kis: ;
 	.
