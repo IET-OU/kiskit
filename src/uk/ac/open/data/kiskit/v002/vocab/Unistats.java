@@ -117,6 +117,7 @@ public class Unistats {
 	public final static Property courseUrl = ResourceFactory.createProperty(ns_ONTOLOGY + "courseUrl");
 	public final static Property relatedCourses = ResourceFactory.createProperty(ns_ONTOLOGY + "courseUrl");
 	public final static Property ukPrnApply = ResourceFactory.createProperty(ns_ONTOLOGY + "ukPrnApply");
+	public final static Property ukprn = ResourceFactory.createProperty(ns_ONTOLOGY + "ukprn");
 	public final static Property courseUrlW = ResourceFactory.createProperty(ns_ONTOLOGY + "courseUrlW");
 	public final static Property supportUrl = ResourceFactory.createProperty(ns_ONTOLOGY + "supportUrl");
 	public final static Property supportUrlW = ResourceFactory.createProperty(ns_ONTOLOGY + "supportUrlW");

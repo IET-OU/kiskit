@@ -9,6 +9,7 @@
 @prefix courseware: <http://courseware.rkbexplorer.com/ontologies/courseware#> .
 @prefix aiiso: <http://purl.org/vocab/aiiso/schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 # 
@@ -671,6 +672,17 @@ kis:country
 	rdfs:range rdfs:Resource; 
 	rdfs:comment "From the KIS codes: XF=England XG=Northern Ireland XH=Scotland XI=Wales"@en ;
 	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/COUNTRY.html>;
+	rdfs:isDefinedBy kis:
+	.
+kis:ukprn
+	a rdf:Property, owl:DatatypeProperty;
+	rdfs:domain kis:Institution;
+	rdfs:label "UKPRN";
+	skos:prefLabel "UKPRN";
+	rdfs:range rdfs:Resource; 
+	rdfs:comment "The id of the institution in the UK Register of Learning Providers."@en ;
+	rdfs:seeAlso <http://www.hesa.ac.uk/C13061/A/COUNTRY.html> ;
+	foaf:page <https://www.ukrlp.co.uk/> ;	
 	rdfs:isDefinedBy kis:
 	.
 	
