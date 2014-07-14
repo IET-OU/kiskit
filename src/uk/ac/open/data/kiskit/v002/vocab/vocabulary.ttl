@@ -2222,8 +2222,8 @@ courseware:taught-at
 	<http://data.linkedu.eu/kis/ontology/independent> skos:prefLabel """Independent""" .
 	<http://data.linkedu.eu/kis/ontology/placement> skos:prefLabel """Placement""" .
 	<http://data.linkedu.eu/kis/ontology/scheduled> skos:prefLabel """Scheduled""" .
-	<http://data.linkedu.eu/kis/ontology/workOrStudy> skos:prefLabel """WorkOrStudy""" .
-	<http://data.linkedu.eu/kis/ontology/assumedUnemployed> skos:prefLabel """AssumedU nemployed""" .
+	<http://data.linkedu.eu/kis/ontology/workOrStudy> skos:prefLabel """Work, Study, Work and Study""" .
+	<http://data.linkedu.eu/kis/ontology/assumedUnemployed> skos:prefLabel """Assumed Unemployed""" .
 	<http://data.linkedu.eu/kis/ontology/workAndStudy> skos:prefLabel """Work And Study""" .
 	<http://data.linkedu.eu/kis/ontology/notAvailable> skos:prefLabel """Not Available""" .
 	<http://data.linkedu.eu/kis/ontology/study> skos:prefLabel """Study""" .
