@@ -61,6 +61,8 @@ To only extract data about a single institution
 ```
 java -jar kiskit-<version>.jar <inputDir> <outputFile> <ukprn>
 ```
+The program generates an RDF file in N-Triples format.
+
 ## Run the Old Version (2012)
 By default the tool expects an XML respecting the HESA Unistats spec C13061 published on Sept 2013.
 However, the code includes also packages to translate the previous version, spec C12061 with data about year 2012.
