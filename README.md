@@ -1,32 +1,5 @@
 # Kis-Kit
 This tool converts Unistats XML data to Linked Data.
-## Build
-This is a Java program.
-To build the project you need also http://ant.apache.org/. 
-
-Having ant in place, run the following command from the project main directory:
-```
-ant build jar
-```
-## Usage
-### How to obtain the Unistats data
-To download the latest unistats archive go to this page: 
-
-http://www.hesa.ac.uk/index.php?option=com_content&task=view&id=2609
-
-and click the button "Accept".
-
-Unpack the archive. 
-
-### Run the extraction
-To extract the data in full:
-```
-java -jar kiskit-<version>.jar <inputDir> <outputFile>
-```
-To only extract data about a single institution
-```
-java -jar kiskit-<version>.jar <inputDir> <outputFile> <ukprn>
-```
 ## The Ontology
 The schema is mostly based on the W3C RDF Data Cube Vocabulary http://www.w3.org/TR/vocab-data-cube/
 
@@ -60,6 +33,33 @@ where {
 } 
 GROUP BY ?URI ?Name 
 ORDER BY DESC(?Observation)	
+```
+## Build
+This is a Java program.
+To build the project you need also http://ant.apache.org/. 
+
+Having ant in place, run the following command from the project main directory:
+```
+ant build jar
+```
+## Usage
+### How to obtain the Unistats data
+To download the latest unistats archive go to this page: 
+
+http://www.hesa.ac.uk/index.php?option=com_content&task=view&id=2609
+
+and click the button "Accept".
+
+Unpack the archive. 
+
+### Run the extraction
+To extract the data in full:
+```
+java -jar kiskit-<version>.jar <inputDir> <outputFile>
+```
+To only extract data about a single institution
+```
+java -jar kiskit-<version>.jar <inputDir> <outputFile> <ukprn>
 ```
 ## Run the Old Version (2012)
 By default the tool expects an XML respecting the HESA Unistats spec C13061 published on Sept 2013.
